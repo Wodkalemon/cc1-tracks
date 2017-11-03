@@ -1,0 +1,27 @@
+<h1>Track Details</h1>
+
+
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+
+    <!--<agm-kml-layer url="https://developers.google.com/kml/documentation/KML_Samples.kml"></agm-kml-layer>-->
+
+    <agm-polyline strokeColor="RED">
+
+        <agm-polyline-point *ngFor="let coord of polyLineRed" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
+
+    </agm-polyline>
+
+    <agm-polyline strokeColor="BLUE">
+
+        <agm-polyline-point *ngFor="let coord of polyLineBlue" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
+
+    </agm-polyline>
+
+    <agm-polyline strokeColor="GREEN">
+
+        <agm-polyline-point *ngFor="let coord of polyLineGreen" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
+
+    </agm-polyline>
+
+    <agm-marker [latitude]="50.357968" [longitude]="7.569099"></agm-marker>-->
+</agm-map>
