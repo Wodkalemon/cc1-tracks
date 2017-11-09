@@ -25,8 +25,15 @@ export class UserRegistrationService {
             Name: 'nickname',
             Value: user.name
         };
+
+        let dataGroups = {
+            Name: 'custom:group',
+            Value: user.group
+        };
+
         attributeList.push(new CognitoUserAttribute(dataEmail));
         attributeList.push(new CognitoUserAttribute(dataNickname));
+        attributeList.push(new CognitoUserAttribute(dataGroups));
 
         this.cognitoUtil.getUserPool().signUp(user.email, user.password, attributeList, null, function (err, result) {
             if (err) {

@@ -22,6 +22,15 @@
                [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
+        <label class="control-label" for="signupPassword">What are you?</label>
+        <div id="signupGroup">
+            <label class="radio-inline"><input type="radio" name="signupGroups" value="user"
+                                               [(ngModel)]="registrationUser.group">User</label>
+            <label class="radio-inline"><input type="radio" name="signupGroups" value="sponsor"
+                                               [(ngModel)]="registrationUser.group">Sponsor</label>
+        </div>
+    </div>
+    <div class="form-group">
         <button (click)="onRegister()" id="signupSubmit" type="submit" class="btn btn-info btn-block">
             Create your account
         </button>

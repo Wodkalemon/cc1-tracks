@@ -7,6 +7,7 @@ export class RegistrationUser {
     name: string;
     email: string;
     password: string;
+    group: string="user";
 }
 /**
  * This component is responsible for displaying and controlling
@@ -32,6 +33,8 @@ export class RegisterComponent implements CognitoCallback {
     }
 
     onRegister() {
+        console.log("Groups: " + this.registrationUser.group);
+        console.log(this.registrationUser.group.constructor.name); // MyClass
         this.errorMessage = null;
         this.userRegistration.register(this.registrationUser, this);
     }
