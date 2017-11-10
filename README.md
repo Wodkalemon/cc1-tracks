@@ -1,29 +1,23 @@
-Cognito Quickstart
+cc1-tracks
 ===================================================
 
 ## What does this app do?
-![QuickStart Angular2 Cognito App](/aws/meta/Cognito-Angular2-QuickStart.png?raw=true)
+This Application is the frontend for the CloudComputing-Projekt "????"
 
 ## Tech Stack
 ### Required Tools
 * [aws cli](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
-* [eb cli](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html)
 * [npm](https://www.npmjs.com/)
 * [angular-cli](https://github.com/angular/angular-cli)
 
-### Frameworks
-* [AWS JavaScript SDK](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-intro.html)
-* [Angular 2](https://angular.io/docs/ts/latest/quickstart.html)
-    * [TypeScript](https://www.typescriptlang.org/docs/tutorial.html)
-* [Bootstrap](http://getbootstrap.com/)
 
 ## AWS Setup
-##### Install the required tools (the installation script only runs on Linux and Mac)
+##### Install the required tools
 * Create an AWS account
-* Install [npm](https://www.npmjs.com/)
+* [Install NodeJS](https://nodejs.org/en/download/)
 * [Install or update your aws cli](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) 
-* [Install or update your eb cli](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html) 
-* [Install angular-cli](https://github.com/angular/angular-cli)
+* Install angular-cli </br>
+   ``npm install -g @angular/cli``
 
 
 ## Getting the code and running it locally
@@ -31,16 +25,16 @@ _This uses the pre-configured AWS resources hosted by AWS_
 
 ```
 # Clone it from github
-git clone --depth 1 git@github.com:awslabs/aws-cognito-angular2-quickstart.git
+git clone https://github.com/Wodkalemon/cc1-tracks.git
 ```
 ```
 # Install the NPM packages
-cd aws-cognito-angular2-quickstart
+cd cc1-tracks
 npm install
 ```
 ```
-# Run the app in dev mode
-npm start
+# Run the app local
+ng serve
 ```
 
 ## Creating AWS Resources
