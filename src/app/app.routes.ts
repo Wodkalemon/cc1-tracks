@@ -12,6 +12,8 @@ import {LogoutComponent, RegistrationConfirmationComponent} from "./public/auth/
 import {ResendCodeComponent} from "./public/auth/resend/resendCode.component";
 import {NewPasswordComponent} from "./public/auth/newpassword/newpassword.component";
 import {TrackDetailsComponent} from './secure/track-details/track-details.component';
+import {SearchComponent} from "./secure/search/search.component";
+import {TopRoutesComponent} from "./secure/top-routes/topRoutes.component";
 
 const homeRoutes: Routes = [
     {
@@ -50,6 +52,8 @@ const secureHomeRoutes: Routes = [
         {path: 'myprofile', component: MyProfileComponent},
         {path: 'useractivity', component: UseractivityComponent},
         {path: 'track-details', component: TrackDetailsComponent},
+        {path: 'search', component: SearchComponent},
+        {path: 'top-routes', component: TopRoutesComponent},
         {path: '', component: MyProfileComponent}]
     }
 ];

@@ -14,6 +14,8 @@ import {UseractivityComponent} from "./secure/useractivity/useractivity.componen
 import {MyProfileComponent} from "./secure/profile/myprofile.component";
 import {SecureHomeComponent} from "./secure/landing/securehome.component";
 import {JwtComponent} from "./secure/jwttokens/jwt.component";
+import {SearchComponent} from "./secure/search/search.component";
+import {TopRoutesComponent} from "./secure/top-routes/topRoutes.component";
 import {DynamoDBService} from "./service/ddb.service";
 import {LoginComponent} from "./public/auth/login/login.component";
 import {RegisterComponent} from "./public/auth/register/registration.component";
@@ -44,6 +46,8 @@ import { AgmCoreModule } from '@agm/core';
         MyProfileComponent,
         SecureHomeComponent,
         JwtComponent,
+        SearchComponent,
+        TopRoutesComponent,
         AppComponent,
 
         TrackDetailsComponent
