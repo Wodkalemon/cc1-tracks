@@ -7,7 +7,8 @@ import {Router} from "@angular/router";
 
 @Component({
     selector: 'awscognito-angular2-app',
-    templateUrl: './search.html'
+    templateUrl: './search.html',
+    styleUrls: ['./search.css']
 })
 export class SearchComponent implements LoggedInCallback {
 
