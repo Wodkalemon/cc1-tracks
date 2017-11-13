@@ -1,27 +1,63 @@
 <h1 class="page-header">Track Details</h1>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
 
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+                <agm-polyline strokeColor="RED">
 
-    <!--<agm-kml-layer url="https://developers.google.com/kml/documentation/KML_Samples.kml"></agm-kml-layer>-->
+                    <agm-polyline-point *ngFor="let coord of polyLineRed" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
 
-    <agm-polyline strokeColor="RED">
+                </agm-polyline>
 
-        <agm-polyline-point *ngFor="let coord of polyLineRed" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
+                <agm-polyline strokeColor="BLUE">
 
-    </agm-polyline>
+                    <agm-polyline-point *ngFor="let coord of polyLineBlue" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
 
-    <agm-polyline strokeColor="BLUE">
+                </agm-polyline>
 
-        <agm-polyline-point *ngFor="let coord of polyLineBlue" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
+                <agm-polyline strokeColor="GREEN">
 
-    </agm-polyline>
+                    <agm-polyline-point *ngFor="let coord of polyLineGreen" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
 
-    <agm-polyline strokeColor="GREEN">
+                </agm-polyline>
 
-        <agm-polyline-point *ngFor="let coord of polyLineGreen" [latitude]="coord.lat" [longitude]="coord.lng"></agm-polyline-point>
+                <agm-marker [latitude]="50.357968" [longitude]="7.569099"></agm-marker>
+            </agm-map>
+        </div>
+        <div class="col-sm">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <td>Poi 1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Poi 2</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Poi 3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Poi 4</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Poi 5</td>
+                        <td>1</td>
+                    </tr>
 
-    </agm-polyline>
-
-    <agm-marker [latitude]="50.357968" [longitude]="7.569099"></agm-marker>-->
-</agm-map>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Poi 2</h2>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        </div>
+    </div>
+</div>
