@@ -1,3 +1,55 @@
 agm-map {
     height: 450px;
 }
+
+#sidebar-ribbon {
+
+}
+
+.sidebar-ribbon-item {
+    text-align: center;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 2px;
+}
+
+#sidebar-ribbon .active {
+    color: white;
+    background-color: #337ab7;
+
+}
+
+#sidebar-ribbon-item:hover {
+    color: #337ab7;
+}
+
+.sidebar-list-item {
+    border: 1px solid gray;
+    border-radius: 2px;
+}
+
+.sidebar-list-item .number {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background: #fff;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    font: 18px Arial, sans-serif;
+    display: inline-block;
+    margin-left: 0.3em;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.no-padding {
+    padding-left: 0 !important;
+    padding-right: 5px !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

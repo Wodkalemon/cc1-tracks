@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-sm-9">
             <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
 
                 <agm-polyline strokeColor="RED">
@@ -26,31 +26,18 @@
                 <agm-marker [latitude]="50.357968" [longitude]="7.569099"></agm-marker>
             </agm-map>
         </div>
-        <div class="col-sm">
-            <div class="table-responsive">
-                <table class="table table-hover table-striped">
-                    <tr>
-                        <td>Poi 1</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Poi 2</td>
-                        <td>5</td>
-                    </tr>
-                    <tr>
-                        <td>Poi 3</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td>Poi 4</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Poi 5</td>
-                        <td>1</td>
-                    </tr>
-
-                </table>
+        <div class="col-sm-3">
+            <div id="sidebar-ribbon" class="row">
+                <div class="col-xs-4 sidebar-ribbon-item active" id="rbn-btn-poi">POI</div>
+                <div class="col-xs-4 sidebar-ribbon-item" id="rbn-btn-story">Story</div>
+                <div class="col-xs-4 sidebar-ribbon-item" id="rbn-btn-sponsor">Sponsor</div>
+            </div>
+            <div id="sidebar-list">
+                <div class="sidebar-list-item row vertical-align">
+                    <div class="col-xs-2 number">1</div>
+                    <div class="col-xs-7"><h4>Poi 1 <br/><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr </small></h4></div>
+                    <div class="col-xs-3 no-padding"><img class="img-responsive"src="assets/img/100x100sample.jpg"></div>
+                </div>
             </div>
         </div>
     </div>
