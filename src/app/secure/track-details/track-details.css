@@ -23,12 +23,12 @@ agm-map {
     color: #337ab7;
 }
 
-.sidebar-list-item {
+.sidebar-list-item, #info-frame{
     border: 1px solid gray;
     border-radius: 2px;
 }
 
-.sidebar-list-item .number {
+.sidebar-list-item .number, #info-frame .number {
     border-radius: 50%;
     width: 36px;
     height: 36px;
