@@ -23,8 +23,11 @@ import {ForgotPassword2Component, ForgotPasswordStep1Component} from "./public/a
 import {LogoutComponent, RegistrationConfirmationComponent} from "./public/auth/confirm/confirmRegistration.component";
 import {ResendCodeComponent} from "./public/auth/resend/resendCode.component";
 import {NewPasswordComponent} from "./public/auth/newpassword/newpassword.component";
+import {HttpClientModule} from '@angular/common/http';
 
 import {TrackDetailsComponent} from './secure/track-details/track-details.component';
+
+import {TrackService} from './service/track.service';
 
 import { AgmCoreModule } from '@agm/core';
 
@@ -58,6 +61,7 @@ import { AgmCoreModule } from '@agm/core';
         FormsModule,
         HttpModule,
         routing,
+        HttpClientModule,
 
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyD6O0Z3glNdE9eHeoAECtVF8ZinHSjCCzA'
@@ -70,7 +74,9 @@ import { AgmCoreModule } from '@agm/core';
         DynamoDBService,
         UserRegistrationService,
         UserLoginService,
-        UserParametersService],
+        UserParametersService,
+        TrackService
+        ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {LatLng} from '@agm/core';
 import {LatLngImpl} from '../../Model/lat-lng';
+import {TrackService} from '../../service/track.service';
+import {Track} from '../../Model/Track';
 
 @Component({
     selector: 'track-details',
@@ -9,6 +11,7 @@ import {LatLngImpl} from '../../Model/lat-lng';
 })
 export class TrackDetailsComponent implements OnInit {
 
+    track: Track;
     lat: number = 50.357968;
     lng: number = 7.569099;
 
@@ -19,14 +22,21 @@ export class TrackDetailsComponent implements OnInit {
     polyLineBlue: LatLngImpl[] = [new LatLngImpl(50.359899, 7.568618), new LatLngImpl(50.357968, 7.569099)];
 
 
-    constructor() {
+    constructor(
+        private trackService: TrackService
+    ) {
         console.log("TrackDetailsComponent: constructor");
+
     }
 
     ngOnInit() {
-
+        this.getTrack(1);
     }
 
 
+    getTrack(id: number) {
+        this.trackService.getTrack(id)
+            .subscribe(track => this.track = track);
+    }
 }
 
