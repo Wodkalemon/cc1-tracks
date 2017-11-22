@@ -1,48 +1,84 @@
 <h1 class="page-header">Suche</h1>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" placeholder="Suche nach Route" />
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label for="filter">Dauer</label>
-                                        <select class="form-control">
-                                            <option value="0" selected>1 Tag</option>
-                                            <option value="1">2-3 Tage</option>
-                                            <option value="2">4-7 Tage</option>
-                                            <option value="3">7-14 Tage</option>
-                                            <option value="4">14+ Tage</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="filter">Startland</label>
-                                        <select class="form-control">
-                                            <option value="0" selected>Deutschland</option>
-                                            <option value="1">Frankreich</option>
-                                            <option value="2">Schweiz</option>
-                                            <option value="3">Österreich</option>
-                                            <option value="4">Italien</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contain">Entfernung (km)</label>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search fa-fw"></i></button>
-                                </form>
-                            </div>
+        <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+            <form>
+                <div class="form-group">
+                    <div class="form-group row">
+                        <label for="srch-route-name" class="col-xs-2 col-form-label">Name</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="Routenname" id="srch-route-name">
                         </div>
-                        <button type="button" class="btn btn-primary"><i class="fa fa-search fa-fw"></i></button>
+                    </div>
+                    <div class="form-group row">
+                        <label for="srch-route-begin" class="col-xs-2 col-form-label">Startland</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="Startland" id="srch-route-begin">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="srch-route-end" class="col-xs-2 col-form-label">Startland</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="Zielland" id="srch-route-end">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="srch-route-duration" class="col-xs-2 col-form-label">Dauer</label>
+                        <div class="col-xs-10">
+                            <select class="form-control" id="srch-route-duration">
+                                <option>1 Tag</option>
+                                <option>2-3 Tage</option>
+                                <option>3-5 Tage</option>
+                                <option>5-7 Tage</option>
+                                <option>7-14 Tage</option>
+                                <option>14+ Tage</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="srch-route-length" class="col-xs-2 col-form-label">Entfernung</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="Entfernung (durch Slider ersetzen)" id="srch-route-length">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="srch-route-difficulty-0" class="col-xs-2 col-form-label">Schwierigkeit</label>
+                        <div class="col-xs-10" data-toggle="buttons">
+                            <label class="btn btn-success active">
+                                <input type="checkbox" id="srch-route-difficulty-0" value="0" autocomplete="off" checked>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </label>
+
+                            <label class="btn btn-primary">
+                                <input type="checkbox" id="srch-route-difficulty-1" value="1" autocomplete="off">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </label>
+
+                            <label class="btn btn-warning">
+                                <input type="checkbox" id="srch-route-difficulty-2" value="2" autocomplete="off">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </label>
+
+                            <label class="btn btn-danger">
+                                <input type="checkbox" id="srch-route-difficulty-3" value="3" autocomplete="off">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </label>
+
+                            <label class="btn btn-info">
+                                <input type="checkbox" id="srch-route-difficulty-4" value="4" autocomplete="off">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="srch-route-rating" class="col-xs-2 col-form-label">Bewertung</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" value="Entfernung (durch Radiobutton ersetzen)" id="srch-route-rating">
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
