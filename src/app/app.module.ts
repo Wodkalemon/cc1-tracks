@@ -31,6 +31,8 @@ import {TrackService} from './service/track.service';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { NouisliderModule } from 'ng2-nouislider';
+
 
 @NgModule({
     declarations: [
@@ -62,6 +64,7 @@ import { AgmCoreModule } from '@agm/core';
         HttpModule,
         routing,
         HttpClientModule,
+        NouisliderModule,
 
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyD6O0Z3glNdE9eHeoAECtVF8ZinHSjCCzA'
