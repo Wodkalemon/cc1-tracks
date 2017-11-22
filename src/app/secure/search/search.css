@@ -4,3 +4,9 @@
 .btn.active i.fa {
     opacity: 1;
 }
+
+.btn-dark {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}
