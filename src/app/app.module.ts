@@ -30,8 +30,9 @@ import {TrackDetailsComponent} from './secure/track-details/track-details.compon
 import {TrackService} from './service/track.service';
 
 import { AgmCoreModule } from '@agm/core';
-
 import { NouisliderModule } from 'ng2-nouislider';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { NouisliderModule } from 'ng2-nouislider';
         routing,
         HttpClientModule,
         NouisliderModule,
+        NgbModule.forRoot(),
 
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyD6O0Z3glNdE9eHeoAECtVF8ZinHSjCCzA'
