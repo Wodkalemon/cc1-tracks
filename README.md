@@ -64,5 +64,7 @@ see aws/createResources.sh
 # Build the project and sync the output with the S3 bucket
 ng build
 cd dist
-aws s3 sync . s3://[BUCKET_NAME]/
+aws s3 sync . s3://cc1-tracks/
 ```
+### View result
+http://cc1-tracks.s3-website.us-east-2.amazonaws.com
