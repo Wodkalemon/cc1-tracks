@@ -7,12 +7,14 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {RequestOptions, Response} from '@angular/http';
 import {catchError, tap} from 'rxjs/operators';
 import {Sponsor} from '../Model/Sponsor';
+import {Organisation} from '../Model/Organisation';
 
 @Injectable()
 export class TrackService {
     results: string[];
     trackUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/route-detail"
-    sponsorsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/poi"
+    sponsorsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/sponsors"
+    organisationsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/organisation"
     constructor(private http: HttpClient) {
     }
 
@@ -34,6 +36,12 @@ export class TrackService {
 
         );
     }
-
+    getOrganisations(ids: number[]): Observable<Organisation[]> {
+        const url = `${this.organisationsUrl}`;
+        //return this.http.get<Track>(url).pipe(
+        return this.http.get<Organisation[]>(url).pipe(
+            tap(_ => console.log(`fetched Organisations`))
+        );
+    }
 
 }

@@ -6,8 +6,9 @@ import {Track} from '../../Model/Track';
 import {Poi} from '../../Model/Poi';
 import {Story} from '../../Model/Story';
 import {forEach} from '@angular/router/src/utils/collection';
-import {SponsorParts} from '../../Model/SponsorPart';
+import {SponsorPart} from '../../Model/SponsorPart';
 import {Sponsor} from '../../Model/Sponsor';
+import {Organisation} from '../../Model/Organisation';
 
 @Component({
     selector: 'track-details',
@@ -22,9 +23,10 @@ export class TrackDetailsComponent implements OnInit {
 
     track: Track;
     sponsors: Sponsor[];
+    organisations: Organisation[];
     selectedPoi: Poi;
     selectedStory: Story;
-    selectedSponsor: Poi;
+    selectedSponsorPart: SponsorPart;
     lat: number = 50.357968;
     lng: number = 7.569099;
 //    lat: number = 50.357968;
@@ -49,15 +51,21 @@ export class TrackDetailsComponent implements OnInit {
     showPoi(poi: Poi) {
         console.log("POI selected: " + poi.id);
         this.selectedPoi = poi;
-        this.selectedSponsor = null;
+        this.selectedSponsorPart = null;
         this.selectedStory = null;
     }
 
     showStory(story: Story) {
         console.log("Story selected: " + story.id);
         this.selectedPoi = null;
-        this.selectedSponsor = null;
+        this.selectedSponsorPart = null;
         this.selectedStory = story;
+    }
+    showSponsorPart(part: SponsorPart) {
+        console.log("SponsorPart selected: " + part.id);
+        this.selectedPoi = null;
+        this.selectedSponsorPart = part;
+        this.selectedStory = null;
     }
 
     getTrack(id: number) {
@@ -68,6 +76,8 @@ export class TrackDetailsComponent implements OnInit {
                 console.log(this.track);
 
                 this.getSponsors([1001,1002,1003]);
+                this.getOrganisations([2001,2002,2003]);
+
 
                 for (let sponsorPart of this.track.sponsorParts){
                     //console.log("sponsorPart");
@@ -106,6 +116,17 @@ export class TrackDetailsComponent implements OnInit {
 
     }
 
+    getOrganisations(ids:number[]) {
+
+        this.trackService.getOrganisations(ids)
+            .subscribe(oragnisation => {
+                this.organisations = oragnisation;
+                console.log("getOrganisations(" + ids + ") : " + this.organisations);
+                console.log(this.organisations);
+            });
+
+    }
+
     getSponsorColor(id:number):String {
         for(let sponsor of this.sponsors){
             if(sponsor.id == id) {
@@ -115,7 +136,23 @@ export class TrackDetailsComponent implements OnInit {
         }
     }
 
-    getSponsorPartPoints(sponsorPart: SponsorParts): SponsorParts {
+    getSponsor(id:number):Sponsor {
+        for(let sponsor of this.sponsors){
+            if(sponsor.id == id) {
+                return sponsor;
+            }
+        }
+    }
+
+    getOrganisation(id:number):Organisation {
+        for(let organisation of this.organisations){
+            if(organisation.id == id) {
+                return organisation;
+            }
+        }
+    }
+
+    getSponsorPartPoints(sponsorPart: SponsorPart): SponsorPart {
         let result: LatLngImpl[]=[];
         let foundStart: boolean=false;
         //console.log("suche...");

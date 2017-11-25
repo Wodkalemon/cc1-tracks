@@ -4,7 +4,7 @@ import {float} from 'aws-sdk/clients/lightsail';
 import {Poi} from './Poi';
 import {Story} from './Story';
 import {Rating} from './Rating';
-import {SponsorParts} from './SponsorPart';
+import {SponsorPart} from './SponsorPart';
 
 export class Sponsor {
 

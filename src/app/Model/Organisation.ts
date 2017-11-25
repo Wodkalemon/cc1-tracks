@@ -4,18 +4,16 @@ import {float} from 'aws-sdk/clients/lightsail';
 import {Poi} from './Poi';
 import {Story} from './Story';
 import {Rating} from './Rating';
+import {SponsorPart} from './SponsorPart';
 
-export class SponsorPart {
+export class Organisation {
 
     id:number;
-    sponsorId: number;
-    sponsoredId: number;
-    startPoint: LatLngImpl;
-    endPoint: LatLngImpl;
-    points: LatLngImpl[];
-    distance: number;
-    price: number;
-    comment: String;
+    name: String;
+    trackColor: String;
+    imageSmall: String;
+    imageLarge: String;
+    description: String;
 
     constructor () {
     }

@@ -13,6 +13,7 @@
                     </agm-polyline-point>
 
                 </agm-polyline>
+
                 <div *ngIf="sponsors">
                     <agm-polyline *ngFor="let sponsorPart of track.sponsorParts"
                                   strokeColor="{{getSponsorColor(sponsorPart.sponsorId)}}">
@@ -24,44 +25,10 @@
                     </agm-polyline>
                 </div>
 
-                <!-- <agm-polyline strokeColor="GREEN">
+                <div *ngFor="let poi of track.pois; let i = index">
+                    <agm-marker label="{{i+1}}" [latitude]="poi.location[1]" [longitude]="poi.location[0]"></agm-marker>
+                </div>
 
-                     <agm-polyline-point  [latitude]="track.points[0][1]"
-                                          [longitude]="track.points[0][0]">
-                     </agm-polyline-point>
-                     <agm-polyline-point  [latitude]="track.points[1][1]"
-                                          [longitude]="track.points[1][0]">
-                     </agm-polyline-point>
-                     <agm-polyline-point  [latitude]="track.points[2][1]"
-                                          [longitude]="track.points[2][0]">
-                     </agm-polyline-point>
-                     <agm-polyline-point  [latitude]="track.points[3][1]"
-                                          [longitude]="track.points[3][0]">
-                     </agm-polyline-point>
-                 </agm-polyline>
- -->
-                <!--<agm-polyline strokeColor="BLUE">
-
-                    <agm-polyline-point *ngFor="let coord of polyLineRed" [latitude]="coord.lat"
-                                        [longitude]="coord.lng"></agm-polyline-point>
-
-                </agm-polyline>
-
-                <agm-polyline strokeColor="BLUE">
-
-                    <agm-polyline-point *ngFor="let coord of polyLineBlue" [latitude]="coord.lat"
-                                        [longitude]="coord.lng"></agm-polyline-point>
-
-                </agm-polyline>
-
-                <agm-polyline strokeColor="GREEN">
-
-                    <agm-polyline-point *ngFor="let coord of polyLineGreen" [latitude]="coord.lat"
-                                        [longitude]="coord.lng"></agm-polyline-point>
-
-                </agm-polyline>-->
-
-                <agm-marker [latitude]="50.357968" [longitude]="7.569099"></agm-marker>
             </agm-map>
         </div>
 
@@ -165,6 +132,25 @@
                     </ng-template>
                 </ngb-tab>
 
+                <ngb-tab *ngIf="track" title="Sponsoren">
+                    <ng-template ngbTabContent>
+                        <div id="sidebar-list">
+                            <div *ngFor="let part of track.sponsorParts; let i = index"
+                                 class="sidebar-list-item row vertical-align">
+                                <div class="col-xs-2 number" (click)="showSponsorPart(part)">{{i+1}}</div>
+                                <div class="col-xs-7">
+                                    <h4 (click)="showSponsorPart(part)">{{getSponsor(part.sponsorId).name}} <br/>
+                                        Länge: {{part.distance}} km
+                                        <br/>
+                                    </h4>
+                                </div>
+                                <div class="col-xs-3 no-padding"><img class="img-responsive"
+                                                                      src="assets/img/100x100sample.jpg"></div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+
             </ngb-tabset>
 
             <!--<div id="sidebar-ribbon" class="row">
@@ -256,6 +242,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-xs-12" id="info-frame" *ngIf="selectedSponsorPart">
+            <tr>
+                <td>
+                    <h4>{{getSponsor(selectedSponsorPart.sponsorId).name}}</h4><br/>
+                    {{getSponsor(selectedSponsorPart.sponsorId).description}}
+                </td>
+                <td>
+                    <h4>{{getOrganisation(selectedSponsorPart.sponsoredId).name}}</h4><br/>
+                    {{getOrganisation(selectedSponsorPart.sponsoredId).description}}
+                </td>
+
+            </tr>
+        </div>
     </div>
 </div>
+
 
