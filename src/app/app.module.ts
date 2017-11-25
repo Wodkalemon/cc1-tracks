@@ -32,6 +32,7 @@ import {TrackService} from './service/track.service';
 import { AgmCoreModule } from '@agm/core';
 import { NouisliderModule } from 'ng2-nouislider';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 
 
@@ -71,7 +72,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyD6O0Z3glNdE9eHeoAECtVF8ZinHSjCCzA'
-        })
+        }),
+        AgmJsMarkerClustererModule
 
     ],
     providers: [
