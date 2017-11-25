@@ -26,7 +26,11 @@
                 </div>
 
                 <div *ngFor="let poi of track.pois; let i = index">
-                    <agm-marker label="{{i+1}}" [latitude]="poi.location[1]" [longitude]="poi.location[0]"></agm-marker>
+                    <agm-marker iconUrl="../assets/img/map-icons/poi-map-icon.png" (markerClick)="poiClick(poi)" label="{{LETTERS[i+1]}}" [latitude]="poi.location[1]" [longitude]="poi.location[0]"></agm-marker>
+                </div>
+
+                <div *ngFor="let story of track.stories; let i = index">
+                    <agm-marker iconUrl="../assets/img/map-icons/story-map-icon.png" (markerClick)="storyClick(story)" label="{{i+1}}" [latitude]="story.point[1]" [longitude]="story.point[0]"></agm-marker>
                 </div>
 
             </agm-map>
@@ -75,7 +79,7 @@
                         <div id="sidebar-list">
                             <div *ngFor="let poi of track.pois; let i = index"
                                  class="sidebar-list-item row vertical-align">
-                                <div class="col-xs-2 number" (click)="showPoi(poi)">{{i+1}}</div>
+                                <div class="col-xs-2 number" (click)="showPoi(poi)">{{LETTERS[i+1]}}</div>
                                 <div class="col-xs-7">
                                     <h4 (click)="showPoi(poi)">{{poi.name}}<br/>
                                         <small>{{ (poi.description.length>POI_DESCRIPTION_LENGTH)? (poi.description |

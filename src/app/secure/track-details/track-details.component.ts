@@ -20,6 +20,7 @@ export class TrackDetailsComponent implements OnInit {
     POI_DESCRIPTION_LENGTH = 100;
     STORY_TEXT_LENGTH = 100;
     RATING_COMMENT_LENGTH = 100;
+    LETTERS = {1:"A", 2:"B", 3:"C"};
 
     track: Track;
     sponsors: Sponsor[];
@@ -152,6 +153,14 @@ export class TrackDetailsComponent implements OnInit {
         }
     }
 
+    poiClick(poi: Poi){
+        console.log("POI klicked: " + poi.name);
+        this.showPoi(poi);
+    }
+    storyClick(story: Story){
+        console.log("Story klicked: " + story.title);
+        this.showStory(story);
+    }
     getSponsorPartPoints(sponsorPart: SponsorPart): SponsorPart {
         let result: LatLngImpl[]=[];
         let foundStart: boolean=false;
