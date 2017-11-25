@@ -1,7 +1,7 @@
-.btn i.fa {
+.btn-chkBx i.fa {
     opacity: 0;
 }
-.btn.active i.fa {
+.btn-chkBx.active i.fa {
     opacity: 1;
 }
 
@@ -9,4 +9,17 @@
     color: #fff;
     background-color: #343a40;
     border-color: #343a40;
+}
+
+.btn-search {
+    margin-right: 16px;
+    opacity: 1;
+    padding-right: 2em;
+    padding-left: 2em;
+    background-color: #337ab7;
+    color: white;
+}
+
+.btn-search:hover {
+    background-color: #23527c;
 }
