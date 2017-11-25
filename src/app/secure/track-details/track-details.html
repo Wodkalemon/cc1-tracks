@@ -2,10 +2,45 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-9" id="map-frame">
-            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+        <div class="col-sm-9" id="map-frame" *ngIf="track">
+            <agm-map [latitude]="track.points[0][1]" [longitude]="track.points[0][0]" [zoom]="15">
 
-                <agm-polyline strokeColor="RED">
+
+                <agm-polyline strokeColor="GREY">
+
+                    <agm-polyline-point *ngFor="let coord of track.points" [latitude]="coord[1]"
+                                        [longitude]="coord[0]">
+                    </agm-polyline-point>
+
+                </agm-polyline>
+                <div *ngIf="sponsors">
+                    <agm-polyline *ngFor="let sponsorPart of track.sponsorParts"
+                                  strokeColor="{{getSponsorColor(sponsorPart.sponsorId)}}">
+
+                        <agm-polyline-point *ngFor="let coord of sponsorPart.points" [latitude]="coord[1]"
+                                            [longitude]="coord[0]">
+                        </agm-polyline-point>
+
+                    </agm-polyline>
+                </div>
+
+                <!-- <agm-polyline strokeColor="GREEN">
+
+                     <agm-polyline-point  [latitude]="track.points[0][1]"
+                                          [longitude]="track.points[0][0]">
+                     </agm-polyline-point>
+                     <agm-polyline-point  [latitude]="track.points[1][1]"
+                                          [longitude]="track.points[1][0]">
+                     </agm-polyline-point>
+                     <agm-polyline-point  [latitude]="track.points[2][1]"
+                                          [longitude]="track.points[2][0]">
+                     </agm-polyline-point>
+                     <agm-polyline-point  [latitude]="track.points[3][1]"
+                                          [longitude]="track.points[3][0]">
+                     </agm-polyline-point>
+                 </agm-polyline>
+ -->
+                <!--<agm-polyline strokeColor="BLUE">
 
                     <agm-polyline-point *ngFor="let coord of polyLineRed" [latitude]="coord.lat"
                                         [longitude]="coord.lng"></agm-polyline-point>
@@ -24,7 +59,7 @@
                     <agm-polyline-point *ngFor="let coord of polyLineGreen" [latitude]="coord.lat"
                                         [longitude]="coord.lng"></agm-polyline-point>
 
-                </agm-polyline>
+                </agm-polyline>-->
 
                 <agm-marker [latitude]="50.357968" [longitude]="7.569099"></agm-marker>
             </agm-map>
@@ -58,6 +93,12 @@
                             <td>Bewertung:</td>
                             <td>
                                 <ngb-rating [rate]="track.ratingAvg" max="5" readonly="true"></ngb-rating>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Schwierigkeit:</td>
+                            <td>
+                                <ngb-rating [rate]="track.difficultyAvg" max="5" readonly="true"></ngb-rating>
                             </td>
                         </tr>
                     </ng-template>
@@ -109,8 +150,9 @@
                                  class="sidebar-list-item row vertical-align">
                                 <div class="col-xs-2 number">{{i+1}}</div>
                                 <div class="col-xs-7">
-                                    <h4 >{{rating.userName}} <br/>
-                                        <ngb-rating [rate]="rating.rating" max="5" readonly="true"></ngb-rating> <br/>
+                                    <h4>{{rating.userName}} <br/>
+                                        <ngb-rating [rate]="rating.rating" max="5" readonly="true"></ngb-rating>
+                                        <br/>
                                         <small>{{ (rating.comment.length>RATING_COMMENT_LENGTH)? (rating.comment |
                                             slice:0:RATING_COMMENT_LENGTH)+'..':(rating.comment) }}
                                         </small>
@@ -216,3 +258,4 @@
         </div>
     </div>
 </div>
+

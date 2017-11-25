@@ -4,6 +4,7 @@ import {float} from 'aws-sdk/clients/lightsail';
 import {Poi} from './Poi';
 import {Story} from './Story';
 import {Rating} from './Rating';
+import {SponsorParts} from './SponsorPart';
 
 export class Track {
 
@@ -19,9 +20,11 @@ export class Track {
     endCountry: String;
     sponsorPricePerKm: float;
     ratingAvg: float;
+    difficultyAvg: float;
     pois: Poi[];
     stories: Story[];
-    //ratings: any[];
+    ratings: Rating[];
+    sponsorParts: SponsorParts[];
 
     constructor () {
     }

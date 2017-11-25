@@ -5,6 +5,9 @@ import {TrackService} from '../../service/track.service';
 import {Track} from '../../Model/Track';
 import {Poi} from '../../Model/Poi';
 import {Story} from '../../Model/Story';
+import {forEach} from '@angular/router/src/utils/collection';
+import {SponsorParts} from '../../Model/SponsorPart';
+import {Sponsor} from '../../Model/Sponsor';
 
 @Component({
     selector: 'track-details',
@@ -18,11 +21,14 @@ export class TrackDetailsComponent implements OnInit {
     RATING_COMMENT_LENGTH = 100;
 
     track: Track;
+    sponsors: Sponsor[];
     selectedPoi: Poi;
     selectedStory: Story;
     selectedSponsor: Poi;
     lat: number = 50.357968;
     lng: number = 7.569099;
+//    lat: number = 50.357968;
+//    lng: number = 7.569099;
 
 
     //polyLine: LatLng[] = [new LatLng(50.357968, 7.569099), new LatLng(50.358899, 7.567618)];
@@ -38,8 +44,6 @@ export class TrackDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.getTrack(1);
-        //console.log("Trackname: " + this.track.name);
-
     }
 
     showPoi(poi: Poi) {
@@ -60,7 +64,16 @@ export class TrackDetailsComponent implements OnInit {
         this.trackService.getTrack(id)
             .subscribe(track => {
                 this.track = track;
-                console.log("getTrack(" + id + ")" + this.track.name);
+                console.log("getTrack(" + id + ").name : " + this.track.name);
+                console.log(this.track);
+
+                this.getSponsors([1001,1002,1003]);
+
+                for (let sponsorPart of this.track.sponsorParts){
+                    //console.log("sponsorPart");
+                    //console.log(sponsorPart);
+                    sponsorPart = this.getSponsorPartPoints(sponsorPart);
+                }
             });
     }
 
@@ -72,6 +85,64 @@ export class TrackDetailsComponent implements OnInit {
         }
         ;
         return false;
+    }
+
+    getSponsors(ids:number[]) {
+
+        this.trackService.getSponsors(ids)
+            .subscribe(sponsors => {
+                this.sponsors = sponsors;
+                console.log("getSponsors(" + ids + ") : " + this.sponsors);
+                console.log(this.track);
+
+
+
+                for (let sponsorPart of this.track.sponsorParts){
+                    //console.log("sponsorPart");
+                    //console.log(sponsorPart);
+                    sponsorPart = this.getSponsorPartPoints(sponsorPart);
+                }
+            });
+
+    }
+
+    getSponsorColor(id:number):String {
+        for(let sponsor of this.sponsors){
+            if(sponsor.id == id) {
+                console.log("Farbe: " + sponsor.trackColor);
+                return sponsor.trackColor;
+            }
+        }
+    }
+
+    getSponsorPartPoints(sponsorPart: SponsorParts): SponsorParts {
+        let result: LatLngImpl[]=[];
+        let foundStart: boolean=false;
+        //console.log("suche...");
+        //console.log(point.coord);
+        //console.log(sponsorPart.startPoint);
+        for(let point of this.track.points){
+
+            if (!foundStart && point[0] == sponsorPart.startPoint[0] && point[1] == sponsorPart.startPoint[1]){
+                foundStart = true;
+                result.push(point);
+                //console.log(sponsorPart.startPoint);
+                //console.log("Start gefunden");
+            }
+            else if(foundStart && point[0] == sponsorPart.endPoint[0] && point[1] == sponsorPart.endPoint[1]){
+                foundStart = false;
+                result.push(point);
+                //console.log("Ende gefunden");
+            }
+            else if(foundStart) {
+                result.push(point);
+                //console.log("point added");
+            }
+        }
+        //console.log("points added: "+result.length);
+        sponsorPart.points = result;
+        return sponsorPart;
+
     }
 }
 

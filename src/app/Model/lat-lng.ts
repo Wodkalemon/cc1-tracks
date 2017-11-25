@@ -2,13 +2,14 @@ import {LatLng} from '@agm/core';
 
 
 export class LatLngImpl {
-
-    lat:number;
-    lng:number;
+    coord:number[];
+    //lat:number;
+    //lng:number;
 
     constructor(lat: number, lng: number) {
-        this.lat = lat;
-        this.lng = lng;
+        this.coord = [lat, lng]
+        //this.lat = lat;
+        //this.lng = lng;
     }
 
 }

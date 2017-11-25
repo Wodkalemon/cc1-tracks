@@ -8,6 +8,8 @@ export class Rating {
     id:number;
     userName: String;
     rating: number;
+    difficulty: number;
+    duration: number;
     creationDate: number;
     comment: String;
 
