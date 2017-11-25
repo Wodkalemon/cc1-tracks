@@ -55,7 +55,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         SearchComponent,
         TopRoutesComponent,
         AppComponent,
-        NouisliderModule,
 
         TrackDetailsComponent
 
@@ -65,6 +64,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         FormsModule,
         HttpModule,
         routing,
+        NouisliderModule,
         HttpClientModule,
         NgbModule.forRoot(),
 

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {UserLoginService} from "../../service/user-login.service";
 import {Callback, CognitoUtil, LoggedInCallback} from "../../service/cognito.service";
 import {UserParametersService} from "../../service/user-parameters.service";
@@ -10,7 +10,9 @@ import {Router} from "@angular/router";
     templateUrl: './search.html',
     styleUrls: ['./search.css']
 })
-export class SearchComponent implements LoggedInCallback {
+export class SearchComponent implements OnInit, LoggedInCallback {
+
+    public someRange: number[] = [10, 300];
 
     public parameters: Array<Parameters> = [];
     public cognitoId: String;
@@ -18,6 +20,10 @@ export class SearchComponent implements LoggedInCallback {
     constructor(public router: Router, public userService: UserLoginService, public userParams: UserParametersService, public cognitoUtil: CognitoUtil) {
         this.userService.isAuthenticated(this);
         console.log("In MyProfileComponent");
+    }
+
+    ngOnInit() {
+
     }
 
     isLoggedIn(message: string, isLoggedIn: boolean) {

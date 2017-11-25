@@ -37,9 +37,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="srch-route-length" class="col-xs-12 col-sm-2 col-form-label">Entfernung</label>
+                        <label class="col-xs-12 col-sm-2 col-form-label">Entfernung</label>
                         <div class="col-xs-12 col-sm-10">
-                            <input class="form-control" type="text" value="Entfernung (durch Slider ersetzen)" id="srch-route-length">
+                            <nouislider [connect]="true" [min]="10" [max]="300" [step]="5" [(ngModel)]="someRange" [tooltips]="[ true, true ]" style="margin-top: 2.5em;"></nouislider>
                         </div>
                     </div>
                     <div class="form-group row">
