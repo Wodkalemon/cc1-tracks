@@ -6,7 +6,7 @@
             <agm-map [latitude]="track.points[0][1]" [longitude]="track.points[0][0]" [zoom]="15">
 
 
-                <agm-polyline strokeColor="GREY">
+                <agm-polyline strokeColor="#c2c2a3">
 
                     <agm-polyline-point *ngFor="let coord of track.points" [latitude]="coord[1]"
                                         [longitude]="coord[0]">
@@ -16,9 +16,19 @@
 
                 <div *ngIf="sponsors">
                     <agm-polyline *ngFor="let sponsorPart of track.sponsorParts"
-                                  strokeColor="{{getSponsorColor(sponsorPart.sponsorId)}}">
+                                  strokeColor="{{getSponsorColor(sponsorPart.sponsorId)}}"
+                                    strokeOpacity="0.5">
 
                         <agm-polyline-point *ngFor="let coord of sponsorPart.points" [latitude]="coord[1]"
+                                            [longitude]="coord[0]">
+                        </agm-polyline-point>
+
+                    </agm-polyline>
+                </div>
+                <div *ngIf="selectedSponsorPart">
+                    <agm-polyline strokeWeight="6" strokeColor="{{getSponsorColor(selectedSponsorPart.sponsorId)}}">
+
+                        <agm-polyline-point *ngFor="let coord of selectedSponsorPart.points" [latitude]="coord[1]"
                                             [longitude]="coord[0]">
                         </agm-polyline-point>
 
@@ -247,17 +257,23 @@
             </div>
         </div>
         <div class="col-xs-12" id="info-frame" *ngIf="selectedSponsorPart">
-            <tr>
-                <td>
+            <div class="row">
+                <div class="col-md-3">
                     <h4>{{getSponsor(selectedSponsorPart.sponsorId).name}}</h4><br/>
                     {{getSponsor(selectedSponsorPart.sponsorId).description}}
-                </td>
-                <td>
+                </div>
+                <div class="col-md-3">
+                    -----------------<br/>
+                    {{selectedSponsorPart.price}} € <br/>
+                    -----------------<br/>
+                    {{selectedSponsorPart.comment}}
+                </div>
+                <div class="col-md-3">
                     <h4>{{getOrganisation(selectedSponsorPart.sponsoredId).name}}</h4><br/>
                     {{getOrganisation(selectedSponsorPart.sponsoredId).description}}
-                </td>
+                </div>
+            </div>
 
-            </tr>
         </div>
     </div>
 </div>
