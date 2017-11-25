@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class SearchComponent implements OnInit, LoggedInCallback {
 
-    public someRange: number[] = [10, 300];
+    public searchDistance: number[] = [10, 300];
 
     public parameters: Array<Parameters> = [];
     public cognitoId: String;
