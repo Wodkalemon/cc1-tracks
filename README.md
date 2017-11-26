@@ -42,7 +42,7 @@ This application will be deployed and hosted as a static application on S3.
 The following Resources are necessary to run the application:
 * S3
 * Cognito
-* JSON-APIs with backen Operations
+* JSON-APIs with backend Operations
 
 ### Creating S3 Bucket
 ```
