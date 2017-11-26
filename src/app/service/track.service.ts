@@ -47,7 +47,24 @@ export class TrackService {
     }
 
     searchTracks(params: SearchParam): Observable<Track[]> {
-        const url = `${this.tracksUrl}`;
+        let url = `${this.tracksUrl}`;
+
+        let urlParams = `${params.name ? "name="+params.name + ";" : ''}` +
+            `${params.startCountry ? "startCountry="+params.startCountry + ";" : ''}` +
+            `${params.endCountry ? "endCountry="+params.endCountry + ";" : ''}` +
+            `${params.minDistance ? "minDistance="+params.minDistance + ";" : ''}` +
+            `${params.maxDistance ? "maxDistance="+params.maxDistance + ";" : ''}` +
+            `${params.minDuration ? "minDuration="+params.minDuration + ";" : ''}` +
+            `${params.maxDuration ? "maxDuration="+params.maxDuration + ";" : ''}` +
+            `${params.minRating ? "minRating="+params.minRating + ";" : ''}` +
+            `${params.maxRating ? "maxRating="+params.maxRating + ";" : ''}` +
+            `${params.minDifficulty ? "minDifficulty="+params.minDifficulty + ";" : ''}` +
+            `${params.maxDifficulty ? "maxDifficulty="+params.maxDifficulty + ";" : ''}`;
+
+        if (urlParams != '') {
+            url = url + "?" + urlParams;
+            console.log("url with Params: " + url);
+        }
         //return this.http.get<Track>(url).pipe(
         return this.http.get<Track[]>(url).pipe(
             tap(_ => console.log(`fetched Organisations`))

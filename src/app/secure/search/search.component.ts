@@ -17,8 +17,12 @@ import {MyFormatter} from './slider-formatter';
 
 export class SearchComponent implements OnInit {
     DIFFICULTY_TEXT={1:"Anfänger",2:"Leicht",3:"Mittel",4:"Schwer",5:"Experte"};
-    public searchDistance: number[] = [10, 300];
-    public searchDifficulty: number[] = [0, 5];
+    public searchDistanceMin: number= 0;
+    public searchDistanceMax: number= 10000;
+    public searchDistance: number[] = [this.searchDistanceMin, this.searchDistanceMax];
+    public searchDifficultyMin: number=0
+    public searchDifficultyMax: number=5
+    public searchDifficulty: number[] = [this.searchDifficultyMin, this.searchDifficultyMax];
 
     searchParam: SearchParam;
     searchResult: Track[];
@@ -38,6 +42,15 @@ export class SearchComponent implements OnInit {
         }
     };
 
+    ngOnInit() {
+        this.searchParam = new SearchParam();
+        this.searchParam.minDifficulty=this.searchDifficultyMin;
+        this.searchParam.maxDifficulty=this.searchDifficultyMax;
+        this.searchParam.minDistance=this.searchDistanceMin;
+        this.searchParam.maxDistance=this.searchDistanceMax;
+        this.searchTracks();
+
+    }
 
 
     constructor(private trackService: TrackService) {
@@ -82,10 +95,7 @@ export class SearchComponent implements OnInit {
         this.searchParam.maxDifficulty = minMax[1];
     }
 
-    ngOnInit() {
-        this.searchTracks();
-        this.searchParam = new SearchParam();
-    }
+
 
 }
 

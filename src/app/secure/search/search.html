@@ -29,7 +29,7 @@
                             <select class="form-control" id="srch-route-duration" (change)="setDuration($event.target.value)">
                                 <option value="0;365" >Bitte wählen...</option>
                                 <option value="0;1" >max. 1 Tag</option>
-                                <option value="2;3">2-3 Tage</option>
+                                <option value="1;3">1-3 Tage</option>
                                 <option value="3;5">3-5 Tage</option>
                                 <option value="5;7">5-7 Tage</option>
                                 <option value="7;14">7-14 Tage</option>
@@ -40,8 +40,8 @@
                     <div class="form-group row">
                         <label class="col-xs-12 col-sm-2 col-form-label">Entfernung</label>
                         <div class="col-xs-12 col-sm-10">
-                            <nouislider id="srch-route-distance" name="srch-route-distance" [connect]="true" [min]="10"
-                                        [max]="300" [step]="5" (ngModelChange)="setDistance($event)" [(ngModel)]="searchDistance" [tooltips]="[ true, true ]"
+                            <nouislider id="srch-route-distance" name="srch-route-distance" [connect]="true" [min]="searchDistanceMin"
+                                        [max]="searchDistanceMax" [step]="5" (ngModelChange)="setDistance($event)" [(ngModel)]="searchDistance" [tooltips]="[ true, true ]"
                                         style="margin-top: 2.5em;"></nouislider>
                         </div>
                     </div>

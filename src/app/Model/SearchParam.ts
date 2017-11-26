@@ -11,8 +11,8 @@ export class SearchParam {
     startCountry: String;
     endCountry: String;
 
-    minDistance: number=0;
-    maxDistance: number=300;
+    minDistance: number;
+    maxDistance: number;
 
     minDuration: number;
     maxDuration: number;
@@ -20,8 +20,8 @@ export class SearchParam {
     minRating: number;
     maxRating: number;
 
-    minDifficulty: number=0;
-    maxDifficulty: number=5;
+    minDifficulty: number;
+    maxDifficulty: number;
 
     constructor () {
     }
