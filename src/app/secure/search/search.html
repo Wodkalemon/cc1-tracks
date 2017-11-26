@@ -8,45 +8,52 @@
                     <div class="form-group row">
                         <label for="srch-route-name" class="col-xs-12 col-sm-2 col-form-label">Name</label>
                         <div class="col-xs-12 col-sm-10">
-                            <input class="form-control" type="text" value="Routenname" id="srch-route-name">
+                            <input class="form-control" type="text" [(ngModel)]="searchParam.name"  placeholder="Routenname" id="srch-route-name" name="name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="srch-route-begin" class="col-xs-12 col-sm-2 col-form-label">Startland</label>
                         <div class="col-xs-12 col-sm-10">
-                            <input class="form-control" type="text" value="Startland" id="srch-route-begin">
+                            <input class="form-control" type="text" [(ngModel)]="searchParam.startCountry" placeholder="Startland" id="srch-route-begin" name="start-country">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="srch-route-end" class="col-xs-12 col-sm-2 col-form-label">Zielland</label>
                         <div class="col-xs-12 col-sm-10">
-                            <input class="form-control" type="text" value="Zielland" id="srch-route-end">
+                            <input class="form-control" type="text" [(ngModel)]="searchParam.endCountry" placeholder="Zielland" id="srch-route-end" name="end-country">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="srch-route-duration" class="col-xs-12 col-sm-2 col-form-label">Dauer</label>
                         <div class="col-xs-12 col-sm-10">
-                            <select class="form-control" id="srch-route-duration">
-                                <option>1 Tag</option>
-                                <option>2-3 Tage</option>
-                                <option>3-5 Tage</option>
-                                <option>5-7 Tage</option>
-                                <option>7-14 Tage</option>
-                                <option>14+ Tage</option>
+                            <select class="form-control" id="srch-route-duration" (change)="setDuration($event.target.value)">
+                                <option value="0;365" >Bitte wählen...</option>
+                                <option value="0;1" >max. 1 Tag</option>
+                                <option value="2;3">2-3 Tage</option>
+                                <option value="3;5">3-5 Tage</option>
+                                <option value="5;7">5-7 Tage</option>
+                                <option value="7;14">7-14 Tage</option>
+                                <option value="14;365">14+ Tage</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-xs-12 col-sm-2 col-form-label">Entfernung</label>
                         <div class="col-xs-12 col-sm-10">
-                            <nouislider [connect]="true" [min]="10" [max]="300" [step]="5" [(ngModel)]="searchDistance" [tooltips]="[ true, true ]" style="margin-top: 2.5em;"></nouislider>
+                            <nouislider id="srch-route-distance" name="srch-route-distance" [connect]="true" [min]="10"
+                                        [max]="300" [step]="5" (ngModelChange)="setDistance($event)" [(ngModel)]="searchDistance" [tooltips]="[ true, true ]"
+                                        style="margin-top: 2.5em;"></nouislider>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="srch-route-difficulty-0" class="col-xs-12 col-sm-2 col-form-label">Schwierigkeit</label>
+                        <label for="srch-route-difficulty"
+                               class="col-xs-12 col-sm-2 col-form-label">Schwierigkeit</label>
                         <div class="col-xs-12 col-sm-10" data-toggle="buttons">
-                            <label class="btn btn-success btn-chkBx active col-xs-2 col-xs-offset-1">
-                                <input type="checkbox" id="srch-route-difficulty-0" value="0" autocomplete="off" checked>
+                            <nouislider id="srch-route-difficulty" (ngModelChange)="setDifficulty($event)" [(ngModel)]="searchDifficulty" [config]="sliderConfig" name="srch-route-difficulty"></nouislider>
+                            <br/>
+                            <!--<label class="btn btn-success btn-chkBx active col-xs-2 col-xs-offset-1">
+                                <input type="checkbox" id="srch-route-difficulty-0" value="0" autocomplete="off"
+                                       checked>
                                 <i class="fa fa-check" aria-hidden="true"></i>
                             </label>
 
@@ -68,21 +75,36 @@
                             <label class="btn btn-dark btn-chkBx col-xs-2">
                                 <input type="checkbox" id="srch-route-difficulty-4" value="4" autocomplete="off">
                                 <i class="fa fa-check" aria-hidden="true"></i>
-                            </label>
+                            </label>-->
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-xs-12 col-sm-2 col-form-label">Bewertung</label>
                         <div class="col-xs-12 col-sm-10">
-                            <label class="radio-inline"><input type="radio" name="optradio"><i class="fa fa-star" aria-hidden="true"></i></label>
-                            <label class="radio-inline"><input type="radio" name="optradio"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></label>
-                            <label class="radio-inline"><input type="radio" name="optradio"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></label>
-                            <label class="radio-inline"><input type="radio" name="optradio"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></label>
-                            <label class="radio-inline"><input type="radio" name="optradio"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></label>
+                            <label class="radio-inline"><input type="radio" name="optradio" value="1" [(ngModel)]="searchParam.minRating"><i class="fa fa-star"
+                                                                                               aria-hidden="true"></i></label>
+                            <label class="radio-inline"><input type="radio" name="optradio" value="2" [(ngModel)]="searchParam.minRating"><i class="fa fa-star"
+                                                                                               aria-hidden="true"></i><i
+                                    class="fa fa-star" aria-hidden="true"></i></label>
+                            <label class="radio-inline"><input type="radio" name="optradio" value="3" [(ngModel)]="searchParam.minRating"><i class="fa fa-star"
+                                                                                               aria-hidden="true"></i><i
+                                    class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                                                                 aria-hidden="true"></i></label>
+                            <label class="radio-inline"><input type="radio" name="optradio" value="4" [(ngModel)]="searchParam.minRating"><i class="fa fa-star"
+                                                                                               aria-hidden="true"></i><i
+                                    class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                                                                 aria-hidden="true"></i><i
+                                    class="fa fa-star" aria-hidden="true"></i></label>
+                            <label class="radio-inline"><input type="radio" name="optradio" value="5" [(ngModel)]="searchParam.minRating"><i class="fa fa-star"
+                                                                                               aria-hidden="true"></i><i
+                                    class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                                                                 aria-hidden="true"></i><i
+                                    class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                                                                 aria-hidden="true"></i></label>
                         </div>
                     </div>
                     <div class="form-group row text-right">
-                        <button type="button" class="btn btn-search">
+                        <button type="button" class="btn btn-search" (click)="searchTracks()">
                             <i class="fa fa-search fa-2x" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -94,43 +116,26 @@
         <div class="col-xs-12">
             <h1 class="page-header">Suchergebnisse</h1>
         </div>
-        <div class="table-responsive col-xs-12">
+        <div *ngIf="searchResult" class="table-responsive col-xs-12">
             <table class="table table-hover table-striped">
                 <tr>
                     <th> Name</th>
                     <th> Startland</th>
-                    <th> Zielland </th>
+                    <th> Zielland</th>
                     <th><i class="fa fa-clock-o fa-fw"></i> Dauer</th>
                     <th><i class="fa fa-road fa-fw"></i> Entfernung</th>
                     <th><i class="fa fa-signal fa-fw"></i> Schwierigkeit</th>
                     <th><i class="fa fa-star-o fa-fw"></i> Bewertung</th>
                 </tr>
-                <tr>
-                    <td>Routerli</td>
-                    <td>Deutschland</td>
-                    <td>Schweiz</td>
-                    <td>5 Tage</td>
-                    <td>125km</td>
-                    <td>Schwer</td>
-                    <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
-                </tr>
-                <tr>
-                    <td>Wasserfallroute</td>
-                    <td>Norwegen</td>
-                    <td>Norwegen</td>
-                    <td>3 Tage</td>
-                    <td>64km</td>
-                    <td>Mittel</td>
-                    <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
-                </tr>
-                <tr>
-                    <td>Jakobsweg</td>
-                    <td>Deutschland</td>
-                    <td>Spanien</td>
-                    <td>25 Tage</td>
-                    <td>1400km</td>
-                    <td>Experte</td>
-                    <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
+                <tr *ngFor="let track of searchResult">
+                    <td>{{track.name}}</td>
+                    <td>{{track.startCountry}}</td>
+                    <td>{{track.endCountry}}</td>
+                    <td>{{track.duration}} Stunden</td>
+                    <td>{{track.distance}} km</td>
+                    <td>{{DIFFICULTY_TEXT[track.difficultyAvg.toPrecision(1)]}}</td>
+                    <ngb-rating [(rate)]="track.ratingAvg" [starTemplate]="t" max="5" [readonly]="true"></ngb-rating>
+
                 </tr>
             </table>
         </div>

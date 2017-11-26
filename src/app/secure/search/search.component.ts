@@ -1,8 +1,10 @@
 import {Component, OnInit} from "@angular/core";
-import {UserLoginService} from "../../service/user-login.service";
-import {Callback, CognitoUtil, LoggedInCallback} from "../../service/cognito.service";
-import {UserParametersService} from "../../service/user-parameters.service";
 import {Router} from "@angular/router";
+import {SearchParam} from '../../Model/SearchParam';
+import {TrackService} from '../../service/track.service';
+import {Track} from '../../Model/Track';
+import {NouiFormatter} from 'ng2-nouislider';
+import {MyFormatter} from './slider-formatter';
 
 
 @Component({
@@ -10,57 +12,81 @@ import {Router} from "@angular/router";
     templateUrl: './search.html',
     styleUrls: ['./search.css']
 })
-export class SearchComponent implements OnInit, LoggedInCallback {
 
+
+
+export class SearchComponent implements OnInit {
+    DIFFICULTY_TEXT={1:"Anfänger",2:"Leicht",3:"Mittel",4:"Schwer",5:"Experte"};
     public searchDistance: number[] = [10, 300];
+    public searchDifficulty: number[] = [0, 5];
 
-    public parameters: Array<Parameters> = [];
-    public cognitoId: String;
+    searchParam: SearchParam;
+    searchResult: Track[];
 
-    constructor(public router: Router, public userService: UserLoginService, public userParams: UserParametersService, public cognitoUtil: CognitoUtil) {
-        this.userService.isAuthenticated(this);
-        console.log("In MyProfileComponent");
+    public sliderConfig: any = {
+        connect: true,
+        start: [0,5],
+        step: 1,
+        range: {
+            'min': [0],
+            'max': [5]
+        },
+        pips: {
+            mode: 'steps',
+            density: 1000,
+            format: new MyFormatter()
+        }
+    };
+
+
+
+    constructor(private trackService: TrackService) {
+        console.log("SearchComponent: constructor");
+
+    }
+
+    searchTracks() {
+        console.log("called searchTracks()");
+        console.log(this.searchParam);
+        this.trackService.searchTracks(this.searchParam)
+            .subscribe(searchResult => {
+                this.searchResult = searchResult;
+                console.log("searchTracks(): ");
+                console.log(this.searchResult);
+
+            });
+        /*this.trackService.getTrack(1001)
+            .subscribe(searchResult => {
+                this.searchResult = [searchResult];
+                console.log("searchTracks(): ");
+                console.log(this.searchResult);
+
+            });*/
+    }
+
+    setDuration(minMax: String){
+        let min:number = +minMax.split(";")[0];
+        let max:number = +minMax.split(";")[1];
+        console.log("Min/Max Duration: " + min +"/"+ max);
+        this.searchParam.minDuration = min*24;
+        this.searchParam.maxDuration = max*24;
+    }
+    setDistance(minMax){
+        console.log(minMax)
+        this.searchParam.minDistance = minMax[0];
+        this.searchParam.maxDistance = minMax[1];
+    }
+    setDifficulty(minMax){
+        console.log(minMax)
+        this.searchParam.minDifficulty = minMax[0];
+        this.searchParam.maxDifficulty = minMax[1];
     }
 
     ngOnInit() {
-
+        this.searchTracks();
+        this.searchParam = new SearchParam();
     }
 
-    isLoggedIn(message: string, isLoggedIn: boolean) {
-        if (!isLoggedIn) {
-            this.router.navigate(['/home/login']);
-        } else {
-            this.userParams.getParameters(new GetParametersCallback(this, this.cognitoUtil));
-        }
-    }
 }
 
-export class Parameters {
-    name: string;
-    value: string;
-}
 
-export class GetParametersCallback implements Callback {
-
-    constructor(public me: SearchComponent, public cognitoUtil: CognitoUtil) {
-
-    }
-
-    callback() {
-
-    }
-
-    callbackWithParam(result: any) {
-
-        for (let i = 0; i < result.length; i++) {
-            let parameter = new Parameters();
-            parameter.name = result[i].getName();
-            parameter.value = result[i].getValue();
-            this.me.parameters.push(parameter);
-        }
-        let param = new Parameters()
-        param.name = "cognito ID";
-        param.value = this.cognitoUtil.getCognitoIdentity();
-        this.me.parameters.push(param)
-    }
-}

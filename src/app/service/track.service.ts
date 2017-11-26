@@ -8,19 +8,21 @@ import {RequestOptions, Response} from '@angular/http';
 import {catchError, tap} from 'rxjs/operators';
 import {Sponsor} from '../Model/Sponsor';
 import {Organisation} from '../Model/Organisation';
+import {SearchParam} from '../Model/SearchParam';
 
 @Injectable()
 export class TrackService {
     results: string[];
-    trackUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/route-detail"
+    trackDetailUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/route-detail"
     sponsorsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/sponsors"
     organisationsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/organisation"
+    tracksUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes"
     constructor(private http: HttpClient) {
     }
 
 
     getTrack(id: number): Observable<Track> {
-        const url = `${this.trackUrl}?id=${id}`;
+        const url = `${this.trackDetailUrl}?id=${id}`;
         //return this.http.get<Track>(url).pipe(
         return this.http.get<Track>(url).pipe(
             tap(_ => console.log(`fetched Track id=${id}`))
@@ -42,6 +44,16 @@ export class TrackService {
         return this.http.get<Organisation[]>(url).pipe(
             tap(_ => console.log(`fetched Organisations`))
         );
+    }
+
+    searchTracks(params: SearchParam): Observable<Track[]> {
+        const url = `${this.tracksUrl}`;
+        //return this.http.get<Track>(url).pipe(
+        return this.http.get<Track[]>(url).pipe(
+            tap(_ => console.log(`fetched Organisations`))
+        );
+
+        //https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes?name=route2
     }
 
 }
