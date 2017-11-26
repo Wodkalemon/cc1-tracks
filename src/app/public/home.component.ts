@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, LoggedInCallback {
             if (event instanceof NavigationStart) {
                 this.userService.isAuthenticated(this);
             }
-        }
+        });
     }
 
     /*
