@@ -4,17 +4,17 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
+                <a class="navbar-brand" [routerLink]="['/home']">WebSiteName</a>
             </div>
             <ul class="nav navbar-nav navbar-collapse">
                 <li>
-                    <a [routerLink]="['/securehome/search']"><i class="fa fa-search fa-fw"></i> Suche</a>
+                    <a [routerLink]="['/home/search']"><i class="fa fa-search fa-fw"></i> Suche</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/securehome/top-routes']"><i class="fa fa-trophy fa-fw"></i> Top Routen</a>
+                    <a [routerLink]="['/home/top-routes']"><i class="fa fa-trophy fa-fw"></i> Top Routen</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/securehome/track-details']"><i class="fa fa-table fa-fw"></i> Track Details</a>
+                    <a [routerLink]="['/home/track-details']"><i class="fa fa-table fa-fw"></i> Track Details</a>
                 </li>
                 <li>
                     <a [routerLink]="['/securehome/myprofile']"><i class="fa fa-dashboard fa-fw"></i> My Profile</a>

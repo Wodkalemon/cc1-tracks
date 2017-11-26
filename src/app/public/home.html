@@ -1,7 +1,7 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+<!--<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container topnav">
-        <!-- Brand and toggle get grouped for better mobile display -->
+        &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
@@ -12,7 +12,7 @@
             </button>
             <a class="navbar-brand topnav" href="#">Cognito QuickStart</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
+        &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -23,10 +23,80 @@
                 </li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
+        &lt;!&ndash; /.navbar-collapse &ndash;&gt;
     </div>
-    <!-- /.container -->
+    &lt;!&ndash; /.container &ndash;&gt;
+</nav>-->
+<!-- Navigation -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" [routerLink]="['/home']">HikeWithBenefits</a>
+        </div>
+        <ul class="nav navbar-nav navbar-collapse">
+            <li>
+                <a [routerLink]="['/home/search']"><i class="fa fa-search fa-fw"></i> Suche</a>
+            </li>
+            <li>
+                <a [routerLink]="['/home/top-routes']"><i class="fa fa-trophy fa-fw"></i> Top Routen</a>
+            </li>
+            <li>
+                <a [routerLink]="['/home/track-details']"><i class="fa fa-table fa-fw"></i> Track Details</a>
+            </li>
+            <!--<li>
+                <a [routerLink]="['/securehome/myprofile']"><i class="fa fa-dashboard fa-fw"></i> My Profile</a>
+            </li>
+            <li>
+                <a [routerLink]="['/securehome/jwttokens']"><i class="fa fa-table fa-fw"></i> JWT Tokens</a>
+            </li>
+            <li>
+                <a [routerLink]="['/securehome/useractivity']"><i class="fa fa-table fa-fw"></i> Login Data</a>
+            </li>-->
+        </ul>
+
+        <ul *ngIf="user" class="nav navbar-top-links navbar-right">
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a [routerLink]="['/securehome/myprofile']"><i class="fa fa-user fa-fw"></i> User
+                        Profile</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a [routerLink]="['/securehome/logout']"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+
+        <ul *ngIf="!user" class="nav navbar-top-links navbar-right">
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a [routerLink]="['/home/register']"><i class="fa fa-pencil-square-o fa-fw"></i>Register</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a [routerLink]="['/home/login']"><i class="fa fa-sign-in fa-fw"></i>Login</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+
+    </div>
 </nav>
+
+
 <div class="intro-header">
     <router-outlet></router-outlet>
 </div>

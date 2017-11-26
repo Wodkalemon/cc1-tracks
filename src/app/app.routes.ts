@@ -35,6 +35,8 @@ const homeRoutes: Routes = [
             {path: 'newPassword', component: NewPasswordComponent},
             {path: '', component: HomeLandingComponent},
             {path: 'search', component: SearchComponent},
+            {path: 'track-details', component: TrackDetailsComponent},
+            {path: 'top-routes', component: TopRoutesComponent},
         ]
     },
 ];
@@ -53,7 +55,7 @@ const secureHomeRoutes: Routes = [
         {path: 'myprofile', component: MyProfileComponent},
         {path: 'useractivity', component: UseractivityComponent},
         {path: 'track-details', component: TrackDetailsComponent},
-        {path: 'top-routes', component: TopRoutesComponent},
+
         {path: '', component: MyProfileComponent}]
     }
 ];

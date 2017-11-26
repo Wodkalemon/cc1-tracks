@@ -9,51 +9,11 @@ import {Router} from "@angular/router";
     selector: 'awscognito-angular2-app',
     templateUrl: './topRoutes.html'
 })
-export class TopRoutesComponent implements LoggedInCallback {
+export class TopRoutesComponent {
 
-    public parameters: Array<Parameters> = [];
-    public cognitoId: String;
-
-    constructor(public router: Router, public userService: UserLoginService, public userParams: UserParametersService, public cognitoUtil: CognitoUtil) {
-        this.userService.isAuthenticated(this);
+    constructor() {
         console.log("In Top Routes");
     }
 
-    isLoggedIn(message: string, isLoggedIn: boolean) {
-        if (!isLoggedIn) {
-            this.router.navigate(['/home/login']);
-        } else {
-            this.userParams.getParameters(new GetParametersCallback(this, this.cognitoUtil));
-        }
-    }
 }
 
-export class Parameters {
-    name: string;
-    value: string;
-}
-
-export class GetParametersCallback implements Callback {
-
-    constructor(public me: TopRoutesComponent, public cognitoUtil: CognitoUtil) {
-
-    }
-
-    callback() {
-
-    }
-
-    callbackWithParam(result: any) {
-
-        for (let i = 0; i < result.length; i++) {
-            let parameter = new Parameters();
-            parameter.name = result[i].getName();
-            parameter.value = result[i].getValue();
-            this.me.parameters.push(parameter);
-        }
-        let param = new Parameters()
-        param.name = "cognito ID";
-        param.value = this.cognitoUtil.getCognitoIdentity();
-        this.me.parameters.push(param)
-    }
-}
