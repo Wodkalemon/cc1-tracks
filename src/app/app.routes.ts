@@ -33,7 +33,8 @@ const homeRoutes: Routes = [
             {path: 'forgotPassword/:email', component: ForgotPassword2Component},
             {path: 'forgotPassword', component: ForgotPasswordStep1Component},
             {path: 'newPassword', component: NewPasswordComponent},
-            {path: '', component: HomeLandingComponent}
+            {path: '', component: HomeLandingComponent},
+            {path: 'search', component: SearchComponent},
         ]
     },
 ];
@@ -52,7 +53,6 @@ const secureHomeRoutes: Routes = [
         {path: 'myprofile', component: MyProfileComponent},
         {path: 'useractivity', component: UseractivityComponent},
         {path: 'track-details', component: TrackDetailsComponent},
-        {path: 'search', component: SearchComponent},
         {path: 'top-routes', component: TopRoutesComponent},
         {path: '', component: MyProfileComponent}]
     }
