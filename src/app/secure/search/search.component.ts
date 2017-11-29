@@ -10,7 +10,7 @@ import {MyFormatter} from './slider-formatter';
 @Component({
     selector: 'awscognito-angular2-app',
     templateUrl: './search.html',
-    styleUrls: ['./search.css']
+    styleUrls: ['./search.scss']
 })
 
 

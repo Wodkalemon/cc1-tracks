@@ -10,15 +10,14 @@
     <br/>
     <br/>
 </div>
-<h1 class="page-header">Suche</h1>
-
 <div class="container-fluid grid">
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
 
             <form>
-                <div class="form-group">
+                <div class="form-group" id="srch-group">
 
+                    <h2>Suche</h2>
                     <div class="form-group row">
                         <label for="srch-route-begin" class="col-xs-12 col-sm-2 col-form-label">Startland</label>
                         <div class="col-xs-12 col-sm-10">
@@ -33,10 +32,6 @@
                                    placeholder="Zielland" id="srch-route-end" name="end-country">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-secondary" (click)="showSettings = !showSettings"
-                            [attr.aria-expanded]="showSettings" aria-controls="collapseExample">Weitere
-                        Einstellungen...
-                    </button>
                     <div id="collapseExample" [ngbCollapse]="!showSettings">
                         <div class="form-group row">
                             <label for="srch-route-name" class="col-xs-12 col-sm-2 col-form-label">Name</label>
@@ -143,6 +138,11 @@
                         </div>
                     </div>
                     <div class="form-group row text-right">
+                        <button type="button" class="btn btn-expand" (click)="showSettings = !showSettings"
+                                [attr.aria-expanded]="showSettings" aria-controls="collapseExample">
+                            <i *ngIf="!showSettings" class="fa fa-chevron-down fa-2x" aria-hidden="true"></i>
+                            <i *ngIf="showSettings" class="fa fa-chevron-up fa-2x" aria-hidden="true"></i>
+                        </button>
                         <button type="button" class="btn btn-search" (click)="searchTracks()">
                             <i class="fa fa-search fa-2x" aria-hidden="true"></i>
                         </button>
