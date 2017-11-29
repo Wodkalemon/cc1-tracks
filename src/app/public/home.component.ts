@@ -31,7 +31,8 @@ export class HomeLandingComponent {
 
 @Component({
     selector: 'awscognito-angular2-app',
-    templateUrl: './home.html'
+    templateUrl: './home.html',
+    styleUrls: ['./home.scss']
 })
 export class HomeComponent implements OnInit, LoggedInCallback {
 

@@ -15,7 +15,7 @@ import {AwsUser} from '../../Model/AwsUser';
 @Component({
     selector: 'track-details',
     templateUrl: './track-details.html',
-    styleUrls: ['./track-details.css']
+    styleUrls: ['./track-details.scss']
 })
 export class TrackDetailsComponent implements OnInit {
 

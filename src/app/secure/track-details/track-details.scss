@@ -1,9 +1,15 @@
+@import "../../../colors.scss";
+
 agm-map {
     height: 450px;
 }
 
 #sidebar-ribbon {
 
+}
+
+#sidebar {
+    background-color: $color-backgrounds;
 }
 
 .sidebar-ribbon-item {
