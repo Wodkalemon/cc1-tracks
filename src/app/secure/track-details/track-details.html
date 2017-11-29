@@ -51,7 +51,7 @@
             </agm-map>
         </div>
 
-        <div class="col-sm-3" id="siderbar">
+        <div class="col-sm-3" id="sidebar">
             <ngb-tabset>
                 <ngb-tab *ngIf="track" title="Details">
                     <ng-template ngbTabContent>
@@ -231,6 +231,7 @@
             </div>
 
             <div class="row">
+                <img src="https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/media/test2.jpg">
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
@@ -241,7 +242,8 @@
                         <div class="carousel-inner">
                             <div *ngFor="let media of selectedStory.media; let i = index"
                                  class="{{i==1 ? 'item active' : 'item'}}">
-                                <img src="assets/img/tower1.jpg" alt="Los Angeles">
+
+
                             </div>
                         </div>
 
