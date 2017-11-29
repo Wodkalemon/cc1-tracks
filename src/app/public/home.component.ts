@@ -4,7 +4,9 @@ import {UserLoginService} from '../service/user-login.service';
 import {Callback, CognitoUtil, LoggedInCallback} from '../service/cognito.service';
 import {MyProfileComponent} from '../secure/profile/myprofile.component';
 import {UserParametersService} from '../service/user-parameters.service';
-import {CongitoUser} from '../Model/CongitoUser';
+import {AwsUser} from '../Model/AwsUser';
+import {SharedUserService} from '../service/shared-user.service';
+import {JwtComponent} from '../secure/jwttokens/jwt.component';
 
 declare let AWS: any;
 declare let AWSCognito: any;
@@ -33,10 +35,10 @@ export class HomeLandingComponent {
 })
 export class HomeComponent implements OnInit, LoggedInCallback {
 
-    user: CongitoUser;
+    user: AwsUser;
 
 
-    constructor(public router: Router, public userService: UserLoginService, public userParams: UserParametersService, public cognitoUtil: CognitoUtil) {
+    constructor(public router: Router, public userService: UserLoginService, public userParams: UserParametersService, public cognitoUtil: CognitoUtil, public sharedUserService: SharedUserService) {
         this.userService.isAuthenticated(this);
         console.log("SecureHomeComponent: constructor");
 
@@ -62,9 +64,13 @@ export class HomeComponent implements OnInit, LoggedInCallback {
             console.log("HomeComponent: User is logged in!" + message)
             this.userParams.getParameters(new GetParametersCallback(this, this.cognitoUtil));
 
+
+
+
         } else {
             console.log("HomeComponent: User is NOT logged in!" + message)
             this.user = null;
+            this.sharedUserService.sharedUser = null;
             //this.router.navigate(['/home/login']);
         }
     }
@@ -86,29 +92,48 @@ export class GetParametersCallback implements Callback {
     }
 
     callbackWithParam(result: any) {
-        this.me.user = new CongitoUser();
+        let user = new AwsUser();
         for (let i = 0; i < result.length; i++) {
             switch (result[i].getName()) {
                 case "email_verified":
-                    this.me.user.email_verified = result[i].getValue();
+                    user.email_verified = result[i].getValue();
                     break;
                 case "email":
-                    this.me.user.email = result[i].getValue();
+                    user.email = result[i].getValue();
                     break;
                 case "nickname":
-                    this.me.user.nickname = result[i].getValue();
+                    user.nickname = result[i].getValue();
                     break;
                 case "custom:group":
-                    this.me.user.customGroup = result[i].getValue();
+                    user.customGroup = result[i].getValue();
                     break;
                 case "sub":
-                    this.me.user.sub = result[i].getValue();
+                    user.sub = result[i].getValue();
                     break;
                 default:
                     console.log(result[i].getName() + "=>" + result[i].getValue());
             }
         }
+        this.me.sharedUserService.sharedUser = user;
+        this.me.user = user;
         console.log("User added");
-        console.log(this.me.user);
+        console.log(this.me.sharedUserService.sharedUser);
+
+        this.cognitoUtil.getIdToken(new IdTokenCallback(this.me));
+
+    }
+}
+
+export class IdTokenCallback implements Callback {
+    constructor(public me: HomeComponent) {
+
+    }
+
+    callback() {
+
+    }
+
+    callbackWithParam(result) {
+        this.me.sharedUserService.sharedUser.idToken = result
     }
 }

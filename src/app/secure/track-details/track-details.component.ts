@@ -9,6 +9,8 @@ import {forEach} from '@angular/router/src/utils/collection';
 import {SponsorPart} from '../../Model/SponsorPart';
 import {Sponsor} from '../../Model/Sponsor';
 import {Organisation} from '../../Model/Organisation';
+import {SharedUserService} from '../../service/shared-user.service';
+import {AwsUser} from '../../Model/AwsUser';
 
 @Component({
     selector: 'track-details',
@@ -40,7 +42,7 @@ export class TrackDetailsComponent implements OnInit {
     polyLineBlue: LatLngImpl[] = [new LatLngImpl(50.359899, 7.568618), new LatLngImpl(50.357968, 7.569099)];
 
 
-    constructor(private trackService: TrackService) {
+    constructor(private trackService: TrackService, private sharedUserService: SharedUserService) {
         console.log("TrackDetailsComponent: constructor");
 
     }
@@ -151,6 +153,9 @@ export class TrackDetailsComponent implements OnInit {
                 return organisation;
             }
         }
+    }
+    getUser():AwsUser {
+        return this.sharedUserService.sharedUser;
     }
 
     poiClick(poi: Poi){

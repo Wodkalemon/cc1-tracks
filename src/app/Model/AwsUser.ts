@@ -6,13 +6,14 @@ import {Story} from './Story';
 import {Rating} from './Rating';
 import {SponsorPart} from './SponsorPart';
 
-export class CongitoUser {
+export class AwsUser {
 
     sub: String;
     email_verified: boolean;
     nickname: String;
     customGroup: String;
     email: String;
+    idToken: String;
 
 
     constructor () {

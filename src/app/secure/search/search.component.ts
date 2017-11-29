@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit {
 
     searchParam: SearchParam;
     searchResult: Track[];
+    showSettings:boolean=false;
 
     public sliderConfig: any = {
         connect: true,
@@ -48,7 +49,7 @@ export class SearchComponent implements OnInit {
         this.searchParam.maxDifficulty=this.searchDifficultyMax;
         this.searchParam.minDistance=this.searchDistanceMin;
         this.searchParam.maxDistance=this.searchDistanceMax;
-        this.searchTracks();
+        //this.searchTracks();
 
     }
 

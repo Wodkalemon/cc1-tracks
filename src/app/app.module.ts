@@ -33,6 +33,7 @@ import { AgmCoreModule } from '@agm/core';
 import { NouisliderModule } from 'ng2-nouislider';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import {SharedUserService} from './service/shared-user.service';
 
 
 
@@ -73,7 +74,8 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyD6O0Z3glNdE9eHeoAECtVF8ZinHSjCCzA'
         }),
-        AgmJsMarkerClustererModule
+        AgmJsMarkerClustererModule,
+
 
     ],
     providers: [
@@ -83,7 +85,8 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
         UserRegistrationService,
         UserLoginService,
         UserParametersService,
-        TrackService
+        TrackService,
+        SharedUserService
         ],
     bootstrap: [AppComponent]
 })
