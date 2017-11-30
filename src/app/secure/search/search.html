@@ -1,32 +1,22 @@
-<div *ngIf="!showSettings && !searchResult">
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+<div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12" id="logo-big"*ngIf="!showSettings && !searchResult">
+    <img class="img-responsive center-block" src="../assets/img/logo-big.png" alt="Logo">
 </div>
 <div class="container-fluid grid">
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
 
-            <form>
-                <div class="form-group" id="srch-group">
-
-                    <h2>Suche</h2>
-                    <div class="form-group row">
-                        <label for="srch-route-begin" class="col-xs-12 col-sm-2 col-form-label">Startland</label>
+            <div id="srch-group">
+                <form class="form-horizontal">
+                    <h2 id="srch-heading">Suche</h2>
+                    <div class="form-group">
+                        <label for="srch-route-begin" class="col-xs-12 col-sm-2 control-label">Startland</label>
                         <div class="col-xs-12 col-sm-10">
                             <input class="form-control" type="text" [(ngModel)]="searchParam.startCountry"
                                    placeholder="Startland" id="srch-route-begin" name="start-country">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="srch-route-end" class="col-xs-12 col-sm-2 col-form-label">Zielland</label>
+                    <div class="form-group">
+                        <label for="srch-route-end" class="col-xs-12 col-sm-2 control-label">Zielland</label>
                         <div class="col-xs-12 col-sm-10">
                             <input class="form-control" type="text" [(ngModel)]="searchParam.endCountry"
                                    placeholder="Zielland" id="srch-route-end" name="end-country">
@@ -34,15 +24,15 @@
                     </div>
                     <div id="collapseExample" [ngbCollapse]="!showSettings">
                         <div class="form-group row">
-                            <label for="srch-route-name" class="col-xs-12 col-sm-2 col-form-label">Name</label>
+                            <label for="srch-route-name" class="col-xs-12 col-sm-2 control-label">Name</label>
                             <div class="col-xs-12 col-sm-10">
                                 <input class="form-control" type="text" [(ngModel)]="searchParam.name"
                                        placeholder="Routenname" id="srch-route-name" name="name">
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="srch-route-duration" class="col-xs-12 col-sm-2 col-form-label">Dauer</label>
+                        <div class="form-group">
+                            <label for="srch-route-duration" class="col-xs-12 col-sm-2 control-label">Dauer</label>
                             <div class="col-xs-12 col-sm-10">
                                 <select class="form-control" id="srch-route-duration"
                                         (change)="setDuration($event.target.value)">
@@ -56,8 +46,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-xs-12 col-sm-2 col-form-label">Entfernung</label>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-2 control-label">Entfernung</label>
                             <div class="col-xs-12 col-sm-10">
                                 <nouislider #distanceSlider id="srch-route-distance" name="srch-route-distance" [connect]="true"
                                             [min]="searchDistanceMin"
@@ -66,17 +56,17 @@
                                             style="margin-top: 2.5em;"></nouislider>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group">
                             <label for="srch-route-difficulty"
-                                   class="col-xs-12 col-sm-2 col-form-label">Schwierigkeit</label>
+                                   class="col-xs-12 col-sm-2 control-label">Schwierigkeit</label>
                             <div class="col-xs-12 col-sm-10" data-toggle="buttons">
                                 <nouislider #difficultySlider id="srch-route-difficulty" (ngModelChange)="setDifficulty($event)"
                                             [(ngModel)]="searchDifficulty" [config]="sliderConfig" style="margin-bottom: 2.5em;"
                                             name="srch-route-difficulty"></nouislider>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-xs-12 col-sm-2 col-form-label">Bewertung</label>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-2 control-label">Bewertung</label>
                             <div class="col-xs-12 col-sm-10">
                                 <!--<label class="radio-inline"><input type="radio" name="optradio" value="1"
                                                                    [(ngModel)]="searchParam.minRating"><i
@@ -116,7 +106,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row text-right">
+                    <div class="form-group text-right">
                         <button type="button" class="btn btn-expand" (click)="showSettings = !showSettings"
                                 [attr.aria-expanded]="showSettings" aria-controls="collapseExample">
                             <i *ngIf="!showSettings" class="fa fa-chevron-down fa-2x" aria-hidden="true"></i>
@@ -126,8 +116,8 @@
                             <i class="fa fa-search fa-2x" aria-hidden="true"></i>
                         </button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
     <div *ngIf="searchResult" class="row">

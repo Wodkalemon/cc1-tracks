@@ -1,5 +1,9 @@
 @import "../../../colors.scss";
 
+.btn, ngb-rating {
+    outline: 0;
+}
+
 .btn-chkBx i.fa {
     opacity: 0;
 }
@@ -35,6 +39,17 @@
     background-color: $color-darkAccent;
 }
 
+#logo-big {
+    padding-bottom: 3rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+#srch-heading {
+    padding-bottom: 1em;
+    font-weight: bold;
+}
+
 #srch-group {
     background-color: rgba(231,231,231,0.95);
     padding: 3em;
@@ -53,6 +68,10 @@
     font-size: 3rem;
 }
 
-.noUi-connect .slider-color {
+.slider-color {
     background: $color-accent !important;
+}
+
+nouislider {
+    margin: 16px;
 }
