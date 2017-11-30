@@ -24,6 +24,8 @@ export class SearchComponent implements OnInit {
     public searchDifficultyMax: number=5
     public searchDifficulty: number[] = [this.searchDifficultyMin, this.searchDifficultyMax];
 
+    public minRating: number = 0;
+
     searchParam: SearchParam;
     searchResult: Track[];
     showSettings:boolean=false;

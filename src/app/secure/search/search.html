@@ -74,37 +74,12 @@
                                             [(ngModel)]="searchDifficulty" [config]="sliderConfig"
                                             name="srch-route-difficulty"></nouislider>
                                 <br/>
-                                <!--<label class="btn btn-success btn-chkBx active col-xs-2 col-xs-offset-1">
-                                    <input type="checkbox" id="srch-route-difficulty-0" value="0" autocomplete="off"
-                                           checked>
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </label>
-
-                                <label class="btn btn-primary btn-chkBx col-xs-2">
-                                    <input type="checkbox" id="srch-route-difficulty-1" value="1" autocomplete="off">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </label>
-
-                                <label class="btn btn-warning btn-chkBx col-xs-2">
-                                    <input type="checkbox" id="srch-route-difficulty-2" value="2" autocomplete="off">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </label>
-
-                                <label class="btn btn-danger btn-chkBx col-xs-2">
-                                    <input type="checkbox" id="srch-route-difficulty-3" value="3" autocomplete="off">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </label>
-
-                                <label class="btn btn-dark btn-chkBx col-xs-2">
-                                    <input type="checkbox" id="srch-route-difficulty-4" value="4" autocomplete="off">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </label>-->
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-xs-12 col-sm-2 col-form-label">Bewertung</label>
                             <div class="col-xs-12 col-sm-10">
-                                <label class="radio-inline"><input type="radio" name="optradio" value="1"
+                                <!--<label class="radio-inline"><input type="radio" name="optradio" value="1"
                                                                    [(ngModel)]="searchParam.minRating"><i
                                         class="fa fa-star"
                                         aria-hidden="true"></i></label>
@@ -133,7 +108,12 @@
                                         class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
                                                                                      aria-hidden="true"></i><i
                                         class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                                                                     aria-hidden="true"></i></label>
+                                                                                     aria-hidden="true"></i></label>-->
+                                <ngb-rating [(rate)]="minRating" max="5">
+                                    <ng-template let-fill="fill">
+                                        <span class="star" id="minRating" [class.filled]="fill === 100">&#9733;</span>
+                                    </ng-template>
+                                </ngb-rating>
                             </div>
                         </div>
                     </div>
@@ -173,7 +153,11 @@
                     <td>{{track.duration}} Stunden</td>
                     <td>{{track.distance}} km</td>
                     <td>{{DIFFICULTY_TEXT[track.difficultyAvg.toPrecision(1)]}}</td>
-                    <ngb-rating [(rate)]="track.ratingAvg" [starTemplate]="t" max="5" [readonly]="true"></ngb-rating>
+                    <ngb-rating [(rate)]="track.ratingAvg" max="5" [readonly]="true">
+                        <ng-template let-fill="fill">
+                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
 
                 </tr>
             </table>

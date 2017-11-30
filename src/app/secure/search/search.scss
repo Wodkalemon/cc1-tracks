@@ -40,3 +40,15 @@
     padding: 3em;
     border-radius: 1em;
 }
+
+.star {
+    color: $color-inactiveAccent;
+}
+
+.filled {
+    color: $color-accent;
+}
+
+#minRating {
+    font-size: 3rem;
+}
