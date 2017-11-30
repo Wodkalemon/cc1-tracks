@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, ViewChild, ElementRef, OnInit, AfterViewInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {SearchParam} from '../../Model/SearchParam';
 import {TrackService} from '../../service/track.service';
@@ -15,7 +15,7 @@ import {MyFormatter} from './slider-formatter';
 
 
 
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, AfterViewInit {
     DIFFICULTY_TEXT={1:"Anfänger",2:"Leicht",3:"Mittel",4:"Schwer",5:"Experte"};
     public searchDistanceMin: number= 0;
     public searchDistanceMax: number= 10000;
@@ -32,11 +32,11 @@ export class SearchComponent implements OnInit {
 
     public sliderConfig: any = {
         connect: true,
-        start: [0,5],
+        start: [0,4],
         step: 1,
         range: {
             'min': [0],
-            'max': [5]
+            'max': [4]
         },
         pips: {
             mode: 'steps',
@@ -44,6 +44,13 @@ export class SearchComponent implements OnInit {
             format: new MyFormatter()
         }
     };
+
+    @ViewChild('distanceSlider', { read: ElementRef }) slider1: ElementRef;
+    @ViewChild('difficultySlider', { read: ElementRef }) slider2: ElementRef;
+
+    ngAfterViewInit() {
+        this.sliderColor();
+    }
 
     ngOnInit() {
         this.searchParam = new SearchParam();
@@ -53,6 +60,19 @@ export class SearchComponent implements OnInit {
         this.searchParam.maxDistance=this.searchDistanceMax;
         //this.searchTracks();
 
+    }
+
+
+
+    sliderColor() {
+        const sl1 = this.slider1.nativeElement.querySelectorAll('.noUi-connect');
+        const sl2 = this.slider2.nativeElement.querySelectorAll('.noUi-connect');
+        for( let i = 0; i < sl1.length; i++) {
+            sl1[i].classList.add('slider-color');
+        }
+        for( let i = 0; i < sl2.length; i++) {
+            sl2[i].classList.add('slider-color');
+        }
     }
 
 

@@ -59,7 +59,7 @@
                         <div class="form-group row">
                             <label class="col-xs-12 col-sm-2 col-form-label">Entfernung</label>
                             <div class="col-xs-12 col-sm-10">
-                                <nouislider id="srch-route-distance" name="srch-route-distance" [connect]="true"
+                                <nouislider #distanceSlider id="srch-route-distance" name="srch-route-distance" [connect]="true"
                                             [min]="searchDistanceMin"
                                             [max]="searchDistanceMax" [step]="5" (ngModelChange)="setDistance($event)"
                                             [(ngModel)]="searchDistance" [tooltips]="[ true, true ]"
@@ -70,10 +70,9 @@
                             <label for="srch-route-difficulty"
                                    class="col-xs-12 col-sm-2 col-form-label">Schwierigkeit</label>
                             <div class="col-xs-12 col-sm-10" data-toggle="buttons">
-                                <nouislider id="srch-route-difficulty" (ngModelChange)="setDifficulty($event)"
-                                            [(ngModel)]="searchDifficulty" [config]="sliderConfig"
+                                <nouislider #difficultySlider id="srch-route-difficulty" (ngModelChange)="setDifficulty($event)"
+                                            [(ngModel)]="searchDifficulty" [config]="sliderConfig" style="margin-bottom: 2.5em;"
                                             name="srch-route-difficulty"></nouislider>
-                                <br/>
                             </div>
                         </div>
                         <div class="form-group row">
