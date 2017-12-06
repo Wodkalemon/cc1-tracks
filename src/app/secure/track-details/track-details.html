@@ -15,48 +15,47 @@
     <button class="btn btn-success" (click)="addStory()" >Speichern</button>
 </app-dialog>
 
-<h1 *ngIf="track" class="page-header">Route Details: {{track.name}}</h1>
+<div id="details-page">
+    <h2 *ngIf="track" id="details-heading">Routendetails: {{track.name}}</h2>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-9" id="map-frame" *ngIf="track">
-            <agm-map [latitude]="track.points[0][1]" [longitude]="track.points[0][0]" [zoom]="15">
-                <agm-marker-cluster
-                        imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-8 col-lg-9" id="map-frame" *ngIf="track">
+                <agm-map [latitude]="track.points[0][1]" [longitude]="track.points[0][0]" [zoom]="15">
+                    <agm-marker-cluster
+                            imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
 
+                    <agm-polyline strokeColor="#c2c2a3"(lineClick)="polylineClicked($event)" clickable="true">
 
-                    <agm-polyline strokeColor="#c2c2a3" (lineClick)="polylineClicked($event)" clickable="true">
-
-                        <agm-polyline-point *ngFor="let coord of track.points" [latitude]="coord[1]"
-                                            [longitude]="coord[0]">
-                        </agm-polyline-point>
-
-                    </agm-polyline>
-
-                    <div *ngIf="sponsors">
-                        <agm-polyline *ngFor="let sponsorPart of track.sponsorParts"
-                                      strokeColor="{{getSponsorColor(sponsorPart.sponsorId)}}"
-                                      strokeOpacity="0.5" (lineClick)="polylineClicked($event)"
-                                      clickable="true">
-
-                            <agm-polyline-point *ngFor="let coord of sponsorPart.points" [latitude]="coord[1]"
-                                                [longitude]="coord[0]" >
-                            </agm-polyline-point>
-
-                        </agm-polyline>
-                    </div>
-                    <div *ngIf="selectedSponsorPart">
-                        <agm-polyline strokeWeight="6" strokeColor="{{getSponsorColor(selectedSponsorPart.sponsorId)}}">
-
-                            <agm-polyline-point *ngFor="let coord of selectedSponsorPart.points" [latitude]="coord[1]"
+                            <agm-polyline-point *ngFor="let coord of track.points" [latitude]="coord[1]"
                                                 [longitude]="coord[0]">
                             </agm-polyline-point>
 
                         </agm-polyline>
-                    </div>
 
+                        <div *ngIf="sponsors">
+                            <agm-polyline *ngFor="let sponsorPart of track.sponsorParts"
+                                          strokeColor="{{getSponsorColor(sponsorPart.sponsorId)}}"
+                                          strokeOpacity="0.5" (lineClick)="polylineClicked($event)"
+                                      clickable="true">
 
-                    <agm-marker *ngIf="selectedPosition" iconUrl="../assets/img/map-icons/poi-map-icon.png"
+                                <agm-polyline-point *ngFor="let coord of sponsorPart.points" [latitude]="coord[1]"
+                                                    [longitude]="coord[0]" >
+                                </agm-polyline-point>
+
+                            </agm-polyline>
+                        </div>
+                        <div *ngIf="selectedSponsorPart">
+                            <agm-polyline strokeWeight="6" strokeColor="{{getSponsorColor(selectedSponsorPart.sponsorId)}}">
+
+                                <agm-polyline-point *ngFor="let coord of selectedSponsorPart.points" [latitude]="coord[1]"
+                                                    [longitude]="coord[0]">
+                                </agm-polyline-point>
+
+                            </agm-polyline>
+                        </div>
+
+<agm-marker *ngIf="selectedPosition" iconUrl="../assets/img/map-icons/poi-map-icon.png"
                                 label="F" [latitude]="selectedPosition.coord[1]" [longitude]="selectedPosition.coord[0]"
                                 [openInfoWindow]="true">
                         <agm-info-window isOpen="true" (infoWindowClose)="infoWindowClosed($event)">
@@ -64,258 +63,265 @@
                             <br/>
                             <button class="btn btn-info">POI hinzufügen</button>
                         </agm-info-window>
-                    </agm-marker>
-
-
-                    <div *ngFor="let poi of track.pois; let i = index">
+                    </agm-marker>                    <div *ngFor="let poi of track.pois; let i = index">
                         <agm-marker iconUrl="../assets/img/map-icons/poi-map-icon.png" (markerClick)="poiClick(poi)"
                                     label="{{LETTERS[i+1]}}" [latitude]="poi.location[1]"
-                                    [longitude]="poi.location[0]">
-                        </agm-marker>
+                                    [longitude]="poi.location[0]"></agm-marker>
                     </div>
 
-                    <div *ngFor="let story of track.stories; let i = index">
-                        <agm-marker iconUrl="../assets/img/map-icons/story-map-icon.png"
-                                    (markerClick)="storyClick(story)" label="{{i+1}}" [latitude]="story.point[1]"
-                                    [longitude]="story.point[0]"></agm-marker>
-                    </div>
-                </agm-marker-cluster>
-            </agm-map>
-        </div>
-
-        <div class="col-sm-3" id="sidebar">
-            <ngb-tabset>
-                <ngb-tab *ngIf="track" title="Details">
-                    <ng-template ngbTabContent>
-                        <tr>
-                            <td>Name:</td>
-                            <td>{{track.name}}</td>
-                        </tr>
-                        <tr>
-                            <td>Entfernung:</td>
-                            <td>{{track.distance}} km</td>
-                        </tr>
-                        <tr>
-                            <td>Dauer:</td>
-                            <td>{{track.duration}} Std.</td>
-                        </tr>
-                        <tr>
-                            <td>Start:</td>
-                            <td>{{track.startPoint}}</td>
-                        </tr>
-                        <tr>
-                            <td>Ziel:</td>
-                            <td>{{track.endPoint}}</td>
-                        </tr>
-                        <tr>
-                            <td>Bewertung:</td>
-                            <td>
-                                <ngb-rating [rate]="track.ratingAvg" max="5" readonly="true"></ngb-rating>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Schwierigkeit:</td>
-                            <td>
-                                <ngb-rating [rate]="track.difficultyAvg" max="5" readonly="true"></ngb-rating>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </ngb-tab>
-                <ngb-tab *ngIf="track" title="POIs">
-                    <ng-template ngbTabContent>
-                        <div id="sidebar-list">
-                            <div *ngFor="let poi of track.pois; let i = index"
-                                 class="sidebar-list-item row vertical-align">
-                                <div class="col-xs-2 number" (click)="showPoi(poi)">{{LETTERS[i+1]}}</div>
-                                <div class="col-xs-7">
-                                    <h4 (click)="showPoi(poi)">{{poi.name}}<br/>
-                                        <small>{{ (poi.description.length>POI_DESCRIPTION_LENGTH)? (poi.description |
-                                            slice:0:POI_DESCRIPTION_LENGTH)+'..':(poi.description) }}
-                                        </small>
-                                    </h4>
-                                </div>
-                                <div class="col-xs-3 no-padding"><img class="img-responsive"
-                                                                      [src]="getMedia(poi.media[0].reference)"></div>
-                            </div>
+                        <div *ngFor="let story of track.stories; let i = index">
+                            <agm-marker iconUrl="../assets/img/map-icons/story-map-icon.png"
+                                        (markerClick)="storyClick(story)" label="{{i+1}}" [latitude]="story.point[1]"
+                                        [longitude]="story.point[0]"></agm-marker>
                         </div>
-                    </ng-template>
-                </ngb-tab>
-
-                <ngb-tab *ngIf="track" title="Stories">
-                    <ng-template ngbTabContent>
-                        <div id="sidebar-list">
-                            <div *ngFor="let story of track.stories; let i = index"
-                                 class="sidebar-list-item row vertical-align">
-                                <div class="col-xs-2 number" (click)="showStory(story)">{{i+1}}</div>
-                                <div class="col-xs-7">
-                                    <h4 (click)="showStory(story)">{{story.title}}<br/>
-                                        <small>{{ (story.text.length>STORY_TEXT_LENGTH)? (story.text |
-                                            slice:0:STORY_TEXT_LENGTH)+'..':(story.text) }}
-                                        </small>
-                                    </h4>
-                                </div>
-                                <div class="col-xs-3 no-padding"><img class="img-responsive"
-                                                                      [src]="getMedia(story.media[0].reference)"></div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ngb-tab>
-
-                <ngb-tab *ngIf="track" title="Ratings">
-                    <ng-template ngbTabContent>
-                        <div id="sidebar-list">
-                            <div *ngFor="let rating of track.ratings; let i = index"
-                                 class="sidebar-list-item row vertical-align">
-                                <div class="col-xs-2 number">{{i+1}}</div>
-                                <div class="col-xs-10">
-                                    <h4>{{rating.userName}} <br/>
-                                        <ngb-rating [rate]="rating.rating" max="5" readonly="true"></ngb-rating>
-                                        <br/>
-                                        <small>{{ (rating.comment.length>RATING_COMMENT_LENGTH)? (rating.comment |
-                                            slice:0:RATING_COMMENT_LENGTH)+'..':(rating.comment) }}
-                                        </small>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ngb-tab>
-
-                <ngb-tab *ngIf="track" title="Sponsoren">
-                    <ng-template ngbTabContent>
-                        <div id="sidebar-list">
-                            <div *ngFor="let part of track.sponsorParts; let i = index"
-                                 class="sidebar-list-item row vertical-align">
-                                <div class="col-xs-2 number" (click)="showSponsorPart(part)">{{i+1}}</div>
-                                <div class="col-xs-7">
-                                    <h4 (click)="showSponsorPart(part)">{{getSponsor(part.sponsorId).name}} <br/>
-                                        Länge: {{part.distance}} km
-                                        <br/>
-                                    </h4>
-                                </div>
-                                <div class="col-xs-3 no-padding"><img class="img-responsive"
-                                                                      [src]="getMedia(getSponsor(part.sponsorId).imageSmall)">
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ngb-tab>
-
-            </ngb-tabset>
-
-            <!--<div id="sidebar-ribbon" class="row">
-                <div class="col-xs-4 sidebar-ribbon-item active" id="rbn-btn-poi">POI</div>
-                <div class="col-xs-4 sidebar-ribbon-item" id="rbn-btn-story">Story</div>
-                <div class="col-xs-4 sidebar-ribbon-item" id="rbn-btn-sponsor">Sponsor</div>
+                    </agm-marker-cluster>
+                </agm-map>
             </div>
-            <div id="sidebar-list">
-                <div class="sidebar-list-item row vertical-align">
-                    <div class="col-xs-2 number">1</div>
-                    <div class="col-xs-7"><h4>Poi 1 <br/><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr ...</small></h4></div>
-                    <div class="col-xs-3 no-padding"><img class="img-responsive"src="assets/img/100x100sample.jpg"></div>
+
+            <div class="col-xs-12 col-md-4 col-lg-3" id="sidebar">
+                <ngb-tabset>
+                    <ngb-tab *ngIf="track" title="Detail">
+                        <ng-template ngbTabContent>
+                            <table class="table">
+                                <tr>
+                                    <td class="text-right table-fit">Name:</td>
+                                    <td>{{track.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right table-fit">Entfernung:</td>
+                                    <td>{{track.distance}} km</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right table-fit">Dauer:</td>
+                                    <td>{{track.duration}} Std.</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right table-fit">Start:</td>
+                                    <td>{{track.startPoint}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right table-fit">Ziel:</td>
+                                    <td>{{track.endPoint}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right table-fit">Bewertung:</td>
+                                    <td>
+                                        <ngb-rating [(rate)]="track.ratingAvg" max="5" [readonly]="true">
+                                            <ng-template let-fill="fill">
+                                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right table-fit">Schwierigkeit:</td>
+                                    <td>
+                                        <ngb-rating [(rate)]="track.difficultyAvg" max="5" [readonly]="true">
+                                            <ng-template let-fill="fill">
+                                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab *ngIf="track" title="POI">
+                        <ng-template ngbTabContent>
+                            <div id="sidebar-list">
+                                <div *ngFor="let poi of track.pois; let i = index"
+                                     class="sidebar-list-item row vertical-align">
+                                    <div class="col-xs-2 number" (click)="showPoi(poi)">{{LETTERS[i+1]}}</div>
+                                    <div class="col-xs-7">
+                                        <h4 (click)="showPoi(poi)">{{poi.name}}<br/>
+                                            <small>{{ (poi.description.length>POI_DESCRIPTION_LENGTH)? (poi.description |
+                                                slice:0:POI_DESCRIPTION_LENGTH)+'..':(poi.description) }}
+                                            </small>
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-3 no-padding"><img class="img-responsive"
+                                                                          [src]="getMedia(poi.media[0].reference)"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab *ngIf="track" title="Story">
+                        <ng-template ngbTabContent>
+                            <div id="sidebar-list">
+                                <div *ngFor="let story of track.stories; let i = index"
+                                     class="sidebar-list-item row vertical-align">
+                                    <div class="col-xs-2 number" (click)="showStory(story)">{{i+1}}</div>
+                                    <div class="col-xs-7">
+                                        <h4 (click)="showStory(story)">{{story.title}}<br/>
+                                            <small>{{ (story.text.length>STORY_TEXT_LENGTH)? (story.text |
+                                                slice:0:STORY_TEXT_LENGTH)+'..':(story.text) }}
+                                            </small>
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-3 no-padding"><img class="img-responsive"
+                                                                          [src]="getMedia(story.media[0].reference)"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab *ngIf="track" title="Rating">
+                        <ng-template ngbTabContent>
+                            <div id="sidebar-list">
+                                <div *ngFor="let rating of track.ratings; let i = index"
+                                     class="sidebar-list-item row vertical-align">
+                                    <div class="col-xs-2 number">{{i+1}}</div>
+                                    <div class="col-xs-10">
+                                        <h4>{{rating.userName}} <br/>
+                                            <ngb-rating [rate]="rating.rating" max="5" readonly="true"></ngb-rating>
+                                            <br/>
+                                            <small>{{ (rating.comment.length>RATING_COMMENT_LENGTH)? (rating.comment |
+                                                slice:0:RATING_COMMENT_LENGTH)+'..':(rating.comment) }}
+                                            </small>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab *ngIf="track" title="Sponsor">
+                        <ng-template ngbTabContent>
+                            <div id="sidebar-list">
+                                <div *ngFor="let part of track.sponsorParts; let i = index"
+                                     class="sidebar-list-item row vertical-align">
+                                    <div class="col-xs-2 number" (click)="showSponsorPart(part)">{{i+1}}</div>
+                                    <div class="col-xs-7">
+                                        <h4 (click)="showSponsorPart(part)">{{getSponsor(part.sponsorId).name}} <br/>
+                                            Länge: {{part.distance}} km
+                                            <br/>
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-3 no-padding"><img class="img-responsive"
+                                                                          [src]="getMedia(getSponsor(part.sponsorId).imageSmall)">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+
+                </ngb-tabset>
+
+                <!--<div id="sidebar-ribbon" class="row">
+                    <div class="col-xs-4 sidebar-ribbon-item active" id="rbn-btn-poi">POI</div>
+                    <div class="col-xs-4 sidebar-ribbon-item" id="rbn-btn-story">Story</div>
+                    <div class="col-xs-4 sidebar-ribbon-item" id="rbn-btn-sponsor">Sponsor</div>
+                </div>
+                <div id="sidebar-list">
+                    <div class="sidebar-list-item row vertical-align">
+                        <div class="col-xs-2 number">1</div>
+                        <div class="col-xs-7"><h4>Poi 1 <br/><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr ...</small></h4></div>
+                        <div class="col-xs-3 no-padding"><img class="img-responsive"src="assets/img/100x100sample.jpg"></div>
+                    </div>
+                </div>
+                -->
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" id="info-frame" *ngIf="selectedPoi">
+                <div class="row vertical-align">
+                    <div class="col-xs-11"><h2>{{selectedPoi.name}}</h2></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
+                                <li data-target="#myCarousel" data-slide-to="0"></li>
+                            </ol>-->
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div *ngFor="let media of selectedPoi.media; let i = index"
+                                     class="{{i==1 ? 'item active' : 'item'}}">
+                                    <img [src]="getMedia(media.reference)" [alt]="media.reference">
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-6">
+                        {{selectedPoi.description}}
+                    </div>
                 </div>
             </div>
-            -->
+            <div class="col-xs-12" id="info-frame" *ngIf="selectedStory">
+                <div class="row vertical-align">
+                    <div class="col-xs-11"><h2>{{selectedStory.title}}</h2></div>
+                </div>
 
+                <div class="row">
+                    <img src="https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/media/test2.jpg">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
+                                <li data-target="#myCarousel" data-slide-to="0"></li>
+                            </ol>-->
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div *ngFor="let media of selectedStory.media; let i = index"
+                                     class="{{i==1 ? 'item active' : 'item'}}">
+                                    <img [src]="getMedia(media.reference)" [alt]="media.reference">
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-6">
+                        {{selectedStory.text}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12" id="info-frame" *ngIf="selectedSponsorPart">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h4>{{getSponsor(selectedSponsorPart.sponsorId).name}}</h4><br/>
+                        {{getSponsor(selectedSponsorPart.sponsorId).description}}
+                        <img [src]="getMedia(getSponsor(selectedSponsorPart.sponsorId).imageLarge)">
+                    </div>
+                    <div class="col-md-3">
+                        -----------------<br/>
+                        {{selectedSponsorPart.price}} € <br/>
+                        -----------------<br/>
+                        {{selectedSponsorPart.comment}}
+                    </div>
+                    <div class="col-md-3">
+                        <h4>{{getOrganisation(selectedSponsorPart.sponsoredId).name}}</h4><br/>
+                        {{getOrganisation(selectedSponsorPart.sponsoredId).description}}
+                        <img [src]="getMedia(getOrganisation(selectedSponsorPart.sponsoredId).imageLarge)">
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </div>
-    <div class="row">
-        <div class="col-xs-12" id="info-frame" *ngIf="selectedPoi">
-            <div class="row vertical-align">
-                <div class="col-xs-11"><h2>{{selectedPoi.name}}</h2></div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
-                            <li data-target="#myCarousel" data-slide-to="0"></li>
-                        </ol>-->
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div *ngFor="let media of selectedPoi.media; let i = index"
-                                 class="{{i==1 ? 'item active' : 'item'}}">
-                                <img [src]="getMedia(media.reference)" [alt]="media.reference">
-                            </div>
-                        </div>
-
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-6">
-                    {{selectedPoi.description}}
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12" id="info-frame" *ngIf="selectedStory">
-            <div class="row vertical-align">
-                <div class="col-xs-11"><h2>{{selectedStory.title}}</h2></div>
-            </div>
-
-            <div class="row">
-                <img src="https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/media/test2.jpg">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
-                            <li data-target="#myCarousel" data-slide-to="0"></li>
-                        </ol>-->
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div *ngFor="let media of selectedStory.media; let i = index"
-                                 class="{{i==1 ? 'item active' : 'item'}}">
-                                <img [src]="getMedia(media.reference)" [alt]="media.reference">
-                            </div>
-                        </div>
-
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-6">
-                    {{selectedStory.text}}
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12" id="info-frame" *ngIf="selectedSponsorPart">
-            <div class="row">
-                <div class="col-md-3">
-                    <h4>{{getSponsor(selectedSponsorPart.sponsorId).name}}</h4><br/>
-                    {{getSponsor(selectedSponsorPart.sponsorId).description}}
-                    <img [src]="getMedia(getSponsor(selectedSponsorPart.sponsorId).imageLarge)">
-                </div>
-                <div class="col-md-3">
-                    -----------------<br/>
-                    {{selectedSponsorPart.price}} € <br/>
-                    -----------------<br/>
-                    {{selectedSponsorPart.comment}}
-                </div>
-                <div class="col-md-3">
-                    <h4>{{getOrganisation(selectedSponsorPart.sponsoredId).name}}</h4><br/>
-                    {{getOrganisation(selectedSponsorPart.sponsoredId).description}}
-                    <img [src]="getMedia(getOrganisation(selectedSponsorPart.sponsoredId).imageLarge)">
-                </div>
-            </div>
-
-        </div>
-    </div>
-
 </div>
 
 
