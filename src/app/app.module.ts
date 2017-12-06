@@ -1,4 +1,4 @@
-import {BrowserModule} from "@angular/platform-browser";
+import {BrowserModule, DomSanitizer} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
@@ -25,6 +25,7 @@ import {ResendCodeComponent} from "./public/auth/resend/resendCode.component";
 import {NewPasswordComponent} from "./public/auth/newpassword/newpassword.component";
 import {HttpClientModule} from '@angular/common/http';
 
+
 import {TrackDetailsComponent} from './secure/track-details/track-details.component';
 
 import {TrackService} from './service/track.service';
@@ -34,6 +35,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import {SharedUserService} from './service/shared-user.service';
+
 
 
 
@@ -58,6 +60,7 @@ import {SharedUserService} from './service/shared-user.service';
         SearchComponent,
         TopRoutesComponent,
         AppComponent,
+
 
         TrackDetailsComponent
 
