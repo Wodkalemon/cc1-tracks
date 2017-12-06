@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {LatLng} from '@agm/core';
+import {Component, EventEmitter, OnInit} from "@angular/core";
+import {LatLng, PolyMouseEvent} from '@agm/core';
 import {LatLngImpl} from '../../Model/lat-lng';
 import {TrackService} from '../../service/track.service';
 import {Track} from '../../Model/Track';
@@ -12,6 +12,7 @@ import {Organisation} from '../../Model/Organisation';
 import {SharedUserService} from '../../service/shared-user.service';
 import {AwsUser} from '../../Model/AwsUser';
 import {DomSanitizer} from '@angular/platform-browser';
+
 
 
 @Component({
@@ -34,16 +35,11 @@ export class TrackDetailsComponent implements OnInit {
     selectedPoi: Poi;
     selectedStory: Story;
     selectedSponsorPart: SponsorPart;
+    selectedPosition: LatLngImpl;
     lat: number = 50.357968;
     lng: number = 7.569099;
-//    lat: number = 50.357968;
-//    lng: number = 7.569099;
 
-
-    //polyLine: LatLng[] = [new LatLng(50.357968, 7.569099), new LatLng(50.358899, 7.567618)];
-    polyLineRed: LatLngImpl[] = [new LatLngImpl(50.357968, 7.569099), new LatLngImpl(50.358899, 7.567618)];
-    polyLineGreen: LatLngImpl[] = [new LatLngImpl(50.358899, 7.567618), new LatLngImpl(50.359899, 7.568618)];
-    polyLineBlue: LatLngImpl[] = [new LatLngImpl(50.359899, 7.568618), new LatLngImpl(50.357968, 7.569099)];
+    showDialog = false;
 
 
     constructor(private trackService: TrackService, private sharedUserService: SharedUserService, private sanitizer:DomSanitizer) {
@@ -137,7 +133,7 @@ export class TrackDetailsComponent implements OnInit {
     getSponsorColor(id:number):String {
         for(let sponsor of this.sponsors){
             if(sponsor.id == id) {
-                console.log("Farbe: " + sponsor.trackColor);
+                //console.log("Farbe: " + sponsor.trackColor);
                 return sponsor.trackColor;
             }
         }
@@ -204,8 +200,25 @@ export class TrackDetailsComponent implements OnInit {
         return this.sanitizer.bypassSecurityTrustUrl(url);
     }
 
+    polylineClicked($event : any) {
+        console.log("PolyLineClicked() Vertex:"+ $event.vertex);
+        console.log("PolyLineClicked() path:"+ $event.path);
+        console.log("PolyLineClicked() edge:"+ $event.edge);
+        console.log($event);
+        console.log($event.latLng.lat());
+        console.log($event.latLng.lng());
+        this.selectedPosition = new LatLngImpl($event.latLng.lng(), $event.latLng.lat());
+    }
+
+    infoWindowClosed($event) {
+        this.selectedPosition = null;
+    }
+
     getMedia(reference: String) {
         return this.sanitize(this.MEDIA_REF+'?id='+reference)
     }
+
+
+
 }
 

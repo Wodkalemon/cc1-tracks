@@ -35,6 +35,8 @@ import { NouisliderModule } from 'ng2-nouislider';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import {SharedUserService} from './service/shared-user.service';
+import {DialogComponent} from './secure/dialog/dialog.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 
@@ -62,7 +64,8 @@ import {SharedUserService} from './service/shared-user.service';
         AppComponent,
 
 
-        TrackDetailsComponent
+        TrackDetailsComponent,
+        DialogComponent
 
     ],
     imports: [
@@ -78,6 +81,7 @@ import {SharedUserService} from './service/shared-user.service';
             apiKey: 'AIzaSyD6O0Z3glNdE9eHeoAECtVF8ZinHSjCCzA'
         }),
         AgmJsMarkerClustererModule,
+        BrowserAnimationsModule
 
 
     ],
