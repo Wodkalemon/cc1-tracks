@@ -2,3 +2,25 @@
 .slider-color {
     background: #337ab7 !important;
 }
+
+/*Nav-Sidebar-TrackDetails*/
+
+#sidebar .nav-link.active {
+    color: #337ab7 !important;
+}
+
+#sidebar .tab-pane.active, #sidebar .nav-link.active {
+    background-color: #f9f9f9 !important;
+}
+
+#sidebar .tab-pane.active {
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px
+}
+
+#sidebar .nav-link {
+    padding: 0.5em !important;
+    background: #b0c4de;
+    color: #f9f9f9;
+}
