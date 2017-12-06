@@ -68,37 +68,7 @@
                         <div class="form-group">
                             <label class="col-xs-12 col-sm-2 control-label">Bewertung</label>
                             <div class="col-xs-12 col-sm-10">
-                                <!--<label class="radio-inline"><input type="radio" name="optradio" value="1"
-                                                                   [(ngModel)]="searchParam.minRating"><i
-                                        class="fa fa-star"
-                                        aria-hidden="true"></i></label>
-                                <label class="radio-inline"><input type="radio" name="optradio" value="2"
-                                                                   [(ngModel)]="searchParam.minRating"><i
-                                        class="fa fa-star"
-                                        aria-hidden="true"></i><i
-                                        class="fa fa-star" aria-hidden="true"></i></label>
-                                <label class="radio-inline"><input type="radio" name="optradio" value="3"
-                                                                   [(ngModel)]="searchParam.minRating"><i
-                                        class="fa fa-star"
-                                        aria-hidden="true"></i><i
-                                        class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                                                                     aria-hidden="true"></i></label>
-                                <label class="radio-inline"><input type="radio" name="optradio" value="4"
-                                                                   [(ngModel)]="searchParam.minRating"><i
-                                        class="fa fa-star"
-                                        aria-hidden="true"></i><i
-                                        class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                                                                     aria-hidden="true"></i><i
-                                        class="fa fa-star" aria-hidden="true"></i></label>
-                                <label class="radio-inline"><input type="radio" name="optradio" value="5"
-                                                                   [(ngModel)]="searchParam.minRating"><i
-                                        class="fa fa-star"
-                                        aria-hidden="true"></i><i
-                                        class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                                                                     aria-hidden="true"></i><i
-                                        class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                                                                     aria-hidden="true"></i></label>-->
-                                <ngb-rating [(rate)]="minRating" max="5">
+                                <ngb-rating [(rate)]="searchParam.minRating" max="5">
                                     <ng-template let-fill="fill">
                                         <span class="star" id="minRating" [class.filled]="fill === 100">&#9733;</span>
                                     </ng-template>
@@ -112,7 +82,7 @@
                             <i *ngIf="!showSettings" class="fa fa-chevron-down fa-2x" aria-hidden="true"></i>
                             <i *ngIf="showSettings" class="fa fa-chevron-up fa-2x" aria-hidden="true"></i>
                         </button>
-                        <button type="button" class="btn btn-search" (click)="searchTracks()">
+                        <button type="button" class="btn btn-search slider-color" (click)="searchTracks()">
                             <i class="fa fa-search fa-2x" aria-hidden="true"></i>
                         </button>
                     </div>
