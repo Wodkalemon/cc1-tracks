@@ -5,7 +5,8 @@
     <button (click)="showDialog = !showDialog" class="btn">Close</button>
 </app-dialog>
 
-<h1 *ngIf="track" class="page-header">Route Details: {{track.name}}</h1>
+<div id="details-page">
+    <h2 *ngIf="track" id="details-heading">Routendetails: {{track.name}}</h2>
 
     <div class="container-fluid">
         <div class="row">
