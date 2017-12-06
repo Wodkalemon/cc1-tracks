@@ -39,8 +39,9 @@ export class TrackDetailsComponent implements OnInit {
     lat: number = 50.357968;
     lng: number = 7.569099;
 
-    showDialog = false;
-
+    showAddStory = false;
+    newStory : Story = new Story();
+    newPOI: Poi = new Poi();
 
     constructor(private trackService: TrackService, private sharedUserService: SharedUserService, private sanitizer:DomSanitizer) {
         console.log("TrackDetailsComponent: constructor");
@@ -216,6 +217,15 @@ export class TrackDetailsComponent implements OnInit {
 
     getMedia(reference: String) {
         return this.sanitize(this.MEDIA_REF+'?id='+reference)
+    }
+
+    addStory() {
+        this.trackService.addStory(this.newStory).subscribe(result => {
+            console.log("addStory: added Story");
+            console.log(this.newStory);
+            this.showAddStory = false;
+            this.newStory = new Story();
+        });
     }
 
 

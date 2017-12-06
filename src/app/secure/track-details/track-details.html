@@ -1,8 +1,18 @@
-<button (click)="showDialog = !showDialog" class="btn">Open</button>
+<button (click)="showAddStory = !showAddStory" class="btn">Open</button>
 
-<app-dialog [(visible)]="showDialog">
-    <h1>Hello World</h1>
-    <button (click)="showDialog = !showDialog" class="btn">Close</button>
+<app-dialog [(visible)]="showAddStory">
+    <h1>Füge deine Story hinzu!</h1>
+    <div class="form-group">
+        <label for="usr">Titel:</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="newStory.title">
+    </div>
+    <div class="form-group">
+        <label for="usr">Text:</label>
+        <textarea class="form-control" rows="5" id="comment" [(ngModel)]="newStory.text"></textarea>
+    </div>
+
+    <button class="btn btn-warning" (click)="showAddStory = !showAddStory" >Abbrechen</button>
+    <button class="btn btn-success" (click)="addStory()" >Speichern</button>
 </app-dialog>
 
 <h1 *ngIf="track" class="page-header">Route Details: {{track.name}}</h1>

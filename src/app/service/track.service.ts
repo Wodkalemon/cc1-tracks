@@ -9,6 +9,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {Sponsor} from '../Model/Sponsor';
 import {Organisation} from '../Model/Organisation';
 import {SearchParam} from '../Model/SearchParam';
+import {Story} from '../Model/Story';
 
 @Injectable()
 export class TrackService {
@@ -17,6 +18,7 @@ export class TrackService {
     sponsorsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/sponsors"
     organisationsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/organisation"
     tracksUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes"
+    addStoryUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes"
     constructor(private http: HttpClient) {
     }
 
@@ -71,6 +73,15 @@ export class TrackService {
         );
 
         //https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes?name=route2
+    }
+
+    addStory(story: Story, track: Track):Observable<any> {
+        const url = `${this.addStoryUrl}`;
+        //return this.http.get<Track>(url).pipe(
+        return this.http.get<Organisation[]>(url).pipe(
+            tap(_ => console.log(`fetched Organisations`))
+        );
+
     }
 
 }
