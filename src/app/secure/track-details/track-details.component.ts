@@ -220,12 +220,13 @@ export class TrackDetailsComponent implements OnInit {
     }
 
     addStory() {
+        /*
         this.trackService.addStory(this.newStory).subscribe(result => {
             console.log("addStory: added Story");
             console.log(this.newStory);
             this.showAddStory = false;
             this.newStory = new Story();
-        });
+        });*/
     }
 
 
