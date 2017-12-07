@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/Rx';
 import {Track} from '../Model/Track';
@@ -10,6 +10,7 @@ import {Sponsor} from '../Model/Sponsor';
 import {Organisation} from '../Model/Organisation';
 import {SearchParam} from '../Model/SearchParam';
 import {Story} from '../Model/Story';
+import {Poi} from '../Model/Poi';
 
 @Injectable()
 export class TrackService {
@@ -18,7 +19,10 @@ export class TrackService {
     sponsorsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/sponsors"
     organisationsUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/organisation"
     tracksUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes"
-    addStoryUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes"
+    addStoryUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/add-story"
+    addPoiUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/add-poi"
+    uploadMediaUrl = "http://backend-env.fbhen6p3um.us-west-2.elasticbeanstalk.com/api/media"
+
     constructor(private http: HttpClient) {
     }
 
@@ -28,7 +32,6 @@ export class TrackService {
         //return this.http.get<Track>(url).pipe(
         return this.http.get<Track>(url).pipe(
             tap(_ => console.log(`fetched Track id=${id}`))
-
         );
     }
 
@@ -37,9 +40,9 @@ export class TrackService {
         //return this.http.get<Track>(url).pipe(
         return this.http.get<Sponsor[]>(url).pipe(
             tap(_ => console.log(`fetched Sponsors`))
-
         );
     }
+
     getOrganisations(ids: number[]): Observable<Organisation[]> {
         const url = `${this.organisationsUrl}`;
         //return this.http.get<Track>(url).pipe(
@@ -51,17 +54,17 @@ export class TrackService {
     searchTracks(params: SearchParam): Observable<Track[]> {
         let url = `${this.tracksUrl}`;
 
-        let urlParams = `${params.name ? "name="+params.name + ";" : ''}` +
-            `${params.startCountry ? "startCountry="+params.startCountry + ";" : ''}` +
-            `${params.endCountry ? "endCountry="+params.endCountry + ";" : ''}` +
-            `${params.minDistance ? "minDistance="+params.minDistance + ";" : ''}` +
-            `${params.maxDistance ? "maxDistance="+params.maxDistance + ";" : ''}` +
-            `${params.minDuration ? "minDuration="+params.minDuration + ";" : ''}` +
-            `${params.maxDuration ? "maxDuration="+params.maxDuration + ";" : ''}` +
-            `${params.minRating ? "minRating="+params.minRating + ";" : ''}` +
-            `${params.maxRating ? "maxRating="+params.maxRating + ";" : ''}` +
-            `${params.minDifficulty ? "minDifficulty="+params.minDifficulty + ";" : ''}` +
-            `${params.maxDifficulty ? "maxDifficulty="+params.maxDifficulty + ";" : ''}`;
+        let urlParams = `${params.name ? "name=" + params.name + ";" : ''}` +
+            `${params.startCountry ? "startCountry=" + params.startCountry + ";" : ''}` +
+            `${params.endCountry ? "endCountry=" + params.endCountry + ";" : ''}` +
+            `${params.minDistance ? "minDistance=" + params.minDistance + ";" : ''}` +
+            `${params.maxDistance ? "maxDistance=" + params.maxDistance + ";" : ''}` +
+            `${params.minDuration ? "minDuration=" + params.minDuration + ";" : ''}` +
+            `${params.maxDuration ? "maxDuration=" + params.maxDuration + ";" : ''}` +
+            `${params.minRating ? "minRating=" + params.minRating + ";" : ''}` +
+            `${params.maxRating ? "maxRating=" + params.maxRating + ";" : ''}` +
+            `${params.minDifficulty ? "minDifficulty=" + params.minDifficulty + ";" : ''}` +
+            `${params.maxDifficulty ? "maxDifficulty=" + params.maxDifficulty + ";" : ''}`;
 
         if (urlParams != '') {
             url = url + "?" + urlParams;
@@ -75,7 +78,7 @@ export class TrackService {
         //https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes?name=route2
     }
 
-    addStory(story: Story, track: Track):Observable<any> {
+    addStory(story: Story, track: Track): Observable<any> {
         const url = `${this.addStoryUrl}`;
         //return this.http.get<Track>(url).pipe(
         return this.http.get<Organisation[]>(url).pipe(
@@ -83,5 +86,33 @@ export class TrackService {
         );
 
     }
+    addPoi(poi: Poi, track: Track): Observable<any> {
+        const url = `${this.addPoiUrl}`;
+        //return this.http.get<Track>(url).pipe(
+        return this.http.get<Organisation[]>(url).pipe(
+            tap(_ => console.log(`fetched Organisations`))
+        );
+
+    }
+
+
+    uploadMedia(file: File): Observable<any> {
+        let url = `${this.uploadMediaUrl}`;
+
+        let formData: FormData = new FormData();
+        formData.append('uploadFile', file, file.name);
+
+        let headers = new HttpHeaders();
+        headers.append('Content-Type', 'multipart/form-data');
+        headers.append('Accept', 'application/json');
+        //let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(url, formData, {
+            headers: headers
+        }).pipe(
+            tap(_ => console.log(`uploaded media`))
+        );
+    }
+
 
 }
