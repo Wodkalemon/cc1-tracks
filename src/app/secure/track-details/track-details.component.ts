@@ -283,18 +283,6 @@ export class TrackDetailsComponent implements OnInit {
 
     }
 
-    addPoi() {
-
-        this.trackService.addPoi(this.newPoi, this.track).subscribe(result => {
-            console.log("addPoi: added Poi");
-            console.log(this.newPoi);
-            this.showAddPoi = false;
-            this.newPoi = new Poi();
-        });
-
-    }
-
-
 
     fileUpload(event: any) {
         let fileList: FileList = event.target.files;

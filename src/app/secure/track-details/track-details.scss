@@ -11,7 +11,6 @@ agm-map {
 
 #details-page {
     background-color: rgba(231, 231, 231, 0.95);
-    margin: 1em;
     border-radius: 1em;
 }
 
@@ -23,7 +22,7 @@ agm-map {
     margin: 0 !important;
 }
 
-.sidebar-list-item .number, #info-frame .number {
+.sidebar-list-item .number, .info-frame .number {
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -62,3 +61,26 @@ agm-map {
     color: $color-accent;
 }
 
+.info-frame-text {
+    background: $color-backgrounds;
+    text-align: justify;
+    padding: 1em;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 1em;
+}
+
+.info-frame h2 {
+    background: $color-accent;
+    margin-bottom: 0;
+    color: $color-backgrounds;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-wrap: wrap;
+}
