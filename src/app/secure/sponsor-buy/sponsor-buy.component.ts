@@ -5,7 +5,6 @@ import {TrackService} from '../../service/track.service';
 import {Track} from '../../Model/Track';
 import {Poi} from '../../Model/Poi';
 import {Story} from '../../Model/Story';
-import {forEach} from '@angular/router/src/utils/collection';
 import {SponsorPart} from '../../Model/SponsorPart';
 import {Sponsor} from '../../Model/Sponsor';
 import {Organisation} from '../../Model/Organisation';
@@ -15,11 +14,11 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
-    selector: 'track-details',
-    templateUrl: './track-details.html',
-    styleUrls: ['./track-details.scss']
+    selector: 'sponsor-buy',
+    templateUrl: './sponsor-buy.html',
+    styleUrls: ['./sponsor-buy.scss']
 })
-export class TrackDetailsComponent implements OnInit {
+export class SponsorBuyComponent implements OnInit {
 
     POI_DESCRIPTION_LENGTH = 100;
     STORY_TEXT_LENGTH = 100;
@@ -56,6 +55,8 @@ export class TrackDetailsComponent implements OnInit {
     MEDIA_REF = " http://backend-env.fbhen6p3um.us-west-2.elasticbeanstalk.com/api/media"
 
     track: Track;
+    sponsor: Sponsor;
+
     sponsors: Sponsor[];
     organisations: Organisation[];
     selectedPoi: Poi;
@@ -70,13 +71,26 @@ export class TrackDetailsComponent implements OnInit {
     newStory: Story = new Story();
     newPoi: Poi = new Poi();
 
+    newSponsorPart = new SponsorPart();
+
     constructor(private trackService: TrackService, private sharedUserService: SharedUserService, private sanitizer: DomSanitizer) {
-        console.log("TrackDetailsComponent: constructor");
+        console.log("SponsorBuyComponent: constructor");
 
     }
 
     ngOnInit() {
         this.getTrack(1);
+        this.getSponsorByName(this.getUser().nickname);
+    }
+
+    setEndpoint(lat: number, lng: number) {
+        this.newSponsorPart.endPoint = new LatLngImpl(lat, lng);
+        console.log(this.newSponsorPart);
+    }
+
+    setStartpoint(lat: number, lng: number) {
+        this.newSponsorPart.startPoint = new LatLngImpl(lat, lng);
+        console.log(this.newSponsorPart);
     }
 
     showPoi(poi: Poi) {
@@ -146,6 +160,22 @@ export class TrackDetailsComponent implements OnInit {
             });
 
     }
+
+    getSponsorByName(name: String) {
+
+        this.trackService.getSponsors([])
+            .subscribe(sponsors => {
+
+                for (let sponsor of sponsors) {
+                    if (sponsor.name == name) {
+                        this.sponsor = sponsor;
+                    }
+
+                }
+            });
+
+    }
+
 
     getOrganisations(ids: number[]) {
 
@@ -282,18 +312,6 @@ export class TrackDetailsComponent implements OnInit {
         });
 
     }
-
-    addPoi() {
-
-        this.trackService.addPoi(this.newPoi, this.track).subscribe(result => {
-            console.log("addPoi: added Poi");
-            console.log(this.newPoi);
-            this.showAddPoi = false;
-            this.newPoi = new Poi();
-        });
-
-    }
-
 
 
     fileUpload(event: any) {

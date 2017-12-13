@@ -1,0 +1,64 @@
+@import "../../../colors.scss";
+
+agm-map {
+    height: 450px;
+}
+#details-heading {
+    padding-top: 0.7em;
+    padding-bottom: 0.2em;
+    font-weight: bold;
+}
+
+#details-page {
+    background-color: rgba(231, 231, 231, 0.95);
+    margin: 1em;
+    border-radius: 1em;
+}
+
+#sidebar {
+    padding-left: 0;
+}
+
+#sidebar .row {
+    margin: 0 !important;
+}
+
+.sidebar-list-item .number, #info-frame .number {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background: #fff;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    font: 18px Arial, sans-serif;
+    display: inline-block;
+    margin-left: 0.3em;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.no-padding {
+    padding-left: 0 !important;
+    padding-right: 5px !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.table-fit {
+    white-space: nowrap;
+    width: 1px;
+}
+
+.star {
+    color: $color-inactiveAccent;
+}
+
+.filled {
+    color: $color-accent;
+}
+

@@ -79,18 +79,32 @@ export class TrackService {
     }
 
     addStory(story: Story, track: Track): Observable<any> {
-        const url = `${this.addStoryUrl}`;
-        //return this.http.get<Track>(url).pipe(
-        return this.http.get<Organisation[]>(url).pipe(
-            tap(_ => console.log(`fetched Organisations`))
+        console.log("addStory: " + track.id.toString())
+        const url = `${this.addStoryUrl}?id=${track.id}`;
+
+        let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+
+        //let body = story;
+        let body = '{"name":"super tolles ding", "location":[10.10,10.2],"description":"asfasf","media":[{"reference":"test2.jpg","type":"image"}]}';
+        return this.http.post(url, body).pipe(
+            tap(_ => console.log(`posted addStory`))
         );
 
     }
+
+
+
+
     addPoi(poi: Poi, track: Track): Observable<any> {
-        const url = `${this.addPoiUrl}`;
-        //return this.http.get<Track>(url).pipe(
-        return this.http.get<Organisation[]>(url).pipe(
-            tap(_ => console.log(`fetched Organisations`))
+        const url = `${this.addPoiUrl}?id=${track.id}`;
+
+        console.log("addPoi: " + track.id.toString())
+
+
+        let body = poi;
+        return this.http.post(url, body).pipe(
+            tap(_ => console.log(`posted addPoi`))
         );
 
     }

@@ -14,6 +14,7 @@ import {NewPasswordComponent} from "./public/auth/newpassword/newpassword.compon
 import {TrackDetailsComponent} from './secure/track-details/track-details.component';
 import {SearchComponent} from "./secure/search/search.component";
 import {TopRoutesComponent} from "./secure/top-routes/topRoutes.component";
+import {SponsorBuyComponent} from './secure/sponsor-buy/sponsor-buy.component';
 
 const homeRoutes: Routes = [
     {
@@ -37,6 +38,7 @@ const homeRoutes: Routes = [
             {path: 'search', component: SearchComponent},
             {path: 'track-details', component: TrackDetailsComponent},
             {path: 'top-routes', component: TopRoutesComponent},
+            {path: 'sponsor-buy', component: SponsorBuyComponent}
         ]
     },
 ];

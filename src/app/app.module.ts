@@ -37,6 +37,7 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import {SharedUserService} from './service/shared-user.service';
 import {DialogComponent} from './secure/dialog/dialog.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SponsorBuyComponent} from './secure/sponsor-buy/sponsor-buy.component';
 
 
 
@@ -65,7 +66,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
         TrackDetailsComponent,
-        DialogComponent
+        DialogComponent,
+        SponsorBuyComponent
 
     ],
     imports: [
