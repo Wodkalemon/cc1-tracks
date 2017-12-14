@@ -36,8 +36,10 @@ const homeRoutes: Routes = [
             {path: 'newPassword', component: NewPasswordComponent},
             {path: '', component: HomeLandingComponent},
             {path: 'search', component: SearchComponent},
+            {path: 'track-details/:id', component: TrackDetailsComponent},
             {path: 'track-details', component: TrackDetailsComponent},
             {path: 'top-routes', component: TopRoutesComponent},
+            {path: 'sponsor-buy/:id', component: SponsorBuyComponent},
             {path: 'sponsor-buy', component: SponsorBuyComponent}
         ]
     },

@@ -105,7 +105,7 @@
                     <th><i class="fa fa-signal fa-fw"></i> Schwierigkeit</th>
                     <th><i class="fa fa-star-o fa-fw"></i> Bewertung</th>
                 </tr>
-                <tr *ngFor="let track of searchResult">
+                <tr *ngFor="let track of searchResult" [routerLink]="['/home/track-details/'+track.id]">
                     <td>{{track.name}}</td>
                     <td>{{track.startCountry}}</td>
                     <td>{{track.endCountry}}</td>

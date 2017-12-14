@@ -11,6 +11,8 @@ import {Organisation} from '../../Model/Organisation';
 import {SharedUserService} from '../../service/shared-user.service';
 import {AwsUser} from '../../Model/AwsUser';
 import {DomSanitizer} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
+import {HaversineService} from 'ng2-haversine';
 
 
 @Component({
@@ -73,14 +75,62 @@ export class SponsorBuyComponent implements OnInit {
 
     newSponsorPart = new SponsorPart();
 
-    constructor(private trackService: TrackService, private sharedUserService: SharedUserService, private sanitizer: DomSanitizer) {
+    constructor(private route: ActivatedRoute,
+                private trackService: TrackService,
+                private sharedUserService: SharedUserService,
+                private sanitizer: DomSanitizer,
+                private haversineService: HaversineService) {
         console.log("SponsorBuyComponent: constructor");
 
     }
 
     ngOnInit() {
-        this.getTrack(1);
-        this.getSponsorByName(this.getUser().nickname);
+        this.route.params.subscribe(params => {
+            console.log("id:" + params['id']);
+            if (params['id']){
+                this.getTrack(params['id']);
+            } else {
+                this.getTrack(1);
+            }
+
+
+        });
+        this.getSponsorByName(this.getUser() ? this.getUser().nickname:'');
+    }
+
+
+
+    checkSponsorPart() {
+
+        this.newSponsorPart.startPoint = this.getClosestTrackPoint(this.newSponsorPart.startPoint.coord[1], this.newSponsorPart.startPoint.coord[0]);
+        this.newSponsorPart.endPoint = this.getClosestTrackPoint(this.newSponsorPart.endPoint.coord[1], this.newSponsorPart.endPoint.coord[0]);
+
+        this.trackService.checkSponsorPart(this.newSponsorPart, this.track)
+            .subscribe(Result => {
+                console.log(Result);
+                this.newSponsorPart.price = Result.price;
+                this.newSponsorPart.distance = Result.distance;
+            });
+    }
+
+    getClosestTrackPoint(lat: number, lng: number) :LatLngImpl {
+        let distance: number;
+        let shortestDistance: number = 100000000;
+        let closestPoint;
+        for (let point of this.track.points) {
+            console.log("Distance: " +this.haversineService.getDistanceInMeters({latitude: lat, longitude: lng},{latitude: point[0], longitude: point[1]}));
+            distance = this.haversineService.getDistanceInMeters({latitude: lat, longitude: lng},{latitude: point[0], longitude: point[1]});
+            if (distance < shortestDistance ) {
+                shortestDistance = distance;
+                closestPoint = point;
+            }
+        }
+        console.log("ClosestDistance: " +this.haversineService.getDistanceInMeters({latitude: lat, longitude: lng},{latitude: closestPoint[0], longitude: closestPoint[1]}));
+        return new LatLngImpl(closestPoint[1], closestPoint[0]);
+    }
+
+    addSponsorPart() {
+        
     }
 
     setEndpoint(lat: number, lng: number) {

@@ -53,6 +53,7 @@
     "karma-remap-istanbul": "0.6.0",
     "morgan": "~1.7.0",
     "ng-bootstrap": "^1.6.3",
+    "ng2-haversine": "^0.1.1",
     "ng2-nouislider": "^1.7.4",
     "nouislider": "^10.1.0",
     "protractor": "~5.1.2",

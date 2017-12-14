@@ -11,6 +11,7 @@ import {Organisation} from '../Model/Organisation';
 import {SearchParam} from '../Model/SearchParam';
 import {Story} from '../Model/Story';
 import {Poi} from '../Model/Poi';
+import {SponsorPart} from '../Model/SponsorPart';
 
 @Injectable()
 export class TrackService {
@@ -22,6 +23,7 @@ export class TrackService {
     addStoryUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/add-story"
     addPoiUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/add-poi"
     uploadMediaUrl = "http://backend-env.fbhen6p3um.us-west-2.elasticbeanstalk.com/api/media"
+    checkSponsoringUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/check-sponsoring"
 
     constructor(private http: HttpClient) {
     }
@@ -81,19 +83,33 @@ export class TrackService {
     addStory(story: Story, track: Track): Observable<any> {
         console.log("addStory: " + track.id.toString())
         const url = `${this.addStoryUrl}?id=${track.id}`;
+        //const url = 'http://backend-env.fbhen6p3um.us-west-2.elasticbeanstalk.com/?id=2';
 
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
 
-        //let body = story;
-        let body = '{"name":"super tolles ding", "location":[10.10,10.2],"description":"asfasf","media":[{"reference":"test2.jpg","type":"image"}]}';
-        return this.http.post(url, body).pipe(
-            tap(_ => console.log(`posted addStory`))
+        let body = '{ "creationDate": 1524924248, "id": 1461425257,  "media": [{"reference": "test.jpg", "type": "image"}],  "point": [   10.2, 10.3 ],   "text": "apigatewaytes3t",  "title": "DerTitel", "userName": "DerAdder"  }';
+        return this.http.post(url, body, {
+            headers: headers
+        }).pipe(
+            tap(data => console.log(data))
         );
 
     }
 
+    checkSponsorPart(part: SponsorPart, track: Track): Observable<SponsorPart> {
+        const url = this.checkSponsoringUrl +
+            '?id=' + track.id +
+            ';x1=' + part.startPoint.coord[1] +
+            ';y1=' + part.startPoint.coord[0] +
+            ';x2=' + part.endPoint.coord[1] +
+            ';y2=' + part.endPoint.coord[0];
 
+        return this.http.get<SponsorPart>(url).pipe(
+            tap(_ => console.log(`fetched sponorPart`))
+        );
+    }
 
 
     addPoi(poi: Poi, track: Track): Observable<any> {

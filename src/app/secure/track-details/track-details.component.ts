@@ -12,6 +12,7 @@ import {Organisation} from '../../Model/Organisation';
 import {SharedUserService} from '../../service/shared-user.service';
 import {AwsUser} from '../../Model/AwsUser';
 import {DomSanitizer} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -70,13 +71,31 @@ export class TrackDetailsComponent implements OnInit {
     newStory: Story = new Story();
     newPoi: Poi = new Poi();
 
-    constructor(private trackService: TrackService, private sharedUserService: SharedUserService, private sanitizer: DomSanitizer) {
+    constructor(private route: ActivatedRoute, private trackService: TrackService, private sharedUserService: SharedUserService, private sanitizer: DomSanitizer) {
         console.log("TrackDetailsComponent: constructor");
 
     }
 
     ngOnInit() {
-        this.getTrack(1);
+        this.route.params.subscribe(params => {
+            console.log("id:" + params['id']);
+            if (params['id']){
+                this.getTrack(params['id']);
+            } else {
+                this.getTrack(1);
+            }
+
+
+        });
+
+    }
+
+    isSponsor() {
+        let user = this.getUser();
+        if (this.getUser() && this.getUser().customGroup == "sponsor"){
+            return true;
+        }
+        return false;
     }
 
     showPoi(poi: Poi) {
