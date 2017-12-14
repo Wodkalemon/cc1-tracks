@@ -106,7 +106,7 @@
                                         <div class="form-group">
                                             <select [(ngModel)]="newSponsorPart.sponsoredId" name="statusselect"  class="col-xs-8 form-control">
                                                 <option value="">Bitte wählen...</option>
-                                                <option *ngFor="let org of sponsors" [ngValue]="org.id">
+                                                <option *ngFor="let org of organisations" [ngValue]="org.id">
                                                     {{org.name}}
                                                 </option>
                                             </select>
@@ -120,8 +120,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <button class="btn btn-success" (click)="checkSponsorPart()">Prüfe den Abschnitt</button>
-                            <button class="btn btn-success" (click)="addSponsorPart()">Abschnitt Kaufen</button>
+                            <button [disabled]="!isBuyable()" class="btn btn-success" (click)="addSponsorPart()">Abschnitt Kaufen</button>
                         </ng-template>
                     </ngb-tab>
                     <ngb-tab *ngIf="track" title="Detail">

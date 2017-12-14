@@ -96,6 +96,7 @@ export class SponsorBuyComponent implements OnInit {
 
         });
         this.getSponsorByName(this.getUser() ? this.getUser().nickname:'');
+        this.newSponsorPart.sponsorId = this.sponsor.id;
     }
 
 
@@ -130,17 +131,34 @@ export class SponsorBuyComponent implements OnInit {
     }
 
     addSponsorPart() {
-        
+
     }
+    isBuyable() {
+        if (this.newSponsorPart.price &&
+            this.newSponsorPart.distance &&
+            this.newSponsorPart.sponsoredId &&
+            this.newSponsorPart.comment ) {
+            //this.newSponsorPart.sponsorId = this.sponsor.id;
+            return true;
+        }
+        return false;
+    }
+
 
     setEndpoint(lat: number, lng: number) {
         this.newSponsorPart.endPoint = new LatLngImpl(lat, lng);
         console.log(this.newSponsorPart);
+        if (this.newSponsorPart.startPoint) {
+            this.checkSponsorPart();
+        }
     }
 
     setStartpoint(lat: number, lng: number) {
         this.newSponsorPart.startPoint = new LatLngImpl(lat, lng);
         console.log(this.newSponsorPart);
+        if (this.newSponsorPart.endPoint) {
+            this.checkSponsorPart();
+        }
     }
 
     showPoi(poi: Poi) {
