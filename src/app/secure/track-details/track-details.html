@@ -261,8 +261,8 @@
 
                 <ngb-tab *ngIf="track" title="Sponsor">
                     <ng-template ngbTabContent>
-                        <div>
-                            <div *ngFor="let part of track.sponsorParts; let i = index"
+                        <div *ngFor="let part of track.sponsorParts; let i = index">
+                            <div *ngIf="getSponsor(part.sponsorId)"
                                  class="sidebar-list-item row vertical-align">
                                 <div class="col-xs-2 number" (click)="showSponsorPart(part)">{{i+1}}</div>
                                 <div class="col-xs-7">
