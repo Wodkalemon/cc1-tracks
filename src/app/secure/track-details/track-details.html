@@ -286,34 +286,36 @@
                 <div class="vertical-align">
                     <div class="col-xs-12"><h2>{{selectedPoi.name}}</h2></div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 row-eq-height">
-                    <div id="poiCarousel"class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
-                            <li data-target="#myCarousel" data-slide-to="0"></li>
-                        </ol>-->
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div *ngFor="let media of selectedPoi.media; let i = index"
-                                 class="{{i==1 ? 'item active' : 'item'}}">
-                                <img [src]="getMedia(media.reference)" [alt]="media.reference">
+                <div class="col-xs-12 bgColor">
+                    <div class="col-md-3 col-sm-6 col-xs-12 row-eq-height">
+                        <div id="poiCarousel"class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
+                                <li data-target="#myCarousel" data-slide-to="0"></li>
+                            </ol>-->
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div *ngFor="let media of selectedPoi.media; let i = index"
+                                     class="{{i==1 ? 'item active' : 'item'}}">
+                                    <img [src]="getMedia(media.reference)" [alt]="media.reference">
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#poiCarousel" data-slide="prev">
-                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#poiCarousel" data-slide="next">
-                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#poiCarousel" data-slide="prev">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#poiCarousel" data-slide="next">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-9 col-sm-6 row-eq-height">
-                    <div class="info-frame-text">
-                        {{selectedPoi.description}}
+                    <div class="col-md-9 col-sm-6 row-eq-height">
+                        <div class="info-frame-text">
+                            {{selectedPoi.description}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -321,54 +323,64 @@
                 <div class="vertical-align">
                     <div class="col-xs-12"><h2>{{selectedStory.title}}</h2></div>
                 </div>
-                <img src="https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/media/test2.jpg">
-                <div class="col-md-3 col-sm-6 col-xs-12 row-eq-height">
-                    <div id="storyCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
-                            <li data-target="#myCarousel" data-slide-to="0"></li>
-                        </ol>-->
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div *ngFor="let media of selectedStory.media; let i = index"
-                                 class="{{i==1 ? 'item active' : 'item'}}">
-                                <img [src]="getMedia(media.reference)" [alt]="media.reference">
+                <div class="col-xs-12 bgColor">
+                    <div class="col-md-3 col-sm-6 col-xs-12 row-eq-height">
+                        <div id="storyCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
+                                <li data-target="#myCarousel" data-slide-to="0"></li>
+                            </ol>-->
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div *ngFor="let media of selectedStory.media; let i = index"
+                                     class="{{i==1 ? 'item active' : 'item'}}">
+                                    <img [src]="getMedia(media.reference)" [alt]="media.reference">
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#storyCarousel" data-slide="prev">
-                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#storyCarousel" data-slide="next">
-                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#storyCarousel" data-slide="prev">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#storyCarousel" data-slide="next">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-9 col-sm-6 row-eq-height">
-                    <div class="info-frame-text">
-                        {{selectedStory.text}}
+                    <div class="col-md-9 col-sm-6 row-eq-height">
+                        <div class="info-frame-text">
+                            {{selectedStory.text}}
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-12 info-frame" *ngIf="selectedSponsorPart">
-                <div class="col-md-3">
-                    <h4>{{getSponsor(selectedSponsorPart.sponsorId).name}}</h4><br/>
-                    {{getSponsor(selectedSponsorPart.sponsorId).description}}
-                    <img [src]="getMedia(getSponsor(selectedSponsorPart.sponsorId).imageLarge)">
+                <div class="vertical-align">
+                    <div class="col-xs-12"><h2>Sponsor: {{getSponsor(selectedSponsorPart.sponsorId).name}}</h2></div>
                 </div>
-                <div class="col-md-3">
-                    -----------------<br/>
-                    {{selectedSponsorPart.price}} € <br/>
-                    -----------------<br/>
-                    {{selectedSponsorPart.comment}}
-                </div>
-                <div class="col-md-3">
-                    <h4>{{getOrganisation(selectedSponsorPart.sponsoredId).name}}</h4><br/>
-                    {{getOrganisation(selectedSponsorPart.sponsoredId).description}}
-                    <img [src]="getMedia(getOrganisation(selectedSponsorPart.sponsoredId).imageLarge)">
+                <div class="vertical-align col-xs-12 bgColor">
+                    <div class="col-xs-12 col-sm-4 col-lg-3">
+                        <img class="img-responsive" [src]="getMedia(getSponsor(selectedSponsorPart.sponsorId).imageLarge)" [alt]="getSponsor(selectedSponsorPart.sponsorId).name">
+                        {{getSponsor(selectedSponsorPart.sponsorId).description}}
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-6">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                <span style="font-size: 2.5em"><i class="fa fa-money" aria-hidden="true"></i> {{selectedSponsorPart.price}} <i class="fa fa-eur" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div id="sponsorComment">
+                            {{selectedSponsorPart.comment}}
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-3">
+                        <!--<img class="img-responsive" [src]="getMedia(getOrganisation(selectedSponsorPart.sponsoredId).imageLarge)">-->
+                        <img class="img-responsive" [src]="getMedia(getOrganisation(selectedSponsorPart.sponsoredId).imageLarge)" [alt]="getOrganisation(selectedSponsorPart.sponsoredId).name">
+                        {{getOrganisation(selectedSponsorPart.sponsoredId).description}}
+                    </div>
                 </div>
             </div>
         </div>

@@ -84,3 +84,12 @@ agm-map {
     display:         flex;
     flex-wrap: wrap;
 }
+
+.bgColor {
+    background: $color-backgrounds;
+    background-clip: content-box;
+}
+
+.progress {
+    height: 2.5em !important;
+}
