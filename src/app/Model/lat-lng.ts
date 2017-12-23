@@ -6,8 +6,8 @@ export class LatLngImpl {
     //lat:number;
     //lng:number;
 
-    constructor(lat: number, lng: number) {
-        this.coord = [lat, lng]
+    constructor(lng: number, lat: number) {
+        this.coord = [lng, lat]
         //this.lat = lat;
         //this.lng = lng;
     }

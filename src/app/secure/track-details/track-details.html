@@ -62,11 +62,11 @@
             <div class="col-md-9">
                 <div class="form-group">
                     <label for="title">Titel:</label>
-                    <input type="text" class="form-control" id="title" [(ngModel)]="newPoi.title">
+                    <input type="text" class="form-control" id="title" [(ngModel)]="newPoi.name">
                 </div>
                 <div class="form-group">
                     <label for="text">Text:</label>
-                    <textarea class="form-control" rows="5" id="text" [(ngModel)]="newPoi.text"></textarea>
+                    <textarea class="form-control" rows="5" id="text" [(ngModel)]="newPoi.description"></textarea>
                 </div>
             </div>
         </div>
@@ -122,12 +122,12 @@
                                 [openInfoWindow]="true">
                         <agm-info-window isOpen="true" (infoWindowClose)="infoWindowClosed($event)">
                             <button type="button" class="btn btn-success"
-                                    (click)="showAddStoryModal(selectedPosition.coord[1], selectedPosition.coord[0])">
+                                    (click)="showAddStoryModal(selectedPosition.coord[0], selectedPosition.coord[1])">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Story hinzufügen
                             </button>
                             <br/>
                             <button type="button" class="btn btn-success"
-                                    (click)="showAddPoiModal(selectedPosition.coord[1], selectedPosition.coord[0])">
+                                    (click)="showAddPoiModal(selectedPosition.coord[0], selectedPosition.coord[1])">
                                 <i class="fa fa-plus" aria-hidden="true"></i> POI hinzufügen
                             </button>
                         </agm-info-window>
@@ -209,7 +209,7 @@
                                         </small>
                                     </h4>
                                 </div>
-                                <div class="col-xs-3 no-padding"><img class="img-responsive"
+                                <div *ngIf="poi.media" class="col-xs-3 no-padding"><img class="img-responsive"
                                                                       [src]="getMedia(poi.media[0].reference)">
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                                         </small>
                                     </h4>
                                 </div>
-                                <div class="col-xs-3 no-padding"><img class="img-responsive"
+                                <div *ngIf="story.media" class="col-xs-3 no-padding"><img class="img-responsive"
                                                                       [src]="getMedia(story.media[0].reference)">
                                 </div>
                             </div>

@@ -96,7 +96,7 @@ export class SponsorBuyComponent implements OnInit {
 
         });
         this.getSponsorByName(this.getUser() ? this.getUser().nickname:'');
-        this.newSponsorPart.sponsorId = this.sponsor.id;
+
     }
 
 
@@ -237,6 +237,7 @@ export class SponsorBuyComponent implements OnInit {
                 for (let sponsor of sponsors) {
                     if (sponsor.name == name) {
                         this.sponsor = sponsor;
+                        this.newSponsorPart.sponsorId = this.sponsor.id;
                     }
 
                 }
@@ -295,17 +296,6 @@ export class SponsorBuyComponent implements OnInit {
         this.showStory(story);
     }
 
-    showAddPoiModal(lat: number, lng: number) {
-        this.showAddPoi = true;
-        this.newPoi = new Poi();
-        this.newPoi.location = new LatLngImpl(lat, lng);
-    }
-
-    showAddStoryModal(lat: number, lng: number) {
-        this.showAddStory = true;
-        this.newStory = new Story();
-        this.newStory.point = new LatLngImpl(lat, lng);
-    }
 
     addPoi() {
 

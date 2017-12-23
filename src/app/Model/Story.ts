@@ -9,7 +9,7 @@ export class Story {
     title: String;
     text: String;
     media: Media[];
-    point: LatLngImpl;
+    point: number[];
 
     constructor () {
     }

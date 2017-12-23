@@ -80,23 +80,7 @@ export class TrackService {
         //https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/routes?name=route2
     }
 
-    addStory(story: Story, track: Track): Observable<any> {
-        console.log("addStory: " + track.id.toString())
-        const url = `${this.addStoryUrl}?id=${track.id}`;
-        //const url = 'http://backend-env.fbhen6p3um.us-west-2.elasticbeanstalk.com/?id=2';
 
-        let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-
-        let body = '{ "creationDate": 1524924248, "id": 1461425257,  "media": [{"reference": "test.jpg", "type": "image"}],  "point": [   10.2, 10.3 ],   "text": "apigatewaytes3t",  "title": "DerTitel", "userName": "DerAdder"  }';
-        return this.http.post(url, body, {
-            headers: headers
-        }).pipe(
-            tap(data => console.log(data))
-        );
-
-    }
 
     checkSponsorPart(part: SponsorPart, track: Track): Observable<SponsorPart> {
         const url = this.checkSponsoringUrl +
@@ -111,15 +95,45 @@ export class TrackService {
         );
     }
 
+    addStory(story: Story, track: Track): Observable<any> {
+        const url = `${this.addStoryUrl}?id=${track.id}`;
+        console.log("addStory-url: " + url);
+
+        let headerJson = {
+            'Content-Type':'application/json',
+            'Accept':'application/json'
+        }
+        let headers = new HttpHeaders(headerJson );
+
+        let body = JSON.stringify(story, null, 2);
+        console.log("addStory-body: " + body)
+
+        return this.http.post(url, body, {
+            headers: headers
+        }).pipe(
+            tap(_ => console.log(`posted addStory`))
+        );
+
+    }
+
 
     addPoi(poi: Poi, track: Track): Observable<any> {
         const url = `${this.addPoiUrl}?id=${track.id}`;
+        console.log("addPoi-url: " + url);
 
-        console.log("addPoi: " + track.id.toString())
 
+        let headerJson = {
+            'Content-Type':'application/json',
+            'Accept':'application/json'
+        }
+        let headers = new HttpHeaders(headerJson );
 
-        let body = poi;
-        return this.http.post(url, body).pipe(
+        let body = JSON.stringify(poi, null, 2);
+        console.log("addPoi-body: " + body);
+
+        return this.http.post(url, body, {
+            headers: headers
+        }).pipe(
             tap(_ => console.log(`posted addPoi`))
         );
 

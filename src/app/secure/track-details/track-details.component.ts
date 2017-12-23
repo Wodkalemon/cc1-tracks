@@ -138,6 +138,16 @@ export class TrackDetailsComponent implements OnInit {
             });
     }
 
+    updateTrack(id: number) {
+        this.trackService.getTrack(id)
+            .subscribe(track => {
+                this.track = track;
+                console.log("getTrack(" + id + ").name : " + this.track.name);
+                console.log(this.track);
+
+            });
+    }
+
     getInstanceOf(element: any): boolean {
         console.log("constructor: " + element.constructor.name);
         console.log(".type: " + (element.type === 'Poi'));
@@ -216,25 +226,41 @@ export class TrackDetailsComponent implements OnInit {
         this.showStory(story);
     }
 
-    showAddPoiModal(lat: number, lng: number) {
+    showAddPoiModal(lng: number, lat: number) {
         this.showAddPoi = true;
         this.newPoi = new Poi();
-        this.newPoi.location = new LatLngImpl(lat, lng);
+        this.newPoi.location = [lng, lat];
+
     }
 
-    showAddStoryModal(lat: number, lng: number) {
+    showAddStoryModal(lng: number, lat: number) {
         this.showAddStory = true;
         this.newStory = new Story();
-        this.newStory.point = new LatLngImpl(lat, lng);
+        this.newStory.point = [lng, lat];
+    }
+
+    addStory() {
+
+        this.trackService.addStory(this.newStory, this.track).subscribe(result => {
+            console.log("addStory: added Story");
+            console.log(result);
+            this.showAddStory = false;
+            this.selectedPosition = null;
+            this.newStory = new Story();
+            this.updateTrack(this.track.id);
+        });
+
     }
 
     addPoi() {
 
         this.trackService.addPoi(this.newPoi, this.track).subscribe(result => {
             console.log("addPoi: added Poi");
-            console.log(this.newPoi);
+            console.log(result);
             this.showAddPoi = false;
+            this.selectedPosition = null;
             this.newPoi = new Poi();
+            this.updateTrack(this.track.id);
         });
     }
 
@@ -291,16 +317,7 @@ export class TrackDetailsComponent implements OnInit {
         return this.sanitize(this.MEDIA_REF + '?id=' + reference)
     }
 
-    addStory() {
 
-        this.trackService.addStory(this.newStory, this.track).subscribe(result => {
-            console.log("addStory: added Story");
-            console.log(this.newStory);
-            this.showAddStory = false;
-            this.newStory = new Story();
-        });
-
-    }
 
 
     fileUpload(event: any) {

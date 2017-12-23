@@ -7,7 +7,7 @@ export class Poi {
 
     id:number;
     name: String;
-    location: LatLngImpl;
+    location: number[];
     description: String;
     media: Media[];
 
