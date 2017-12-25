@@ -144,12 +144,13 @@ export class TrackService {
         let url = `${this.uploadMediaUrl}`;
 
         let formData: FormData = new FormData();
-        formData.append('uploadFile', file, file.name);
+        formData.append('media_file', file, file.name);
 
-        let headers = new HttpHeaders();
-        headers.append('Content-Type', 'multipart/form-data');
-        headers.append('Accept', 'application/json');
-        //let options = new RequestOptions({ headers: headers });
+        let headerJson = {
+            //'Content-Type':'multipart/form-data',
+            'Accept':'application/json'
+        }
+        let headers = new HttpHeaders(headerJson );
 
         return this.http.post(url, formData, {
             headers: headers

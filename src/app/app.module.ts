@@ -39,6 +39,8 @@ import {DialogComponent} from './secure/dialog/dialog.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SponsorBuyComponent} from './secure/sponsor-buy/sponsor-buy.component';
 import {HaversineService} from 'ng2-haversine';
+import {PageSliderModule} from 'ng2-page-slider';
+import { CarouselModule } from './secure/carousel/carousel.module';
 
 
 
@@ -84,7 +86,9 @@ import {HaversineService} from 'ng2-haversine';
             apiKey: 'AIzaSyD6O0Z3glNdE9eHeoAECtVF8ZinHSjCCzA'
         }),
         AgmJsMarkerClustererModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        PageSliderModule,
+        CarouselModule,
 
 
     ],

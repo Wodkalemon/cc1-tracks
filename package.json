@@ -55,6 +55,7 @@
     "ng-bootstrap": "^1.6.3",
     "ng2-haversine": "^0.1.1",
     "ng2-nouislider": "^1.7.4",
+    "ng2-page-slider": "^0.10.1",
     "nouislider": "^10.1.0",
     "protractor": "~5.1.2",
     "rxjs": "^5.5.2",

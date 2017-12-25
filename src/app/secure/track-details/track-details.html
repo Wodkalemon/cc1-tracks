@@ -3,9 +3,25 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
+                <div *ngIf="newStory.media">
+                    <div class="col-md">
+                        <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
+                            <slide *ngFor="let media of newStory.media; let index=index"
+                                   [active]="media.active">
+                                <img [src]="getMedia(media.reference)" style="margin:auto;height: 300px">
+
+                                <div class="carousel-caption">
+                                    <h4>Slide {{index}}</h4>
+
+                                </div>
+                            </slide>
+                        </carousel>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="upload">Medien hinzufügen:</label>
-                    <input type="file" (change)="fileUpload($event)" placeholder="Upload file" id="upload">
+                    <input type="file" (change)="addMedia2NewStory($event)" placeholder="Upload file" id="upload">
                 </div>
             </div>
             <div class="col-md-9">
@@ -85,7 +101,8 @@
                 <agm-marker-cluster
                         imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
 
-                    <agm-polyline strokeColor="#c2c2a3" (lineClick)="polylineClicked($event)" clickable="true" strokeWeight="5">
+                    <agm-polyline strokeColor="#c2c2a3" (lineClick)="polylineClicked($event)" clickable="true"
+                                  strokeWeight="5">
 
                         <agm-polyline-point *ngFor="let coord of track.points" [latitude]="coord[1]"
                                             [longitude]="coord[0]">
@@ -117,17 +134,17 @@
                         </agm-polyline>
                     </div>
 
-                    <agm-marker *ngIf="selectedPosition && getUser()" [latitude]="selectedPosition.coord[1]"
-                                [longitude]="selectedPosition.coord[0]"
+                    <agm-marker *ngIf="selectedPosition && getUser()" [latitude]="selectedPosition[1]"
+                                [longitude]="selectedPosition[0]"
                                 [openInfoWindow]="true">
                         <agm-info-window isOpen="true" (infoWindowClose)="infoWindowClosed($event)">
                             <button type="button" class="btn btn-success"
-                                    (click)="showAddStoryModal(selectedPosition.coord[0], selectedPosition.coord[1])">
+                                    (click)="showAddStoryModal(selectedPosition[0], selectedPosition[1])">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Story hinzufügen
                             </button>
                             <br/>
                             <button type="button" class="btn btn-success"
-                                    (click)="showAddPoiModal(selectedPosition.coord[0], selectedPosition.coord[1])">
+                                    (click)="showAddPoiModal(selectedPosition[0], selectedPosition[1])">
                                 <i class="fa fa-plus" aria-hidden="true"></i> POI hinzufügen
                             </button>
                         </agm-info-window>
@@ -210,7 +227,7 @@
                                     </h4>
                                 </div>
                                 <div *ngIf="poi.media" class="col-xs-3 no-padding"><img class="img-responsive"
-                                                                      [src]="getMedia(poi.media[0].reference)">
+                                                                                        [src]="getMedia(poi.media[0].reference)">
                                 </div>
                             </div>
                         </div>
@@ -231,7 +248,7 @@
                                     </h4>
                                 </div>
                                 <div *ngIf="story.media" class="col-xs-3 no-padding"><img class="img-responsive"
-                                                                      [src]="getMedia(story.media[0].reference)">
+                                                                                          [src]="getMedia(story.media[0].reference)">
                                 </div>
                             </div>
                         </div>
@@ -276,7 +293,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button *ngIf="isSponsor()" class="btn btn-success" [routerLink]="['/home/sponsor-buy/'+track.id]">Kaufe einen Abschnitt!</button>
+                        <button *ngIf="isSponsor()" class="btn btn-success"
+                                [routerLink]="['/home/sponsor-buy/'+track.id]">Kaufe einen Abschnitt!
+                        </button>
                     </ng-template>
                 </ngb-tab>
             </ngb-tabset>
@@ -288,29 +307,7 @@
                 </div>
                 <div class="col-xs-12 bgColor">
                     <div class="col-md-3 col-sm-6 col-xs-12 row-eq-height">
-                        <div id="poiCarousel"class="carousel slide" data-ride="carousel">
-                            <!-- Indicators -->
-                            <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
-                                <li data-target="#myCarousel" data-slide-to="0"></li>
-                            </ol>-->
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div *ngFor="let media of selectedPoi.media; let i = index"
-                                     class="{{i==1 ? 'item active' : 'item'}}">
-                                    <img [src]="getMedia(media.reference)" [alt]="media.reference">
-                                </div>
-                            </div>
-
-                            <!-- Left and right controls -->
-                            <a class="left carousel-control" href="#poiCarousel" data-slide="prev">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#poiCarousel" data-slide="next">
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
+                        a
                     </div>
                     <div class="col-md-9 col-sm-6 row-eq-height">
                         <div class="info-frame-text">
@@ -362,13 +359,18 @@
                 </div>
                 <div class="vertical-align col-xs-12 bgColor">
                     <div class="col-xs-12 col-sm-4 col-lg-3">
-                        <img class="img-responsive" [src]="getMedia(getSponsor(selectedSponsorPart.sponsorId).imageLarge)" [alt]="getSponsor(selectedSponsorPart.sponsorId).name">
+                        <img class="img-responsive"
+                             [src]="getMedia(getSponsor(selectedSponsorPart.sponsorId).imageLarge)"
+                             [alt]="getSponsor(selectedSponsorPart.sponsorId).name">
                         {{getSponsor(selectedSponsorPart.sponsorId).description}}
                     </div>
                     <div class="col-xs-12 col-sm-4 col-lg-6">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                <span style="font-size: 2.5em"><i class="fa fa-money" aria-hidden="true"></i> {{selectedSponsorPart.price}} <i class="fa fa-eur" aria-hidden="true"></i></span>
+                            <div class="progress-bar progress-bar-success progress-bar-striped active"
+                                 role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                 style="width: 100%">
+                                <span style="font-size: 2.5em"><i class="fa fa-money" aria-hidden="true"></i> {{selectedSponsorPart.price}} <i
+                                        class="fa fa-eur" aria-hidden="true"></i></span>
                             </div>
                         </div>
                         <div id="sponsorComment">
@@ -378,7 +380,9 @@
                     </div>
                     <div class="col-xs-12 col-sm-4 col-lg-3">
                         <!--<img class="img-responsive" [src]="getMedia(getOrganisation(selectedSponsorPart.sponsoredId).imageLarge)">-->
-                        <img class="img-responsive" [src]="getMedia(getOrganisation(selectedSponsorPart.sponsoredId).imageLarge)" [alt]="getOrganisation(selectedSponsorPart.sponsoredId).name">
+                        <img class="img-responsive"
+                             [src]="getMedia(getOrganisation(selectedSponsorPart.sponsoredId).imageLarge)"
+                             [alt]="getOrganisation(selectedSponsorPart.sponsoredId).name">
                         {{getOrganisation(selectedSponsorPart.sponsoredId).description}}
                     </div>
                 </div>

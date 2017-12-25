@@ -13,6 +13,7 @@ import {SharedUserService} from '../../service/shared-user.service';
 import {AwsUser} from '../../Model/AwsUser';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
+import {Media} from '../../Model/Media';
 
 
 @Component({
@@ -62,7 +63,7 @@ export class TrackDetailsComponent implements OnInit {
     selectedPoi: Poi;
     selectedStory: Story;
     selectedSponsorPart: SponsorPart;
-    selectedPosition: LatLngImpl;
+    selectedPosition: number[];
     lat: number = 50.357968;
     lng: number = 7.569099;
 
@@ -70,6 +71,10 @@ export class TrackDetailsComponent implements OnInit {
     showAddPoi = false;
     newStory: Story = new Story();
     newPoi: Poi = new Poi();
+
+    public myInterval:number = 5000;
+    public noWrapSlides:boolean = false;
+    public slides:Array<any> = [];
 
     constructor(private route: ActivatedRoute, private trackService: TrackService, private sharedUserService: SharedUserService, private sanitizer: DomSanitizer) {
         console.log("TrackDetailsComponent: constructor");
@@ -87,7 +92,20 @@ export class TrackDetailsComponent implements OnInit {
 
 
         });
+        for (let i = 0; i < 4; i++) {
+            this.addSlide();
+        }
 
+
+    }
+
+    public addSlide():void {
+        let newWidth = 600 + this.slides.length + 1;
+        this.slides.push({
+            image: `//placekitten.com/${newWidth}/300`,
+            text: `${['More', 'Extra', 'Lots of', 'Surplus'][this.slides.length % 4]}
+      ${['Cats', 'Kittys', 'Felines', 'Cutes'][this.slides.length % 4]}`
+        });
     }
 
     isSponsor() {
@@ -300,13 +318,13 @@ export class TrackDetailsComponent implements OnInit {
     }
 
     polylineClicked($event: any) {
-        console.log("PolyLineClicked() Vertex:" + $event.vertex);
-        console.log("PolyLineClicked() path:" + $event.path);
-        console.log("PolyLineClicked() edge:" + $event.edge);
         console.log($event);
         console.log($event.latLng.lat());
         console.log($event.latLng.lng());
-        this.selectedPosition = new LatLngImpl($event.latLng.lng(), $event.latLng.lat());
+        //this.selectedPosition = new LatLngImpl($event.latLng.lng(), $event.latLng.lat());
+        this.selectedPosition = [$event.latLng.lng(), $event.latLng.lat()];
+        console.log(this.selectedPosition);
+
     }
 
     infoWindowClosed($event) {
@@ -314,20 +332,46 @@ export class TrackDetailsComponent implements OnInit {
     }
 
     getMedia(reference: String) {
+        console.log("getmedia:" + this.MEDIA_REF + '?id=' + reference);
         return this.sanitize(this.MEDIA_REF + '?id=' + reference)
     }
 
 
 
-
-    fileUpload(event: any) {
+    addMedia2NewStory(event: any) {
         let fileList: FileList = event.target.files;
         if (fileList.length > 0) {
             console.log("fileUpload: " + fileList[0].name);
             this.trackService.uploadMedia(fileList[0]).subscribe(result => {
                 console.log(result);
+                let media = new Media();
+                media.reference = result.id;
+                media.typ = result.type;
+
+                if (!this.newStory.media) {
+                    this.newStory.media = [];
+                }
+                this.newStory.media.push(media);
+                console.log(this.newStory);
+
             });
         }
+
+    }
+
+
+    fileUpload(event: any): String {
+        let fileList: FileList = event.target.files;
+        if (fileList.length > 0) {
+            console.log("fileUpload: " + fileList[0].name);
+            this.trackService.uploadMedia(fileList[0]).subscribe(result => {
+                console.log(result);
+                return result.id;
+            });
+        } else {
+            return "";
+        }
+
     }
 
 
