@@ -359,6 +359,27 @@ export class TrackDetailsComponent implements OnInit {
 
     }
 
+    addMedia2NewPoi(event: any) {
+        let fileList: FileList = event.target.files;
+        if (fileList.length > 0) {
+            console.log("fileUpload: " + fileList[0].name);
+            this.trackService.uploadMedia(fileList[0]).subscribe(result => {
+                console.log(result);
+                let media = new Media();
+                media.reference = result.id;
+                media.typ = result.type;
+
+                if (!this.newPoi.media) {
+                    this.newPoi.media = [];
+                }
+                this.newPoi.media.push(media);
+                console.log(this.newPoi);
+
+            });
+        }
+
+    }
+
 
     fileUpload(event: any): String {
         let fileList: FileList = event.target.files;

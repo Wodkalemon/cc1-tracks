@@ -10,8 +10,8 @@ export class SponsorPart {
     id:number;
     sponsorId: number;
     sponsoredId: number;
-    startPoint: LatLngImpl;
-    endPoint: LatLngImpl;
+    startPoint: number[];
+    endPoint: number[];
     points: LatLngImpl[];
     distance: number;
     price: number;

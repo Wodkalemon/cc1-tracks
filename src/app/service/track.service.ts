@@ -24,6 +24,7 @@ export class TrackService {
     addPoiUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/add-poi"
     uploadMediaUrl = "http://backend-env.fbhen6p3um.us-west-2.elasticbeanstalk.com/api/media"
     checkSponsoringUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/check-sponsoring"
+    addSponsorPartUrl = "https://l2vba9toe9.execute-api.us-west-2.amazonaws.com/api/add-sponsor-part"
 
     constructor(private http: HttpClient) {
     }
@@ -81,14 +82,13 @@ export class TrackService {
     }
 
 
-
     checkSponsorPart(part: SponsorPart, track: Track): Observable<SponsorPart> {
         const url = this.checkSponsoringUrl +
             '?id=' + track.id +
-            ';x1=' + part.startPoint.coord[1] +
-            ';y1=' + part.startPoint.coord[0] +
-            ';x2=' + part.endPoint.coord[1] +
-            ';y2=' + part.endPoint.coord[0];
+            ';x1=' + part.startPoint[1] +
+            ';y1=' + part.startPoint[0] +
+            ';x2=' + part.endPoint[1] +
+            ';y2=' + part.endPoint[0];
 
         return this.http.get<SponsorPart>(url).pipe(
             tap(_ => console.log(`fetched sponorPart`))
@@ -100,10 +100,10 @@ export class TrackService {
         console.log("addStory-url: " + url);
 
         let headerJson = {
-            'Content-Type':'application/json',
-            'Accept':'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         }
-        let headers = new HttpHeaders(headerJson );
+        let headers = new HttpHeaders(headerJson);
 
         let body = JSON.stringify(story, null, 2);
         console.log("addStory-body: " + body)
@@ -123,10 +123,10 @@ export class TrackService {
 
 
         let headerJson = {
-            'Content-Type':'application/json',
-            'Accept':'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         }
-        let headers = new HttpHeaders(headerJson );
+        let headers = new HttpHeaders(headerJson);
 
         let body = JSON.stringify(poi, null, 2);
         console.log("addPoi-body: " + body);
@@ -139,6 +139,58 @@ export class TrackService {
 
     }
 
+    addSponsorPart(sponsorPart: SponsorPart, track: Track): Observable<any> {
+        const url = `${this.addSponsorPartUrl}?id=${track.id}`;
+        console.log("addSponsorPart-url: " + url);
+
+        let headerJson = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+        let headers = new HttpHeaders(headerJson);
+
+        let body = JSON.stringify(sponsorPart, null, 2);
+        /*let body = "{\n" +
+            "  \"sponsorId\": \"1004\",\n" +
+            "  \"startPoint\": [\n" +
+            "    50.3207028,\n" +
+            "    7.6320871\n" +
+            "  ],\n" +
+            "  \"endPoint\": [\n" +
+            "    50.3217659,\n" +
+            "    7.63287898\n" +
+            "  ],\n" +
+            "  \"price\": 15.82024512912707,\n" +
+            "  \"distance\": 0.1582024512912707,\n" +
+            "  \"sponsoredId\": \"2003\",\n" +
+            "  \"comment\": \"lalalala\"\n" +
+            "}"*/
+
+        /*let body = "{\n" +
+            "  \"startPoint\": [\n" +
+            "    50.3205486,\n" +
+            "    7.63187366\n" +
+            "  ],\n" +
+            "  \"endPoint\": [\n" +
+            "    50.3196387,\n" +
+            "    7.63181506\n" +
+            "  ],\n" +
+            "  \"price\": \"165.90512329633268\",\n" +
+            "  \"distance\": \"1.6590512329633267\",\n" +
+            "  \"sponsoredId\": \"2002\",\n" +
+            "  \"sponsorId\": \"1002\",\n" +
+            "  \"comment\": \"aaaaa\"\n" +
+            "}"*/
+        console.log("addSponsorPart-body: " + body);
+
+
+        return this.http.post(url, body, {
+            headers: headers
+        }).pipe(
+            tap(_ => console.log(`posted addSponosrPart`))
+        );
+
+    }
 
     uploadMedia(file: File): Observable<any> {
         let url = `${this.uploadMediaUrl}`;
@@ -148,9 +200,9 @@ export class TrackService {
 
         let headerJson = {
             //'Content-Type':'multipart/form-data',
-            'Accept':'application/json'
+            'Accept': 'application/json'
         }
-        let headers = new HttpHeaders(headerJson );
+        let headers = new HttpHeaders(headerJson);
 
         return this.http.post(url, formData, {
             headers: headers

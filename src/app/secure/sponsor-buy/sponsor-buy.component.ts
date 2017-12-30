@@ -103,8 +103,8 @@ export class SponsorBuyComponent implements OnInit {
 
     checkSponsorPart() {
 
-        this.newSponsorPart.startPoint = this.getClosestTrackPoint(this.newSponsorPart.startPoint.coord[1], this.newSponsorPart.startPoint.coord[0]);
-        this.newSponsorPart.endPoint = this.getClosestTrackPoint(this.newSponsorPart.endPoint.coord[1], this.newSponsorPart.endPoint.coord[0]);
+        this.newSponsorPart.startPoint = this.getClosestTrackPoint(this.newSponsorPart.startPoint[1], this.newSponsorPart.startPoint[0]);
+        this.newSponsorPart.endPoint = this.getClosestTrackPoint(this.newSponsorPart.endPoint[1], this.newSponsorPart.endPoint[0]);
 
         this.trackService.checkSponsorPart(this.newSponsorPart, this.track)
             .subscribe(Result => {
@@ -114,7 +114,7 @@ export class SponsorBuyComponent implements OnInit {
             });
     }
 
-    getClosestTrackPoint(lat: number, lng: number) :LatLngImpl {
+    getClosestTrackPoint(lat: number, lng: number) :number[] {
         let distance: number;
         let shortestDistance: number = 100000000;
         let closestPoint;
@@ -127,12 +127,18 @@ export class SponsorBuyComponent implements OnInit {
             }
         }
         console.log("ClosestDistance: " +this.haversineService.getDistanceInMeters({latitude: lat, longitude: lng},{latitude: closestPoint[0], longitude: closestPoint[1]}));
-        return new LatLngImpl(closestPoint[1], closestPoint[0]);
+        return [closestPoint[1], closestPoint[0]];
     }
 
     addSponsorPart() {
+        this.trackService.addSponsorPart(this.newSponsorPart, this.track).subscribe(result => {
+            console.log(result);
 
+
+        });
     }
+
+
     isBuyable() {
         if (this.newSponsorPart.price &&
             this.newSponsorPart.distance &&
@@ -145,16 +151,16 @@ export class SponsorBuyComponent implements OnInit {
     }
 
 
-    setEndpoint(lat: number, lng: number) {
-        this.newSponsorPart.endPoint = new LatLngImpl(lat, lng);
+    setEndpoint(lng: number, lat: number) {
+        this.newSponsorPart.endPoint = [lng, lat];
         console.log(this.newSponsorPart);
         if (this.newSponsorPart.startPoint) {
             this.checkSponsorPart();
         }
     }
 
-    setStartpoint(lat: number, lng: number) {
-        this.newSponsorPart.startPoint = new LatLngImpl(lat, lng);
+    setStartpoint(lng: number, lat: number) {
+        this.newSponsorPart.startPoint = [lng, lat];
         console.log(this.newSponsorPart);
         if (this.newSponsorPart.endPoint) {
             this.checkSponsorPart();

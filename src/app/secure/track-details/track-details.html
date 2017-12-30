@@ -47,32 +47,24 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <div *ngIf="newPoi.media" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
-                        <li data-target="#myCarousel" data-slide-to="0"></li>
-                    </ol>-->
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <div *ngFor="let media of newPoi.media; let i = index"
-                             class="{{i==1 ? 'item active' : 'item'}}">
-                            <img [src]="getMedia(media.reference)" [alt]="media.reference">
-                        </div>
-                    </div>
+                <div *ngIf="newPoi.media">
+                    <div class="col-md">
+                        <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
+                            <slide *ngFor="let media of newPoi.media; let index=index"
+                                   [active]="media.active">
+                                <img [src]="getMedia(media.reference)" style="margin:auto;height: 300px">
 
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                        <span class="sr-only">Next</span>
-                    </a>
+                                <div class="carousel-caption">
+                                    <h4>Slide {{index}}</h4>
+
+                                </div>
+                            </slide>
+                        </carousel>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="upload">Medien hinzufügen:</label>
-                    <input type="file" (change)="fileUpload($event)" placeholder="Upload file" id="upload">
+                    <input type="file" (change)="addMedia2NewPoi($event)" placeholder="Upload file" id="uploadPoi">
                 </div>
             </div>
             <div class="col-md-9">
@@ -307,7 +299,29 @@
                 </div>
                 <div class="col-xs-12 bgColor">
                     <div class="col-md-3 col-sm-6 col-xs-12 row-eq-height">
-                        a
+                        <div id="poiCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <!--<ol class="carousel-indicators" *ngFor="let media of selectedElement.media; let k = index">
+                                <li data-target="#myCarousel" data-slide-to="0"></li>
+                            </ol>-->
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div *ngFor="let media of selectedPoi.media; let i = index"
+                                     class="{{i==1 ? 'item active' : 'item'}}">
+                                    <img [src]="getMedia(media.reference)" [alt]="media.reference">
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#poiCarousel" data-slide="prev">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#poiCarousel" data-slide="next">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
                     <div class="col-md-9 col-sm-6 row-eq-height">
                         <div class="info-frame-text">
