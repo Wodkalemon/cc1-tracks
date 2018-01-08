@@ -1,1 +1,42 @@
 @import "../../colors";
+
+.navbar-custom {
+  background-color: $color-backgrounds;
+  color:$color-text;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.navbar-custom .navbar-nav > li > a {
+  color:$color-text;
+}
+
+.navbar-custom .navbar-nav > .active > a {
+  color: $color-accent;
+  background-color:transparent;
+}
+
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus,
+.navbar-custom .navbar-nav > .open >a {
+  color:$color-darkAccent;
+  background-color:transparent;
+  text-decoration: none;
+}
+
+.navbar-custom .navbar-brand {
+  color:$color-text;
+}
+.navbar-custom .navbar-toggle.collapsed {
+  background-color:$color-inactiveAccent;
+}
+
+.navbar-custom .navbar-toggle {
+  background-color:$color-darkAccent;
+}
+
+.navbar-custom .icon-bar {
+  background-color:$color-backgrounds;
+}
