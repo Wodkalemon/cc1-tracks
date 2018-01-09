@@ -1,0 +1,33 @@
+@import "../../../colors.scss";
+
+#topRoutes {
+  background-color: rgba(231, 231, 231, 0.95);
+  border-radius: 1em;
+}
+
+#routes-heading {
+  padding-top: 0.7em;
+  padding-bottom: 0.2em;
+  font-weight: bold;
+}
+
+.thead {
+  color: $color-backgrounds;
+  background-color: $color-accent !important;
+}
+
+ngb-rating {
+  outline: 0;
+}
+
+.star {
+  color: $color-inactiveAccent;
+}
+
+.filled {
+  color: $color-accent;
+}
+
+table {
+  text-align: left;
+}

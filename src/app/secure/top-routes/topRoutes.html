@@ -1,40 +1,43 @@
-<h1 class="page-header">Top Routen</h1>
+<div id="topRoutes" class="container-fluid col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <h2 id="routes-heading">Top Routen</h2>
 
-<table class="table table-hover table-striped">
-    <tr>
-        <th> Name</th>
-        <th> Startland</th>
-        <th> Zielland </th>
-        <th><i class="fa fa-clock-o fa-fw"></i> Dauer</th>
-        <th><i class="fa fa-road fa-fw"></i> Entfernung</th>
-        <th><i class="fa fa-signal fa-fw"></i> Schwierigkeit</th>
-        <th><i class="fa fa-star-o fa-fw"></i> Bewertung</th>
-    </tr>
-    <tr>
-        <td>Routerli</td>
-        <td>Deutschland</td>
-        <td>Schweiz</td>
-        <td>5 Tage</td>
-        <td>125km</td>
-        <td>Schwer</td>
-        <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
-    </tr>
-    <tr>
-        <td>Wasserfallroute</td>
-        <td>Norwegen</td>
-        <td>Norwegen</td>
-        <td>3 Tage</td>
-        <td>64km</td>
-        <td>Mittel</td>
-        <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
-    </tr>
-    <tr>
-        <td>Jakobsweg</td>
-        <td>Deutschland</td>
-        <td>Spanien</td>
-        <td>25 Tage</td>
-        <td>1400km</td>
-        <td>Experte</td>
-        <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
-    </tr>
-</table>
+    <div class="table-responsive col-xs-12">
+        <table class="table table-striped">
+            <tr class="thead">
+                <th> Name</th>
+                <th> Startland</th>
+                <th> Zielland</th>
+                <th><i class="fa fa-clock-o fa-fw"></i> Dauer</th>
+                <th><i class="fa fa-road fa-fw"></i> Entfernung</th>
+                <th><i class="fa fa-signal fa-fw"></i> Schwierigkeit</th>
+                <th><i class="fa fa-star-o fa-fw"></i> Bewertung</th>
+            </tr>
+            <tr>
+                <td>Routerli</td>
+                <td>Deutschland</td>
+                <td>Schweiz</td>
+                <td>5 Tage</td>
+                <td>125km</td>
+                <td>Schwer</td>
+                <td><ngb-rating [(rate)]="ratingOne" max="5" [readonly]="true">
+                    <ng-template let-fill="fill">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                    </ng-template>
+                </ngb-rating></td>
+            </tr>
+            <tr>
+                <td>Wasserfallroute</td>
+                <td>Norwegen</td>
+                <td>Norwegen</td>
+                <td>3 Tage</td>
+                <td>64km</td>
+                <td>Mittel</td>
+                <td><ngb-rating [(rate)]="ratingTwo" max="5" [readonly]="true">
+                    <ng-template let-fill="fill">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                    </ng-template>
+                </ngb-rating></td>
+            </tr>
+        </table>
+    </div>
+</div>
