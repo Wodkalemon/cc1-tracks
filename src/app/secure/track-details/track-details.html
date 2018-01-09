@@ -26,20 +26,20 @@
             </div>
             <div class="col-md-9">
                 <div class="form-group">
-                    <label for="title">Titel:</label>
-                    <input type="text" class="form-control" id="title" [(ngModel)]="newStory.title">
+                    <label for="storyTitle">Titel:</label>
+                    <input type="text" class="form-control" id="storyTitle" [(ngModel)]="newStory.title">
                 </div>
                 <div class="form-group">
-                    <label for="text">Text:</label>
-                    <textarea class="form-control" rows="5" id="text" [(ngModel)]="newStory.text"></textarea>
+                    <label for="storyText">Text:</label>
+                    <textarea class="form-control" rows="5" id="storyText" [(ngModel)]="newStory.text"></textarea>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <button class="btn btn-warning" (click)="showAddStory = !showAddStory">Abbrechen</button>
-    <button class="btn btn-success" (click)="addStory()">Speichern</button>
+    <button class="btn btn-cancel" (click)="showAddStory = !showAddStory">Abbrechen</button>
+    <button class="btn btn-add" (click)="addStory()">Speichern</button>
 </app-dialog>
 
 <app-dialog [(visible)]="showAddPoi">
@@ -69,20 +69,20 @@
             </div>
             <div class="col-md-9">
                 <div class="form-group">
-                    <label for="title">Titel:</label>
-                    <input type="text" class="form-control" id="title" [(ngModel)]="newPoi.name">
+                    <label for="poiTitle">Titel:</label>
+                    <input type="text" class="form-control" id="poiTitle" [(ngModel)]="newPoi.name">
                 </div>
                 <div class="form-group">
-                    <label for="text">Text:</label>
-                    <textarea class="form-control" rows="5" id="text" [(ngModel)]="newPoi.description"></textarea>
+                    <label for="poiText">Text:</label>
+                    <textarea class="form-control" rows="5" id="poiText" [(ngModel)]="newPoi.description"></textarea>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <button class="btn btn-warning" (click)="showAddPoi = !showAddPoi">Abbrechen</button>
-    <button class="btn btn-success" (click)="addPoi()">Speichern</button>
+    <button class="btn btn-cancel" (click)="showAddPoi = !showAddPoi">Abbrechen</button>
+    <button class="btn btn-add" (click)="addPoi()">Speichern</button>
 </app-dialog>
 
 <div id="details-page" class="container-fluid col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
@@ -130,12 +130,12 @@
                                 [longitude]="selectedPosition[0]"
                                 [openInfoWindow]="true">
                         <agm-info-window isOpen="true" (infoWindowClose)="infoWindowClosed($event)">
-                            <button type="button" class="btn btn-success"
+                            <button type="button" class="btn btn-add"
                                     (click)="showAddStoryModal(selectedPosition[0], selectedPosition[1])">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Story hinzufügen
                             </button>
                             <br/>
-                            <button type="button" class="btn btn-success"
+                            <button type="button" class="btn btn-add"
                                     (click)="showAddPoiModal(selectedPosition[0], selectedPosition[1])">
                                 <i class="fa fa-plus" aria-hidden="true"></i> POI hinzufügen
                             </button>

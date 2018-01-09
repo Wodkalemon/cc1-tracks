@@ -41,6 +41,10 @@ agm-map {
     align-items: center;
 }
 
+.form-group {
+    text-align: left;
+}
+
 .no-padding {
     padding-left: 0 !important;
     padding-right: 5px !important;
@@ -92,4 +96,98 @@ agm-map {
 
 .progress {
     height: 2.5em !important;
+}
+
+//Button Styling
+
+.btn-add {
+    color: $color-backgrounds;
+    background-color: $color-text;
+    border-color: $color-darkAccent;
+}
+
+.btn-add:hover,
+.btn-add:focus,
+.btn-add:active,
+.btn-add.active,
+.open .dropdown-toggle.btn-add {
+    color: $color-backgrounds;
+    background-color: $color-accent;
+    border-color: $color-darkAccent;
+}
+
+.btn-add:active,
+.btn-add.active,
+.open .dropdown-toggle.btn-add {
+    background-image: none;
+}
+
+.btn-add.disabled,
+.btn-add[disabled],
+fieldset[disabled] .btn-add,
+.btn-add.disabled:hover,
+.btn-add[disabled]:hover,
+fieldset[disabled] .btn-add:hover,
+.btn-add.disabled:focus,
+.btn-add[disabled]:focus,
+fieldset[disabled] .btn-add:focus,
+.btn-add.disabled:active,
+.btn-add[disabled]:active,
+fieldset[disabled] .btn-add:active,
+.btn-add.disabled.active,
+.btn-add[disabled].active,
+fieldset[disabled] .btn-add.active {
+    background-color: $color-text;
+    border-color: $color-darkAccent;
+}
+
+.btn-add .badge {
+    color: $color-text;
+    background-color: $color-backgrounds;
+}
+
+.btn-cancel {
+    color: $color-backgrounds;
+    background-color: $color-inactiveAccent;
+    border-color: $color-backgrounds;
+}
+
+.btn-cancel:hover,
+.btn-cancel:focus,
+.btn-cancel:active,
+.btn-cancel.active,
+.open .dropdown-toggle.btn-cancel {
+    color: $color-backgrounds;
+    background-color: $color-accent;
+    border-color: $color-backgrounds;
+}
+
+.btn-cancel:active,
+.btn-cancel.active,
+.open .dropdown-toggle.btn-cancel {
+    background-image: none;
+}
+
+.btn-cancel.disabled,
+.btn-cancel[disabled],
+fieldset[disabled] .btn-cancel,
+.btn-cancel.disabled:hover,
+.btn-cancel[disabled]:hover,
+fieldset[disabled] .btn-cancel:hover,
+.btn-cancel.disabled:focus,
+.btn-cancel[disabled]:focus,
+fieldset[disabled] .btn-cancel:focus,
+.btn-cancel.disabled:active,
+.btn-cancel[disabled]:active,
+fieldset[disabled] .btn-cancel:active,
+.btn-cancel.disabled.active,
+.btn-cancel[disabled].active,
+fieldset[disabled] .btn-cancel.active {
+    background-color: $color-inactiveAccent;
+    border-color: $color-backgrounds;
+}
+
+.btn-cancel .badge {
+    color: $color-inactiveAccent;
+    background-color: $color-backgrounds;
 }
