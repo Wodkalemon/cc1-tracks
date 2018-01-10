@@ -24,3 +24,9 @@
     background: #b0c4de;
     color: #f9f9f9;
 }
+
+.gm-style div {
+    color: #fff !important;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
