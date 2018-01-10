@@ -45,12 +45,12 @@
                                     [longitude]="selectedPosition.coord[0]"
                                     [openInfoWindow]="true">
                             <agm-info-window isOpen="true" (infoWindowClose)="infoWindowClosed($event)">
-                                <button type="button" class="btn btn-success"
+                                <button type="button" class="btn btn-add"
                                         (click)="setStartpoint(selectedPosition.coord[1], selectedPosition.coord[0])">
                                     <i class="fa fa-plus" aria-hidden="true"></i> Als Start setzen
                                 </button>
                                 <br/>
-                                <button type="button" class="btn btn-success"
+                                <button type="button" class="btn btn-add"
                                         (click)="setEndpoint(selectedPosition.coord[1], selectedPosition.coord[0])">
                                     <i class="fa fa-plus" aria-hidden="true"></i> Als Ende setzen
                                 </button>
