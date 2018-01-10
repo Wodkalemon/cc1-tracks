@@ -205,7 +205,7 @@ export class TrackDetailsComponent implements OnInit {
 
     }
 
-    getSponsorColor(id: number): String {
+    getSponsorColor(id: String): String {
         for (let sponsor of this.sponsors) {
             if (sponsor.id == id) {
                 //console.log("Farbe: " + sponsor.trackColor);
@@ -214,7 +214,7 @@ export class TrackDetailsComponent implements OnInit {
         }
     }
 
-    getSponsor(id: number): Sponsor {
+    getSponsor(id: String): Sponsor {
         for (let sponsor of this.sponsors) {
             if (sponsor.id == id) {
                 return sponsor;

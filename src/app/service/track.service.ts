@@ -85,10 +85,10 @@ export class TrackService {
     checkSponsorPart(part: SponsorPart, track: Track): Observable<SponsorPart> {
         const url = this.checkSponsoringUrl +
             '?id=' + track.id +
-            ';x1=' + part.startPoint[1] +
-            ';y1=' + part.startPoint[0] +
-            ';x2=' + part.endPoint[1] +
-            ';y2=' + part.endPoint[0];
+            ';x1=' + part.startPoint[0] +
+            ';y1=' + part.startPoint[1] +
+            ';x2=' + part.endPoint[0] +
+            ';y2=' + part.endPoint[1];
 
         return this.http.get<SponsorPart>(url).pipe(
             tap(_ => console.log(`fetched sponorPart`))

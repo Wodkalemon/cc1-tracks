@@ -8,7 +8,7 @@ import {Rating} from './Rating';
 export class SponsorPart {
 
     id:number;
-    sponsorId: number;
+    sponsorId: String;
     sponsoredId: number;
     startPoint: number[];
     endPoint: number[];

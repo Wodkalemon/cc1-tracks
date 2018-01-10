@@ -8,7 +8,7 @@ import {SponsorPart} from './SponsorPart';
 
 export class Sponsor {
 
-    id:number;
+    id: String;
     name: String;
     trackColor: String;
     imageSmall: String;

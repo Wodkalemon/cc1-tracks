@@ -41,8 +41,8 @@
                             </agm-polyline>
                         </div>
 
-                        <agm-marker *ngIf="selectedPosition && getUser()" [latitude]="selectedPosition.coord[1]"
-                                    [longitude]="selectedPosition.coord[0]"
+                        <agm-marker *ngIf="selectedPosition && getUser()" [latitude]="selectedPosition.coord[0]"
+                                    [longitude]="selectedPosition.coord[1]"
                                     [openInfoWindow]="true">
                             <agm-info-window isOpen="true" (infoWindowClose)="infoWindowClosed($event)">
                                 <button type="button" class="btn btn-add"

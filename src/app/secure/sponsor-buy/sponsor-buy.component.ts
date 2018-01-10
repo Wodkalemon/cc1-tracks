@@ -103,8 +103,8 @@ export class SponsorBuyComponent implements OnInit {
 
     checkSponsorPart() {
 
-        this.newSponsorPart.startPoint = this.getClosestTrackPoint(this.newSponsorPart.startPoint[1], this.newSponsorPart.startPoint[0]);
-        this.newSponsorPart.endPoint = this.getClosestTrackPoint(this.newSponsorPart.endPoint[1], this.newSponsorPart.endPoint[0]);
+        this.newSponsorPart.startPoint = this.getClosestTrackPoint(this.newSponsorPart.startPoint[0], this.newSponsorPart.startPoint[1]);
+        this.newSponsorPart.endPoint = this.getClosestTrackPoint(this.newSponsorPart.endPoint[0], this.newSponsorPart.endPoint[1]);
 
         this.trackService.checkSponsorPart(this.newSponsorPart, this.track)
             .subscribe(Result => {
@@ -112,6 +112,9 @@ export class SponsorBuyComponent implements OnInit {
                 this.newSponsorPart.price = Result.price;
                 this.newSponsorPart.distance = Result.distance;
             });
+        //this.getSponsorByName(this.getUser() ? this.getUser().nickname:'');
+        this.newSponsorPart.sponsorId = this.getUser().nickname;
+
     }
 
     getClosestTrackPoint(lat: number, lng: number) :number[] {
@@ -127,7 +130,7 @@ export class SponsorBuyComponent implements OnInit {
             }
         }
         console.log("ClosestDistance: " +this.haversineService.getDistanceInMeters({latitude: lat, longitude: lng},{latitude: closestPoint[0], longitude: closestPoint[1]}));
-        return [closestPoint[1], closestPoint[0]];
+        return [closestPoint[0], closestPoint[1]];
     }
 
     addSponsorPart() {
@@ -236,6 +239,7 @@ export class SponsorBuyComponent implements OnInit {
     }
 
     getSponsorByName(name: String) {
+    console.log("Sponsor-nickname: " + name);
 
         this.trackService.getSponsors([])
             .subscribe(sponsors => {
@@ -243,7 +247,7 @@ export class SponsorBuyComponent implements OnInit {
                 for (let sponsor of sponsors) {
                     if (sponsor.name == name) {
                         this.sponsor = sponsor;
-                        this.newSponsorPart.sponsorId = this.sponsor.id;
+                        this.newSponsorPart.sponsorId = name;
                     }
 
                 }
@@ -263,7 +267,7 @@ export class SponsorBuyComponent implements OnInit {
 
     }
 
-    getSponsorColor(id: number): String {
+    getSponsorColor(id: String): String {
         for (let sponsor of this.sponsors) {
             if (sponsor.id == id) {
                 //console.log("Farbe: " + sponsor.trackColor);
@@ -272,7 +276,7 @@ export class SponsorBuyComponent implements OnInit {
         }
     }
 
-    getSponsor(id: number): Sponsor {
+    getSponsor(id: String): Sponsor {
         for (let sponsor of this.sponsors) {
             if (sponsor.id == id) {
                 return sponsor;
@@ -355,7 +359,7 @@ export class SponsorBuyComponent implements OnInit {
         console.log($event);
         console.log($event.latLng.lat());
         console.log($event.latLng.lng());
-        this.selectedPosition = new LatLngImpl($event.latLng.lng(), $event.latLng.lat());
+        this.selectedPosition = new LatLngImpl($event.latLng.lat(), $event.latLng.lng());
     }
 
     infoWindowClosed($event) {
