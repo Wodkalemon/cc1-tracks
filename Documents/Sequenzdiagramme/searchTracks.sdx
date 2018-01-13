@@ -1,0 +1,13 @@
+user:User[a]
+site:Browser[a]
+node:NodeJS[a]
+cog:Cognito[a]
+rest:Django[a]
+
+user:zeige Startseite=site.lade hike-with-benefits.com
+site:track-search=node.get hike-with-benefits.com
+
+
+user:zeige Suchergebnisse=site.wähle Suchfilter und klicke "Suchen"
+site:routes=rest.get /routes?<suchparameter>
+

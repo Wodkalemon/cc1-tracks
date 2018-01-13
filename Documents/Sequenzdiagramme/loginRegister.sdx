@@ -1,0 +1,19 @@
+user:User[a]
+site:Browser[a]
+node:NodeJS[a]
+cog:Cognito[a]
+rest:REST-API[a]
+
+
+user:zeige Registrierungsseite=site.wähle Registrierung aus
+site:register=node.get hike-with-benefits.com/home/register
+user:bestätige Registrierung=site.register\(Email, PW, Gruppe\)
+site:awsUser=cog.register(Credentials)
+[c:alt User is Sponsor]
+site:success=rest.post /add-sponsor
+[/c]
+
+user:zeige Login-Seite=site.wähle Login aus
+site:login=node.get hike-with-benefits.com/home/login
+user:bestätige Login=site.login\(Email, PW\)
+site:awsUser=cog.authenticateUser(Credentials)

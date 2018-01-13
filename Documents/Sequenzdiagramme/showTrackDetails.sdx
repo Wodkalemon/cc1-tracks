@@ -1,0 +1,33 @@
+user:User[a]
+site:Browser[a]
+node:NodeJS[a]
+cog:Cognito[a]
+rest:REST-API[a]
+
+user:zeige Route=site.wähle Route aus
+site:track-details=node.get hike-with-benefits.com/home/track-details/<routeId>
+site:route-details=rest.get route-detail?id=<routeId>
+[c:loop for each POI/Story]
+site:image=rest.get /media?id\=<media[0].id>
+[/c]
+site:sponsors=rest.get /sponsors
+site:organisations=rest.get /organisation
+[c:loop for each Sponsor/Organisation]
+site:image=rest.get /media?id\=<logo.id>
+[/c]
+
+
+user:zeige POI/Story=site.wähle POI/Story
+[c:loop for each media of POI/Story]
+site:image=rest.get /media?id\=<media.id>
+[/c]
+
+[c:alt User isLoggedIn]
+user:bestätige Upload=site.Füge POI/Story hinzu
+[c:loop for each new image]
+site:imageId=rest.post /media (Body=mediafile)
+[/c]
+site:success=rest.post /add-poi?id\=<routeId>
+[/c]
+
+

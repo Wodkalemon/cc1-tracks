@@ -1,0 +1,20 @@
+user:User[a]
+site:Browser[a]
+node:NodeJS[a]
+cog:Cognito[a]
+rest:REST-API[a]
+
+user:zeige Route=site.zeige Sponsoren-Seite
+site:track-details=node.get hike-with-benefits.com/home/sponsor-buy/<routeId>
+site:route-details=rest.get route-detail?id=<routeId>
+site:sponsors=rest.get /sponsors
+site:organisations=rest.get /organisation
+[c:loop for each Sponsor/Organisation]
+site:image=rest.get /media?id\=<logo.id>
+[/c]
+
+user:zeige Routenabschnitt=site.wähle Start-/Endpunkt
+site:Entfernung/Preis=rest.get /check-sponsoring?startpunkt=<Startpunkt>;endpunkt=<Endpunkt>
+
+user:bestätige Kauf=site.kaufe Routenbschnitt
+site:success=rest.post /add-sponsor-part (Body=Sponsorabschnitt)
