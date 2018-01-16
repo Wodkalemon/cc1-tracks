@@ -3,7 +3,7 @@
 agm-map {
     height: 450px;
 }
-#sponsor-heading {
+#details-heading {
     padding-top: 0.7em;
     padding-bottom: 0.2em;
     font-weight: bold;
@@ -11,7 +11,6 @@ agm-map {
 
 #details-page {
     background-color: rgba(231, 231, 231, 0.95);
-    margin: 1em;
     border-radius: 1em;
 }
 
@@ -23,7 +22,7 @@ agm-map {
     margin: 0 !important;
 }
 
-.sidebar-list-item .number, #info-frame .number {
+.sidebar-list-item .number, .info-frame .number {
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -40,6 +39,10 @@ agm-map {
 .vertical-align {
     display: flex;
     align-items: center;
+}
+
+.form-group {
+    text-align: left;
 }
 
 .no-padding {
@@ -60,6 +63,39 @@ agm-map {
 
 .filled {
     color: $color-accent;
+}
+
+.info-frame-text {
+    background: $color-backgrounds;
+    text-align: justify;
+    padding: 1em;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 1em;
+}
+
+.info-frame h2 {
+    background: $color-accent;
+    margin-bottom: 0;
+    color: $color-backgrounds;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-wrap: wrap;
+}
+
+.bgColor {
+    background: $color-backgrounds;
+    background-clip: content-box;
+}
+
+.progress {
+    height: 2.5em !important;
 }
 
 //Button Styling
@@ -110,3 +146,48 @@ fieldset[disabled] .btn-add.active {
     background-color: $color-backgrounds;
 }
 
+.btn-cancel {
+    color: $color-backgrounds;
+    background-color: $color-inactiveAccent;
+    border-color: $color-backgrounds;
+}
+
+.btn-cancel:hover,
+.btn-cancel:focus,
+.btn-cancel:active,
+.btn-cancel.active,
+.open .dropdown-toggle.btn-cancel {
+    color: $color-backgrounds;
+    background-color: $color-accent;
+    border-color: $color-backgrounds;
+}
+
+.btn-cancel:active,
+.btn-cancel.active,
+.open .dropdown-toggle.btn-cancel {
+    background-image: none;
+}
+
+.btn-cancel.disabled,
+.btn-cancel[disabled],
+fieldset[disabled] .btn-cancel,
+.btn-cancel.disabled:hover,
+.btn-cancel[disabled]:hover,
+fieldset[disabled] .btn-cancel:hover,
+.btn-cancel.disabled:focus,
+.btn-cancel[disabled]:focus,
+fieldset[disabled] .btn-cancel:focus,
+.btn-cancel.disabled:active,
+.btn-cancel[disabled]:active,
+fieldset[disabled] .btn-cancel:active,
+.btn-cancel.disabled.active,
+.btn-cancel[disabled].active,
+fieldset[disabled] .btn-cancel.active {
+    background-color: $color-inactiveAccent;
+    border-color: $color-backgrounds;
+}
+
+.btn-cancel .badge {
+    color: $color-inactiveAccent;
+    background-color: $color-backgrounds;
+}
