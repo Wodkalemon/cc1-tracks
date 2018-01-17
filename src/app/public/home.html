@@ -49,6 +49,12 @@
                 <li>
                     <a [routerLink]="['/home/top-routes']"><i class="fa fa-trophy fa-fw"></i> Top Routen</a>
                 </li>
+                <li>
+                    <a (click)="refreshClicked()"> <i class="fa fa-refresh fa-fw"></i> Neu laden</a>
+                </li>
+                <li>
+                    <a (click)="backClicked()"><i class="fa fa-reply fa-fw"></i> Zurück</a>
+                </li>
                 <!--<li>
                     <a [routerLink]="['/home/track-details']"><i class="fa fa-table fa-fw"></i> Track Details</a>
                 </li>
@@ -65,8 +71,6 @@
                     <a [routerLink]="['/securehome/useractivity']"><i class="fa fa-table fa-fw"></i> Login Data</a>
                 </li>-->
             </ul>
-            <button class="btn btn-warning"  (click)="backClicked()">Zurück</button>
-            <button class="btn btn-warning"  (click)="refreshClicked()">Refresh</button>
             <ul *ngIf="user" class="nav navbar-nav navbar-right">
                             <!-- /.dropdown -->
                 <li class="dropdown">
