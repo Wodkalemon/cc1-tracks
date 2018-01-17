@@ -65,7 +65,8 @@
                     <a [routerLink]="['/securehome/useractivity']"><i class="fa fa-table fa-fw"></i> Login Data</a>
                 </li>-->
             </ul>
-
+            <button class="btn btn-warning"  (click)="backClicked()">Zurück</button>
+            <button class="btn btn-warning"  (click)="refreshClicked()">Refresh</button>
             <ul *ngIf="user" class="nav navbar-nav navbar-right">
                             <!-- /.dropdown -->
                 <li class="dropdown">

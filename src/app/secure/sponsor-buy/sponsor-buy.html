@@ -118,7 +118,10 @@
                                 </td>
                             </tr>
                         </table>
+                        <button style="margin-bottom: 1em" class="btn btn-warning"  (click)="backClicked()">Zurück</button>
                         <button style="margin-bottom: 1em" [disabled]="!isBuyable()" class="btn btn-success" (click)="addSponsorPart()">Abschnitt Kaufen</button>
+
+
                     </ng-template>
                 </ngb-tab>
                 <ngb-tab *ngIf="track" title="Detail">

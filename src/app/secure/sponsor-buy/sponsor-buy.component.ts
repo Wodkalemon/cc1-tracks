@@ -13,6 +13,7 @@ import {AwsUser} from '../../Model/AwsUser';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
 import {HaversineService} from 'ng2-haversine';
+import {Location} from '@angular/common';
 
 
 @Component({
@@ -79,6 +80,7 @@ export class SponsorBuyComponent implements OnInit {
                 private trackService: TrackService,
                 private sharedUserService: SharedUserService,
                 private sanitizer: DomSanitizer,
+                private _location: Location,
                 private haversineService: HaversineService) {
         console.log("SponsorBuyComponent: constructor");
 
@@ -390,6 +392,10 @@ export class SponsorBuyComponent implements OnInit {
                 console.log(result);
             });
         }
+    }
+
+    backClicked() {
+        this._location.back();
     }
 
 

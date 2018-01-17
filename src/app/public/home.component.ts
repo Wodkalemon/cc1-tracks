@@ -7,6 +7,7 @@ import {UserParametersService} from '../service/user-parameters.service';
 import {AwsUser} from '../Model/AwsUser';
 import {SharedUserService} from '../service/shared-user.service';
 import {JwtComponent} from '../secure/jwttokens/jwt.component';
+import {Location} from '@angular/common';
 
 declare let AWS: any;
 declare let AWSCognito: any;
@@ -39,7 +40,7 @@ export class HomeComponent implements OnInit, LoggedInCallback {
     user: AwsUser;
 
 
-    constructor(public router: Router, public userService: UserLoginService, public userParams: UserParametersService, public cognitoUtil: CognitoUtil, public sharedUserService: SharedUserService) {
+    constructor(public router: Router, public userService: UserLoginService, public userParams: UserParametersService, private _location: Location, public cognitoUtil: CognitoUtil, public sharedUserService: SharedUserService) {
         this.userService.isAuthenticated(this);
         console.log("SecureHomeComponent: constructor");
 
@@ -48,6 +49,16 @@ export class HomeComponent implements OnInit, LoggedInCallback {
                 this.userService.isAuthenticated(this);
             }
         });
+
+    }
+
+    backClicked() {
+        this._location.back();
+    }
+
+    refreshClicked() {
+        //this._location.reload();
+        window.location.reload();
     }
 
     /*
