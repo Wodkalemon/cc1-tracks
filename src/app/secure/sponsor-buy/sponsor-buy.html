@@ -1,3 +1,10 @@
+<app-dialog [(visible)]="showConfirmation">
+    <h1>Herzlichen Glückwunsch! </h1>
+<br/>
+    <h2>Dein Abschnitt wurde der Route hinzugefügt</h2>
+    <button class="btn btn-add" (click)="closeConfirmation()">Schließen</button>
+</app-dialog>
+
 <div id="details-page" class="container-fluid col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
     <h2 *ngIf="track" id="sponsor-heading">Sponsern die Route {{track.name}}!</h2>
     <h4 *ngIf="track">Wählen Sie einen Start- und Endpunkt der Strecke die Sie finanziell unterstützen wollen:</h4>
@@ -180,7 +187,7 @@
                                 <div class="col-xs-2 number" (click)="showSponsorPart(part)">{{i+1}}</div>
                                 <div class="col-xs-7">
                                     <h4 (click)="showSponsorPart(part)">{{getSponsor(part.sponsorId).name}} <br/>
-                                        Länge: {{part.distance}} km
+                                        Länge: {{part.distance|number:'1.2-2'}} km
                                         <br/>
                                     </h4>
                                 </div>

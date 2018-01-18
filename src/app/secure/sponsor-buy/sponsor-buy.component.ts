@@ -71,6 +71,7 @@ export class SponsorBuyComponent implements OnInit {
 
     showAddStory = false;
     showAddPoi = false;
+    showConfirmation = false;
     newStory: Story = new Story();
     newPoi: Poi = new Poi();
 
@@ -138,6 +139,8 @@ export class SponsorBuyComponent implements OnInit {
     addSponsorPart() {
         this.trackService.addSponsorPart(this.newSponsorPart, this.track).subscribe(result => {
             console.log(result);
+            this.showConfirmation = true;
+            this.getTrack(this.track.id);
 
 
         });
@@ -398,6 +401,9 @@ export class SponsorBuyComponent implements OnInit {
         this._location.back();
     }
 
+    closeConfirmation() {
+        this.showConfirmation = !this.showConfirmation;
+    }
 
 }
 
