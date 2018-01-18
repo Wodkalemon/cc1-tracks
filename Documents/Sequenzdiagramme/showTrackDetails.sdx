@@ -1,33 +1,104 @@
-user:User[a]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram>
+    <source>
+        <![CDATA[user:User[a]
 site:Browser[a]
-node:NodeJS[a]
 cog:Cognito[a]
 rest:REST-API[a]
+s3:S3-Bucket[a]
 
 user:zeige Route=site.wähle Route aus
-site:track-details=node.get hike-with-benefits.com/home/track-details/<routeId>
+
 site:route-details=rest.get route-detail?id=<routeId>
 [c:loop for each POI/Story]
 site:image=rest.get /media?id\=<media[0].id>
+rest:image=s3.getImage()
 [/c]
 site:sponsors=rest.get /sponsors
 site:organisations=rest.get /organisation
 [c:loop for each Sponsor/Organisation]
 site:image=rest.get /media?id\=<logo.id>
+rest:image=s3.getImage()
 [/c]
 
 
 user:zeige POI/Story=site.wähle POI/Story
 [c:loop for each media of POI/Story]
 site:image=rest.get /media?id\=<media.id>
+rest:image=s3.getImage()
 [/c]
 
 [c:alt User isLoggedIn]
 user:bestätige Upload=site.Füge POI/Story hinzu
 [c:loop for each new image]
 site:imageId=rest.post /media (Body=mediafile)
+rest:=s3.putImage()
 [/c]
 site:success=rest.post /add-poi?id\=<routeId>
 [/c]
 
 
+]]>
+    </source>
+    <configuration>
+        <property name="activationBarBorderThickness" value="1"/>
+        <property name="actorWidth" value="25"/>
+        <property name="arrowColor" value="-14803256"/>
+        <property name="arrowSize" value="6"/>
+        <property name="arrowThickness" value="1"/>
+        <property name="colorizeThreads" value="true"/>
+        <property name="destructorWidth" value="30"/>
+        <property name="explicitReturns" value="false"/>
+        <property family="Dialog" name="font" size="12" style="0"/>
+        <property name="fragmentBorderThickness" value="2"/>
+        <property name="fragmentEdgeColor" value="-16751616"/>
+        <property name="fragmentLabelBgColor" value="-36"/>
+        <property name="fragmentMargin" value="8"/>
+        <property name="fragmentPadding" value="10"/>
+        <property name="fragmentTextPadding" value="3"/>
+        <property name="glue" value="10"/>
+        <property name="headHeight" value="35"/>
+        <property name="headLabelPadding" value="5"/>
+        <property name="headWidth" value="100"/>
+        <property name="initialSpace" value="10"/>
+        <property name="labeledBoxBgColor" value="-76"/>
+        <property name="leftMargin" value="5"/>
+        <property name="lifelineThickness" value="1"/>
+        <property name="lineWrap" value="false"/>
+        <property name="lowerMargin" value="5"/>
+        <property name="mainLifelineWidth" value="8"/>
+        <property name="messageLabelSpace" value="3"/>
+        <property name="messageLineLength" value="0"/>
+        <property name="messagePadding" value="6"/>
+        <property name="noteBgColor" value="-76"/>
+        <property name="noteBorderThickness" value="1"/>
+        <property name="noteMargin" value="6"/>
+        <property name="notePadding" value="6"/>
+        <property name="opaqueMessageText" value="false"/>
+        <property name="returnArrowVisible" value="true"/>
+        <property name="rightMargin" value="5"/>
+        <property name="selfMessageHorizontalSpace" value="15"/>
+        <property name="separatorBottomMargin" value="8"/>
+        <property name="separatorTopMargin" value="15"/>
+        <property name="shouldShadowParticipants" value="false"/>
+        <property name="spaceBeforeActivation" value="2"/>
+        <property name="spaceBeforeAnswerToSelf" value="10"/>
+        <property name="spaceBeforeConstruction" value="6"/>
+        <property name="spaceBeforeSelfMessage" value="7"/>
+        <property name="subLifelineWidth" value="6"/>
+        <property name="tc0" value="-1118482"/>
+        <property name="tc1" value="-256"/>
+        <property name="tc2" value="-65536"/>
+        <property name="tc3" value="-16776961"/>
+        <property name="tc4" value="-16711936"/>
+        <property name="tc5" value="-4144960"/>
+        <property name="tc6" value="-65281"/>
+        <property name="tc7" value="-14336"/>
+        <property name="tc8" value="-20561"/>
+        <property name="tc9" value="-12566464"/>
+        <property name="threadNumbersVisible" value="false"/>
+        <property name="threaded" value="true"/>
+        <property name="upperMargin" value="5"/>
+        <property name="verticallySplit" value="true"/>
+    </configuration>
+</diagram>
